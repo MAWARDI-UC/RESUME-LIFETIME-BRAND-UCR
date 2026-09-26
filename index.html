@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RESUME-LIFETIME-BRAND-UCR</title>
-  
+  <title>BSS UCR MONITORING - Program Pemeriksaan Undercarriage (PPU)</title>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -18,9 +18,8 @@
   <!-- Google Fonts: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -31,12 +30,16 @@
             body: ['"Inter"', 'sans-serif']
           },
           colors: {
-            bodybg: '#070a11',
-            cardbg: '#0f1623',
-            innerbg: '#182232',
-            bordercolor: '#1e293b',
-            brandamber: '#f59e0b',
+            darkbg: '#0b0f19',
+            cardbg: '#121826',
+            cardhover: '#182033',
+            innerbg: '#182234',
+            bordercolor: '#1f2a3e',
+            headerbg: '#0d1322',
+            ambergold: '#f59e0b',
             brandcyan: '#06b6d4',
+            brandpurple: '#a855f7',
+            brandpink: '#ec4899',
             emeraldaccent: '#10b981'
           }
         }
@@ -46,242 +49,297 @@
 
   <style>
     body {
-      background-color: #070a11;
+      background-color: #0b0f19;
       color: #f3f4f6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
+    
+    /* Scrollbar styling */
     .custom-scrollbar::-webkit-scrollbar {
       height: 6px;
       width: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: #0f1623;
+      background: #0b0f19;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #1e293b;
+      background: #1f2a3e;
       border-radius: 4px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background: #f59e0b;
     }
+
+    /* Glow utility effects */
+    .glow-amber {
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+    }
+    .glow-card {
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    }
   </style>
 </head>
-<body class="bg-[#070a11] text-gray-100 font-sans min-h-screen antialiased selection:bg-amber-500/30 selection:text-amber-200">
+<body class="bg-[#0b0f19] text-gray-100 font-sans min-h-screen antialiased selection:bg-amber-500/30 selection:text-amber-200">
 
-  <!-- Top Header & Navigation Container (Sticky / Frozen Header) -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#070a11]/90 border-b border-[#1e293b] shadow-xl shadow-black/40 transition-all duration-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
+  <header class="sticky top-0 z-50 bg-[#0d1322]/95 backdrop-blur-md border-b border-[#1f2a3e] shadow-2xl">
+    <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
       
-      <!-- Top Bar: Title & User Profile -->
+      <!-- Top Title Bar -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- Logo & App Title -->
         <div class="flex items-center space-x-3">
-          <div class="p-2.5 bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/40 rounded-xl text-amber-400 shadow-inner">
+          <div class="p-2.5 bg-gradient-to-br from-amber-500/20 to-amber-700/10 border border-amber-500/40 rounded-xl text-amber-400 shadow-inner flex items-center justify-center">
             <i class="fa-solid fa-shield-halved text-xl"></i>
           </div>
           <div>
-            <h1 class="text-lg md:text-xl font-black tracking-tight text-white uppercase leading-none">
-              RESUME-LIFETIME-BRAND-UCR
+            <h1 class="text-lg md:text-xl font-black tracking-wider text-white uppercase leading-none">
+              BSS UCR MONITORING
             </h1>
             <p class="text-[11px] text-amber-400 font-bold tracking-wide mt-1">
-              Pengukuran & Lifetime UCR Monitoring
+              Program Pemeriksaan Undercarriage (PPU)
             </p>
           </div>
         </div>
 
-        <!-- User Info Badge -->
-        <div class="flex items-center space-x-3 bg-[#182232] px-3.5 py-1.5 rounded-xl border border-gray-700/60 self-start md:self-auto shadow-sm">
-          <div class="bg-gray-700/60 w-7 h-7 rounded-lg text-gray-300 flex items-center justify-center text-xs">
-            <i class="fa-solid fa-user"></i>
+        <!-- User Profile Badge -->
+        <div class="flex items-center space-x-3 bg-[#121826] px-4 py-2 rounded-xl border border-[#1f2a3e] self-start md:self-auto shadow-sm">
+          <div class="bg-amber-500/10 border border-amber-500/30 w-8 h-8 rounded-lg text-amber-400 flex items-center justify-center text-sm font-bold">
+            <i class="fa-solid fa-user-shield"></i>
           </div>
           <div class="text-right">
-            <p class="text-xs font-extrabold text-white leading-tight">Administrator System</p>
-            <p class="text-[10px] text-amber-400 font-bold tracking-wider uppercase">Role: <span class="text-gray-300">Plant / Technical</span></p>
+            <p class="text-xs font-black text-white leading-tight">Administrator System</p>
+            <p class="text-[10px] text-amber-400 font-extrabold tracking-wider uppercase">
+              Role: <span class="text-gray-300">Plant / Technical</span>
+            </p>
           </div>
         </div>
       </div>
 
-      <!-- Navigation Tabs (4 Sheets) -->
-      <nav class="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar">
-        <button onclick="switchTab('sheet1')" id="btn-sheet1" class="tab-btn bg-amber-500 text-slate-950 font-extrabold px-3.5 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center shadow-md whitespace-nowrap">
-          <i class="fa-solid fa-rotate text-[11px] mr-2"></i> Review Achievement After Replace
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar pt-1">
+        <button onclick="switchTab('tab-ppu')" id="btn-tab-ppu" class="tab-btn bg-amber-500 text-slate-950 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center shadow-md whitespace-nowrap">
+          <i class="fa-solid fa-border-all text-[12px] mr-2"></i> PPU
         </button>
-        <button onclick="switchTab('sheet2')" id="btn-sheet2" class="tab-btn bg-[#182232]/80 hover:bg-[#182232] text-gray-300 font-bold px-3.5 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center border border-gray-800 hover:border-gray-700 whitespace-nowrap">
-          <i class="fa-solid fa-chart-column text-[11px] mr-2"></i> Rata-Rata Ketercapaian By Model
+        <button onclick="switchTab('tab-lifetime')" id="btn-tab-lifetime" class="tab-btn bg-[#182234]/80 hover:bg-[#182234] text-gray-300 font-bold px-4 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center border border-[#1f2a3e] hover:border-gray-700 whitespace-nowrap">
+          <i class="fa-solid fa-clock-rotate-left text-[12px] mr-2"></i> Review Lifetime
         </button>
-        <button onclick="switchTab('sheet3')" id="btn-sheet3" class="tab-btn bg-[#182232]/80 hover:bg-[#182232] text-gray-300 font-bold px-3.5 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center border border-gray-800 hover:border-gray-700 whitespace-nowrap">
-          <i class="fa-solid fa-list-check text-[11px] mr-2"></i> Review part UC On Track
+        <button onclick="switchTab('tab-alarm')" id="btn-tab-alarm" class="tab-btn bg-[#182234]/80 hover:bg-[#182234] text-gray-300 font-bold px-4 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center border border-[#1f2a3e] hover:border-gray-700 whitespace-nowrap">
+          <i class="fa-solid fa-circle-exclamation text-[12px] mr-2"></i> Alarm Worn Up 80%
         </button>
-        <button onclick="switchTab('sheet4')" id="btn-sheet4" class="tab-btn bg-[#182232]/80 hover:bg-[#182232] text-gray-300 font-bold px-3.5 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center border border-gray-800 hover:border-gray-700 whitespace-nowrap">
-          <i class="fa-solid fa-clock-rotate-left text-[11px] mr-2"></i> Review Historycal replace UC
+        <button onclick="switchTab('tab-replace')" id="btn-tab-replace" class="tab-btn bg-[#182234]/80 hover:bg-[#182234] text-gray-300 font-bold px-4 py-2 rounded-lg text-xs tracking-wide transition-all duration-200 flex items-center border border-[#1f2a3e] hover:border-gray-700 whitespace-nowrap">
+          <i class="fa-solid fa-wrench text-[12px] mr-2"></i> Rekomendasi Replace
         </button>
       </nav>
 
     </div>
   </header>
 
-  <!-- Main Centered Content Wrapper -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+  <main class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-    <!-- SHEET 1: REVIEW ACHIEVEMENT AFTER REPLACE -->
-    <section id="sheet1" class="tab-page space-y-5">
+    <!-- TAB 1: PPU (PROGRAM PEMERIKSAAN UNDERCARRIAGE) -->
+    <section id="tab-ppu" class="tab-page space-y-6">
       
       <!-- Banner Title Card -->
-      <div class="bg-[#0f1623] p-5 rounded-xl border border-[#1e293b] shadow-lg relative overflow-hidden">
-        <div class="inline-flex items-center space-x-1.5 bg-amber-500/10 text-amber-400 text-[10px] font-black px-3 py-1 rounded-full border border-amber-500/30 mb-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-          <span>PLANT • Achievement Monitoring</span>
+      <div class="bg-gradient-to-r from-[#161c2c] via-[#121826] to-[#0f1420] p-6 rounded-2xl border border-[#1f2a3e] shadow-xl relative overflow-hidden">
+        <div class="inline-flex items-center space-x-2 bg-amber-500/10 text-amber-400 text-[10px] font-black px-3 py-1 rounded-full border border-amber-500/30 mb-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-white">PLANT</span>
+          <span class="text-gray-500">•</span>
+          <span class="text-emerald-400">Monitoring PPU Active</span>
         </div>
-        <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">REVIEW ACHIEVEMENT AFTER REPLACE</h2>
-        <p class="text-xs font-extrabold text-amber-500 tracking-wider uppercase mt-1">MONITORING KETERCAPAIAN LIFETIME SETELAH PENGGANTIAN UC</p>
+        <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight uppercase">
+          Alarm & Achievement PPU
+        </h2>
+        <p class="text-xs font-black text-amber-500 tracking-widest uppercase mt-1">
+          PROGRAM PEMERIKSAAN UNDERCARRIAGE (PPU)
+        </p>
       </div>
 
-      <!-- Filter Bar -->
-      <div class="bg-[#0f1623] p-4 rounded-xl border border-[#1e293b] shadow-md space-y-3">
-        <div class="flex justify-between items-center border-b border-gray-800/80 pb-2.5">
-          <div class="flex items-center space-x-2 text-amber-500 font-extrabold text-xs uppercase tracking-wider">
-            <i class="fa-solid fa-filter text-amber-400"></i>
-            <span>Filter Unit & Site Monitoring</span>
+      <div class="bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg space-y-4">
+        <div class="flex justify-between items-center border-b border-[#1f2a3e] pb-3">
+          <div class="flex items-center space-x-2 text-amber-400 font-extrabold text-xs uppercase tracking-wider">
+            <i class="fa-solid fa-filter"></i>
+            <span>Filter Unit & Site Monitoring PPU</span>
           </div>
-          <button onclick="resetFilters()" class="text-xs font-bold text-gray-400 hover:text-white transition flex items-center gap-1.5 px-2.5 py-1 rounded-lg hover:bg-gray-800">
+          <button onclick="resetPPUFilters()" class="text-xs font-bold text-gray-400 hover:text-white transition flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#182234] hover:bg-gray-800 border border-gray-700/60">
             <i class="fa-solid fa-rotate-left text-[10px]"></i> Reset Filter
           </button>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Filter Site -->
           <div>
-            <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-wider mb-1">SITE</label>
-            <select id="filterSite" onchange="applyFilters()" class="w-full bg-[#070a11] border border-gray-700/80 rounded-lg p-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-500 transition">
+            <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-wider mb-1.5">SITE</label>
+            <select id="filterPPUSite" onchange="applyPPUFilters()" class="w-full bg-[#0b0f19] border border-[#1f2a3e] rounded-xl p-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-500 transition">
               <option value="ALL">Semua Site</option>
-              <option value="MBLM">MBLM</option>
+              <option value="AGM">AGM</option>
               <option value="CDI">CDI</option>
               <option value="IP BAYAN">IP BAYAN</option>
+              <option value="MAS">MAS</option>
+              <option value="MBLM">MBLM</option>
               <option value="MHU">MHU</option>
+              <option value="MME">MME</option>
             </select>
           </div>
+
+          <!-- Filter Type -->
           <div>
-            <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-wider mb-1">MODEL</label>
-            <select id="filterModel" onchange="applyFilters()" class="w-full bg-[#070a11] border border-gray-700/80 rounded-lg p-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-500 transition">
+            <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-wider mb-1.5">TYPE</label>
+            <select id="filterPPUType" onchange="applyPPUFilters()" class="w-full bg-[#0b0f19] border border-[#1f2a3e] rounded-xl p-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-500 transition">
+              <option value="ALL">Semua TYPE</option>
+              <option value="BULLDOZER">BULLDOZER</option>
+              <option value="EXCAVATOR">EXCAVATOR</option>
+            </select>
+          </div>
+
+          <!-- Filter Model -->
+          <div>
+            <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-wider mb-1.5">MODEL</label>
+            <select id="filterPPUModel" onchange="applyPPUFilters()" class="w-full bg-[#0b0f19] border border-[#1f2a3e] rounded-xl p-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-500 transition">
               <option value="ALL">Semua Model</option>
-              <option value="PC2000">PC2000</option>
-              <option value="PC1250">PC1250</option>
-              <option value="D375">D375</option>
+              <option value="D375A-6R">D375A-6R</option>
+              <option value="PC2000-8">PC2000-8</option>
+              <option value="PC1250-8">PC1250-8</option>
             </select>
           </div>
+
+          <!-- Filter Alarm Status -->
           <div>
-            <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-wider mb-1">STATUS WORN</label>
-            <select id="filterStatus" onchange="applyFilters()" class="w-full bg-[#070a11] border border-gray-700/80 rounded-lg p-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-500 transition">
-              <option value="ALL">Semua Status</option>
-              <option value="KRITIS">Kritis (80% Up Worn)</option>
-              <option value="WASPADA">Waspada (> 60% s/d < 80%)</option>
-              <option value="NORMAL">Normal (Under 60%)</option>
+            <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-wider mb-1.5">ALARM PPU</label>
+            <select id="filterPPUAlarm" onchange="applyPPUFilters()" class="w-full bg-[#0b0f19] border border-[#1f2a3e] rounded-xl p-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-500 transition">
+              <option value="ALL">Semua Kategori</option>
+              <option value="OVER INTERVAL PPU">OVER INTERVAL PPU</option>
+              <option value="MENDEKATI PLAN PPU">MENDEKATI PLAN PPU</option>
+              <option value="ON TRACK">ON TRACK</option>
             </select>
           </div>
         </div>
       </div>
 
-      <!-- Metric KPI Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Card 1: Total Unit -->
-        <div class="bg-[#0f1623] p-4 rounded-xl border border-[#1e293b] shadow-md flex justify-between items-center border-l-4 border-blue-500">
+        <!-- Card 1: Total Unit Monitored -->
+        <div class="bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg flex justify-between items-center transition hover:border-blue-500/50">
           <div class="space-y-1">
             <p class="text-[10px] text-gray-400 uppercase font-black tracking-wider">TOTAL UNIT MONITORED</p>
-            <h3 id="statTotal" class="text-2xl md:text-3xl font-black text-white tracking-tight">164 <span class="text-sm font-extrabold text-gray-300">Unit</span></h3>
-            <p class="text-[11px] text-gray-400 font-semibold">Dalam monitoring Replace</p>
+            <h3 id="cardTotalMonitored" class="text-3xl font-black text-white tracking-tight">409 <span class="text-base font-extrabold text-gray-300">Unit</span></h3>
+            <p class="text-[11px] text-gray-400 font-semibold">Dalam monitoring UCR Site</p>
           </div>
-          <div class="bg-blue-600/20 border border-blue-500/30 p-3 rounded-xl text-blue-400 flex items-center justify-center w-11 h-11">
-            <i class="fa-solid fa-truck-monster text-lg"></i>
-          </div>
-        </div>
-
-        <!-- Card 2: Waspada -->
-        <div class="bg-[#0f1623] p-4 rounded-xl border border-[#1e293b] shadow-md flex justify-between items-center border-l-4 border-amber-500">
-          <div class="space-y-1">
-            <p class="text-[10px] text-gray-400 uppercase font-black tracking-wider">WASPADA ( > 60% S/D &lt; 80% )</p>
-            <h3 id="statWaspada" class="text-2xl md:text-3xl font-black text-amber-500 tracking-tight">23 <span class="text-sm font-extrabold text-amber-500">Unit</span></h3>
-            <p class="text-[11px] text-amber-500/90 font-bold">Perlu Pengawasan Ketat</p>
-          </div>
-          <div class="bg-amber-500/20 border border-amber-500/30 p-3 rounded-xl text-amber-500 flex items-center justify-center w-11 h-11">
-            <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+          <div class="bg-blue-600/15 border border-blue-500/30 p-3.5 rounded-2xl text-blue-400 flex items-center justify-center w-12 h-12 shadow-inner">
+            <i class="fa-solid fa-truck-monster text-xl"></i>
           </div>
         </div>
 
-        <!-- Card 3: Kritis -->
-        <div class="bg-[#0f1623] p-4 rounded-xl border border-[#1e293b] shadow-md flex justify-between items-center border-l-4 border-red-500">
+        <!-- Card 2: Over Interval PPU -->
+        <div class="bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg flex justify-between items-center transition hover:border-amber-500/50">
           <div class="space-y-1">
-            <p class="text-[10px] text-gray-400 uppercase font-black tracking-wider">KRITIS (80% UP WORN)</p>
-            <h3 id="statKritis" class="text-2xl md:text-3xl font-black text-red-500 tracking-tight">26 <span class="text-sm font-extrabold text-red-500">Unit</span></h3>
-            <p class="text-[11px] text-red-500/90 font-bold">Perlu Schedule Replace</p>
+            <p class="text-[10px] text-gray-400 uppercase font-black tracking-wider">OVER INTERVAL PPU</p>
+            <h3 id="cardOverInterval" class="text-3xl font-black text-amber-500 tracking-tight">29 <span class="text-base font-extrabold text-amber-500">Unit</span></h3>
+            <p class="text-[11px] text-amber-500/90 font-bold">Perlu Dilakukan PPU</p>
           </div>
-          <div class="bg-red-500/20 border border-red-500/30 p-3 rounded-xl text-red-500 flex items-center justify-center w-11 h-11">
-            <i class="fa-solid fa-circle-radiation text-lg"></i>
+          <div class="bg-amber-500/15 border border-amber-500/30 p-3.5 rounded-2xl text-amber-500 flex items-center justify-center w-12 h-12 shadow-inner">
+            <i class="fa-solid fa-triangle-exclamation text-xl"></i>
           </div>
         </div>
 
-        <!-- Card 4: Normal -->
-        <div class="bg-[#0f1623] p-4 rounded-xl border border-[#1e293b] shadow-md flex justify-between items-center border-l-4 border-emerald-500">
+        <!-- Card 3: Mendekati Plan PPU -->
+        <div class="bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg flex justify-between items-center transition hover:border-rose-500/50">
           <div class="space-y-1">
-            <p class="text-[10px] text-gray-400 uppercase font-black tracking-wider">NORMAL ( UNDER 60% )</p>
-            <h3 id="statNormal" class="text-2xl md:text-3xl font-black text-emerald-400 tracking-tight">115 <span class="text-sm font-extrabold text-emerald-400">Unit</span></h3>
-            <p class="text-[11px] text-emerald-400/90 font-bold">Kondisi Aman</p>
+            <p class="text-[10px] text-gray-400 uppercase font-black tracking-wider">MENDEKATI PLAN PPU</p>
+            <h3 id="cardMendekatiPlan" class="text-3xl font-black text-rose-500 tracking-tight">39 <span class="text-base font-extrabold text-rose-500">Unit</span></h3>
+            <p class="text-[11px] text-rose-500/90 font-bold">Perlu schedule PPU</p>
           </div>
-          <div class="bg-emerald-500/20 border border-emerald-500/30 p-3 rounded-xl text-emerald-400 flex items-center justify-center w-11 h-11">
-            <i class="fa-solid fa-circle-check text-lg"></i>
+          <div class="bg-rose-500/15 border border-rose-500/30 p-3.5 rounded-2xl text-rose-500 flex items-center justify-center w-12 h-12 shadow-inner">
+            <i class="fa-solid fa-circle-dot text-xl"></i>
+          </div>
+        </div>
+
+        <!-- Card 4: PPU Achievement -->
+        <div class="bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg flex justify-between items-center transition hover:border-emerald-500/50">
+          <div class="space-y-1">
+            <p class="text-[10px] text-gray-400 uppercase font-black tracking-wider">PPU ACHIEVEMENT</p>
+            <h3 id="cardPPUAchievement" class="text-3xl font-black text-emerald-400 tracking-tight">92.9%</h3>
+            <p class="text-[11px] text-emerald-400/90 font-bold">Inspeksi On-Schedule</p>
+          </div>
+          <div class="bg-emerald-500/15 border border-emerald-500/30 p-3.5 rounded-2xl text-emerald-400 flex items-center justify-center w-12 h-12 shadow-inner">
+            <i class="fa-solid fa-circle-check text-xl"></i>
           </div>
         </div>
 
       </div>
 
-      <!-- Charts Container -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Chart 1: Distribusi Status -->
-        <div class="bg-[#0f1623] p-5 rounded-xl border border-[#1e293b] shadow-md flex flex-col justify-between">
-          <div class="flex justify-between items-center mb-3">
-            <h3 class="text-xs font-black text-white uppercase tracking-tight">Distribusi Status Condition Per Site</h3>
+        <!-- Chart 1: Bar Chart (PPU Achievement Masing-masing Site) -->
+        <div class="lg:col-span-7 bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg flex flex-col justify-between">
+          <div class="flex justify-between items-center mb-4 border-b border-[#1f2a3e] pb-3">
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+              PPU Achievement Masing-masing Site (%)
+            </h3>
           </div>
-          <div class="h-64 w-full relative">
-            <canvas id="chartDistribution"></canvas>
+          <div class="h-72 w-full relative">
+            <canvas id="chartPPUAchievement"></canvas>
           </div>
         </div>
 
-        <!-- Chart 2: Critical Worn -->
-        <div class="bg-[#0f1623] p-5 rounded-xl border border-[#1e293b] shadow-md flex flex-col justify-between">
-          <div class="flex justify-between items-center mb-3">
-            <h3 class="text-xs font-black text-white uppercase tracking-tight">Total Unit Critical Worn Masing-masing Site</h3>
+        <!-- Chart 2: Donut Chart (Total OVER Interval PPU Masing-masing Site) -->
+        <div class="lg:col-span-5 bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg flex flex-col justify-between">
+          <div class="flex justify-between items-center mb-2 border-b border-[#1f2a3e] pb-3">
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              Total OVER Interval PPU Masing-masing Site
+            </h3>
           </div>
-          <div class="h-64 w-full relative">
-            <canvas id="chartCritical"></canvas>
+          
+          <div class="h-64 w-full relative flex items-center justify-center my-auto">
+            <canvas id="chartOverIntervalDonut"></canvas>
+            
+            <!-- Donut Center Label Overlay -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              <span class="text-[11px] font-extrabold text-gray-400 tracking-wider">Total Over PPU</span>
+              <span id="donutCenterVal" class="text-2xl font-black text-red-500">29 Unit</span>
+            </div>
+          </div>
+
+          <!-- Custom Legend -->
+          <div class="flex flex-wrap items-center justify-center gap-4 pt-2 text-[11px] font-extrabold">
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span><span class="text-gray-300">CDI</span></div>
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span><span class="text-gray-300">IP BAYAN</span></div>
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span><span class="text-gray-300">MBLM</span></div>
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span><span class="text-gray-300">MHU</span></div>
           </div>
         </div>
 
       </div>
 
-      <!-- Data Table Section -->
-      <div class="bg-[#0f1623] p-5 rounded-xl border border-[#1e293b] shadow-md space-y-4">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-gray-800 pb-3">
+      <div class="bg-[#121826] p-5 rounded-2xl border border-[#1f2a3e] shadow-lg space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#1f2a3e] pb-3">
           <div>
-            <h3 class="text-xs font-black text-white uppercase tracking-tight">Data Monitoring Replace UC</h3>
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-list text-amber-500"></i>
+              Status Unit Over Interval PPU
+            </h3>
           </div>
-          <span id="recordCount" class="text-xs font-extrabold bg-[#182232] text-gray-300 px-3 py-1 rounded-full border border-gray-700">
+          <span id="ppuRecordCount" class="text-xs font-extrabold bg-[#182234] text-amber-400 px-3.5 py-1.5 rounded-xl border border-[#1f2a3e]">
             Menampilkan 5 Data
           </span>
         </div>
 
         <div class="overflow-x-auto custom-scrollbar">
-          <table class="w-full text-left text-xs font-semibold text-gray-300">
-            <thead class="bg-[#182232] text-gray-300 uppercase text-[10px] font-black tracking-wider border-b border-gray-700">
+          <table class="w-full text-left text-xs font-medium text-gray-300">
+            <thead class="bg-[#182234] text-gray-300 uppercase text-[10px] font-black tracking-wider border-b border-[#1f2a3e]">
               <tr>
-                <th class="p-3">SITE</th>
-                <th class="p-3">NO UNIT</th>
-                <th class="p-3">MODEL</th>
-                <th class="p-3">DATE LAST</th>
-                <th class="p-3">HM LAST</th>
-                <th class="p-3">WORN LAST</th>
-                <th class="p-3 text-center">STATUS</th>
+                <th class="p-3.5">SITE</th>
+                <th class="p-3.5">TYPE</th>
+                <th class="p-3.5">MODEL UNIT</th>
+                <th class="p-3.5">NO UNIT</th>
+                <th class="p-3.5">ALARM PPU STATUS</th>
+                <th class="p-3.5 text-right">DURASI OVER (HM)</th>
               </tr>
             </thead>
-            <tbody id="dataTableBody" class="divide-y divide-gray-800/80">
-              <!-- Dynamically populated via JS -->
+            <tbody id="ppuTableBody" class="divide-y divide-gray-800/60">
+              <!-- Dynamically populated via JavaScript -->
             </tbody>
           </table>
         </div>
@@ -289,62 +347,71 @@
 
     </section>
 
-    <!-- SHEET 2: RATA-RATA KETERCAPAIAN BY MODEL -->
-    <section id="sheet2" class="tab-page hidden space-y-5">
-      <div class="bg-[#0f1623] p-6 rounded-xl border border-[#1e293b] shadow-md">
+    <!-- TAB 2: REVIEW LIFETIME -->
+    <section id="tab-lifetime" class="tab-page hidden space-y-6">
+      <div class="bg-[#121826] p-6 rounded-2xl border border-[#1f2a3e] shadow-lg">
         <div class="flex items-center space-x-3 mb-4">
-          <div class="bg-amber-500/20 text-amber-500 p-2.5 rounded-lg border border-amber-500/30">
-            <i class="fa-solid fa-chart-column text-lg"></i>
+          <div class="bg-amber-500/20 text-amber-500 p-3 rounded-xl border border-amber-500/30">
+            <i class="fa-solid fa-clock-rotate-left text-xl"></i>
           </div>
           <div>
-            <h2 class="text-lg font-black text-white uppercase tracking-tight">Rata-Rata Ketercapaian By Model</h2>
-            <p class="text-xs font-bold text-gray-400">Analisis statistik ketercapaian jam operasi (HM) berdasarkan model alat berat</p>
+            <h2 class="text-xl font-black text-white uppercase tracking-wide">Review Lifetime Undercarriage</h2>
+            <p class="text-xs font-bold text-gray-400 mt-0.5">Analisis ketercapaian dan estimasi sisa umur komponen Undercarriage</p>
           </div>
         </div>
-        <div class="p-12 text-center border-2 border-dashed border-gray-800 rounded-xl my-4">
-          <i class="fa-solid fa-chart-bar text-4xl text-gray-600 mb-3"></i>
-          <h3 class="text-sm font-extrabold text-gray-300 uppercase">Sheet 2: Analytics By Model</h3>
-          <p class="text-xs text-gray-500 max-w-md mx-auto mt-1">Halaman ini memuat data rerata ketercapaian per model (PC2000, PC1250, D375, dll).</p>
+
+        <div class="p-12 text-center border-2 border-dashed border-[#1f2a3e] rounded-2xl my-4 bg-[#0b0f19]/50">
+          <i class="fa-solid fa-chart-line text-5xl text-amber-500/40 mb-3"></i>
+          <h3 class="text-sm font-black text-gray-200 uppercase tracking-wider">Tab Content: Review Lifetime</h3>
+          <p class="text-xs text-gray-400 max-w-md mx-auto mt-2">
+            Halaman ini memuat histori pemakaian dan statistik ketercapaian target lifetime komponen Undercarriage per model & site.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- SHEET 3: REVIEW PART UC ON TRACK -->
-    <section id="sheet3" class="tab-page hidden space-y-5">
-      <div class="bg-[#0f1623] p-6 rounded-xl border border-[#1e293b] shadow-md">
+    <!-- TAB 3: ALARM WORN UP 80% -->
+    <section id="tab-alarm" class="tab-page hidden space-y-6">
+      <div class="bg-[#121826] p-6 rounded-2xl border border-[#1f2a3e] shadow-lg">
         <div class="flex items-center space-x-3 mb-4">
-          <div class="bg-amber-500/20 text-amber-500 p-2.5 rounded-lg border border-amber-500/30">
-            <i class="fa-solid fa-list-check text-lg"></i>
+          <div class="bg-rose-500/20 text-rose-500 p-3 rounded-xl border border-rose-500/30">
+            <i class="fa-solid fa-circle-exclamation text-xl"></i>
           </div>
           <div>
-            <h2 class="text-lg font-black text-white uppercase tracking-tight">Review Part UC On Track</h2>
-            <p class="text-xs font-bold text-gray-400">Monitoring status keausan komponen undercarriage yang masih dalam batas aman</p>
+            <h2 class="text-xl font-black text-white uppercase tracking-wide">Alarm Worn Up 80%</h2>
+            <p class="text-xs font-bold text-gray-400 mt-0.5">Daftar unit dengan tingkat keausan kritis (>= 80% Worn)</p>
           </div>
         </div>
-        <div class="p-12 text-center border-2 border-dashed border-gray-800 rounded-xl my-4">
-          <i class="fa-solid fa-circle-check text-4xl text-emerald-600/50 mb-3"></i>
-          <h3 class="text-sm font-extrabold text-gray-300 uppercase">Sheet 3: Part UC On Track</h3>
-          <p class="text-xs text-gray-500 max-w-md mx-auto mt-1">Daftar part Undercarriage yang memiliki ketercapaian optimal.</p>
+
+        <div class="p-12 text-center border-2 border-dashed border-[#1f2a3e] rounded-2xl my-4 bg-[#0b0f19]/50">
+          <i class="fa-solid fa-triangle-exclamation text-5xl text-rose-500/40 mb-3"></i>
+          <h3 class="text-sm font-black text-gray-200 uppercase tracking-wider">Tab Content: Alarm Kritis Keausan 80%</h3>
+          <p class="text-xs text-gray-400 max-w-md mx-auto mt-2">
+            Peringatan dini unit yang membutuhkan penjadwalan inspeksi khusus atau pergantian unit Undercarriage dalam waktu dekat.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- SHEET 4: REVIEW HISTORICAL REPLACE UC -->
-    <section id="sheet4" class="tab-page hidden space-y-5">
-      <div class="bg-[#0f1623] p-6 rounded-xl border border-[#1e293b] shadow-md">
+    <!-- TAB 4: REKOMENDASI REPLACE -->
+    <section id="tab-replace" class="tab-page hidden space-y-6">
+      <div class="bg-[#121826] p-6 rounded-2xl border border-[#1f2a3e] shadow-lg">
         <div class="flex items-center space-x-3 mb-4">
-          <div class="bg-amber-500/20 text-amber-500 p-2.5 rounded-lg border border-amber-500/30">
-            <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+          <div class="bg-emerald-500/20 text-emerald-400 p-3 rounded-xl border border-emerald-500/30">
+            <i class="fa-solid fa-wrench text-xl"></i>
           </div>
           <div>
-            <h2 class="text-lg font-black text-white uppercase tracking-tight">Review Historical Replace UC</h2>
-            <p class="text-xs font-bold text-gray-400">Rekapitulasi riwayat penggantian part Undercarriage dari periode sebelumnya</p>
+            <h2 class="text-xl font-black text-white uppercase tracking-wide">Rekomendasi Replace Component</h2>
+            <p class="text-xs font-bold text-gray-400 mt-0.5">Rekomendasi jadwal pergantian part Undercarriage berdasarkan hasil PPU</p>
           </div>
         </div>
-        <div class="p-12 text-center border-2 border-dashed border-gray-800 rounded-xl my-4">
-          <i class="fa-solid fa-clock-rotate-left text-4xl text-gray-600 mb-3"></i>
-          <h3 class="text-sm font-extrabold text-gray-300 uppercase">Sheet 4: Historical Replace</h3>
-          <p class="text-xs text-gray-500 max-w-md mx-auto mt-1">Log & riwayat penggantian part UC untuk evaluasi siklus pemakaian.</p>
+
+        <div class="p-12 text-center border-2 border-dashed border-[#1f2a3e] rounded-2xl my-4 bg-[#0b0f19]/50">
+          <i class="fa-solid fa-screwdriver-wrench text-5xl text-emerald-500/40 mb-3"></i>
+          <h3 class="text-sm font-black text-gray-200 uppercase tracking-wider">Tab Content: Rekomendasi Replace</h3>
+          <p class="text-xs text-gray-400 max-w-md mx-auto mt-2">
+            Perencanaan pergantian part Undercarriage (Track Link, Roller, Sprocket, Idler) secara efisien dan tepat waktu.
+          </p>
         </div>
       </div>
     </section>
@@ -352,200 +419,133 @@
   </main>
 
   <script>
-    // Safely Register datalabels plugin if available
+    // Register ChartDataLabels plugin if available
     if (typeof ChartDataLabels !== 'undefined') {
       Chart.register(ChartDataLabels);
     }
 
-    // Tab Navigation Logic
+    // Tab Navigation Switcher
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-page').forEach(page => {
-        page.classList.add('hidden');
-      });
+      document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-amber-500', 'text-slate-950', 'font-extrabold', 'shadow-md');
-        btn.classList.add('bg-[#182232]/80', 'text-gray-300', 'font-bold');
+        btn.classList.add('bg-[#182234]/80', 'text-gray-300', 'font-bold');
       });
 
       const targetPage = document.getElementById(tabId);
-      if(targetPage) {
-        targetPage.classList.remove('hidden');
-      }
+      if (targetPage) targetPage.classList.remove('hidden');
 
       const activeBtn = document.getElementById('btn-' + tabId);
-      if(activeBtn) {
-        activeBtn.classList.remove('bg-[#182232]/80', 'text-gray-300', 'font-bold');
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-[#182234]/80', 'text-gray-300', 'font-bold');
         activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'font-extrabold', 'shadow-md');
       }
     }
 
-    // Dataset
-    const sampleData = [
-      { site: 'MBLM', unit: 'EX-01', model: 'PC2000', date: '2026-09-20', hm: '12,450', worn: '85%', status: 'KRITIS' },
-      { site: 'CDI', unit: 'EX-05', model: 'PC1250', date: '2026-09-22', hm: '8,200', worn: '65%', status: 'WASPADA' },
-      { site: 'IP BAYAN', unit: 'EX-12', model: 'PC2000', date: '2026-09-24', hm: '14,100', worn: '82%', status: 'KRITIS' },
-      { site: 'MHU', unit: 'DZ-03', model: 'D375', date: '2026-09-25', hm: '5,300', worn: '42%', status: 'NORMAL' },
-      { site: 'MBLM', unit: 'EX-08', model: 'PC1250', date: '2026-09-26', hm: '9,800', worn: '38%', status: 'NORMAL' }
+    // Sample Dataset matching image
+    const ppuSampleData = [
+      { site: 'MBLM', type: 'BULLDOZER', model: 'D375A-6R', unit: 'DZ422', status: 'MENDEKATI PLAN PPU', durasi: '415' },
+      { site: 'IP BAYAN', type: 'EXCAVATOR', model: 'PC2000-8', unit: 'EX019', status: 'OVER INTERVAL PPU', durasi: '890' },
+      { site: 'CDI', type: 'EXCAVATOR', model: 'PC1250-8', unit: 'EX005', status: 'OVER INTERVAL PPU', durasi: '620' },
+      { site: 'MHU', type: 'BULLDOZER', model: 'D375A-6R', unit: 'DZ008', status: 'MENDEKATI PLAN PPU', durasi: '210' },
+      { site: 'AGM', type: 'EXCAVATOR', model: 'PC2000-8', unit: 'EX012', status: 'ON TRACK', durasi: '0' }
     ];
 
-    function renderTable(data) {
-      const tbody = document.getElementById('dataTableBody');
-      const countLabel = document.getElementById('recordCount');
-      if(!tbody) return;
+    // Render Table Function
+    function renderPPUTable(data) {
+      const tbody = document.getElementById('ppuTableBody');
+      const recordCount = document.getElementById('ppuRecordCount');
+      if (!tbody) return;
 
       tbody.innerHTML = '';
 
-      if(data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-500 font-bold">Data tidak ditemukan</td></tr>`;
-        if(countLabel) countLabel.textContent = 'Menampilkan 0 Data';
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500 font-bold">Data tidak ditemukan</td></tr>`;
+        if (recordCount) recordCount.textContent = 'Menampilkan 0 Data';
         return;
       }
 
-      if(countLabel) countLabel.textContent = `Menampilkan ${data.length} Data`;
+      if (recordCount) recordCount.textContent = `Menampilkan ${data.length} Data`;
 
       data.forEach(row => {
         let statusBadge = '';
-        if(row.status === 'KRITIS') {
-          statusBadge = `<span class="bg-red-500/20 text-red-400 border border-red-500/40 px-2.5 py-0.5 rounded text-[10px] font-black inline-block min-w-[70px] text-center">KRITIS</span>`;
-        } else if(row.status === 'WASPADA') {
-          statusBadge = `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-0.5 rounded text-[10px] font-black inline-block min-w-[70px] text-center">WASPADA</span>`;
+        if (row.status === 'OVER INTERVAL PPU') {
+          statusBadge = `<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-3 py-1 rounded-lg text-[10px] font-black inline-block tracking-wide">OVER INTERVAL PPU</span>`;
+        } else if (row.status === 'MENDEKATI PLAN PPU') {
+          statusBadge = `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-3 py-1 rounded-lg text-[10px] font-black inline-block tracking-wide">MENDEKATI PLAN PPU</span>`;
         } else {
-          statusBadge = `<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-0.5 rounded text-[10px] font-black inline-block min-w-[70px] text-center">NORMAL</span>`;
+          statusBadge = `<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-lg text-[10px] font-black inline-block tracking-wide">ON TRACK</span>`;
         }
 
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-[#182232]/50 transition-colors font-medium';
+        tr.className = 'hover:bg-[#182234]/50 transition-colors font-medium';
         tr.innerHTML = `
-          <td class="p-3 font-extrabold text-white">${row.site}</td>
-          <td class="p-3 font-mono font-bold text-gray-300">${row.unit}</td>
-          <td class="p-3 font-bold">${row.model}</td>
-          <td class="p-3 text-gray-400 font-mono">${row.date}</td>
-          <td class="p-3 font-mono font-bold">${row.hm}</td>
-          <td class="p-3 font-black text-gray-200">${row.worn}</td>
-          <td class="p-3 text-center">${statusBadge}</td>
+          <td class="p-3.5 font-black text-white">${row.site}</td>
+          <td class="p-3.5 font-bold text-gray-300">${row.type}</td>
+          <td class="p-3.5 font-bold text-gray-200">${row.model}</td>
+          <td class="p-3.5 font-mono font-extrabold text-amber-400">${row.unit}</td>
+          <td class="p-3.5">${statusBadge}</td>
+          <td class="p-3.5 text-right font-mono font-black text-white">${row.durasi}</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function applyFilters() {
-      const siteVal = document.getElementById('filterSite').value;
-      const modelVal = document.getElementById('filterModel').value;
-      const statusVal = document.getElementById('filterStatus').value;
+    // Filter Logic
+    function applyPPUFilters() {
+      const siteVal = document.getElementById('filterPPUSite').value;
+      const typeVal = document.getElementById('filterPPUType').value;
+      const modelVal = document.getElementById('filterPPUModel').value;
+      const alarmVal = document.getElementById('filterPPUAlarm').value;
 
-      const filtered = sampleData.filter(item => {
+      const filtered = ppuSampleData.filter(item => {
         const matchSite = (siteVal === 'ALL' || item.site === siteVal);
+        const matchType = (typeVal === 'ALL' || item.type === typeVal);
         const matchModel = (modelVal === 'ALL' || item.model === modelVal);
-        const matchStatus = (statusVal === 'ALL' || item.status === statusVal);
-        return matchSite && matchModel && matchStatus;
+        const matchAlarm = (alarmVal === 'ALL' || item.status === alarmVal);
+        return matchSite && matchType && matchModel && matchAlarm;
       });
 
-      renderTable(filtered);
+      renderPPUTable(filtered);
     }
 
-    function resetFilters() {
-      document.getElementById('filterSite').value = 'ALL';
-      document.getElementById('filterModel').value = 'ALL';
-      document.getElementById('filterStatus').value = 'ALL';
-      renderTable(sampleData);
+    function resetPPUFilters() {
+      document.getElementById('filterPPUSite').value = 'ALL';
+      document.getElementById('filterPPUType').value = 'ALL';
+      document.getElementById('filterPPUModel').value = 'ALL';
+      document.getElementById('filterPPUAlarm').value = 'ALL';
+      renderPPUTable(ppuSampleData);
     }
 
-    // Chart.js Setup
     window.onload = function() {
-      renderTable(sampleData);
+      renderPPUTable(ppuSampleData);
 
       Chart.defaults.color = '#9ca3af';
       Chart.defaults.font.family = '"Plus Jakarta Sans", sans-serif';
 
-      // Chart 1: Grouped Bar Chart
-      const canvasDist = document.getElementById('chartDistribution');
-      if (canvasDist) {
-        const ctxDist = canvasDist.getContext('2d');
-        new Chart(ctxDist, {
+      // 1. PPU Achievement Bar Chart
+      const canvasBar = document.getElementById('chartPPUAchievement');
+      if (canvasBar) {
+        const ctxBar = canvasBar.getContext('2d');
+        new Chart(ctxBar, {
           type: 'bar',
           data: {
-            labels: ['MBLM', 'CDI', 'IP BAYAN', 'MHU'],
-            datasets: [
-              {
-                label: 'Aman / Normal',
-                data: [36, 9, 21, 49],
-                backgroundColor: '#10b981',
-                borderRadius: 2,
-                barPercentage: 0.8,
-                categoryPercentage: 0.7
-              },
-              {
-                label: 'Waspada',
-                data: [5, 6, 12, null],
-                backgroundColor: '#f59e0b',
-                borderRadius: 2,
-                barPercentage: 0.8,
-                categoryPercentage: 0.7
-              },
-              {
-                label: 'Kritis',
-                data: [10, 5, 11, null],
-                backgroundColor: '#ef4444',
-                borderRadius: 2,
-                barPercentage: 0.8,
-                categoryPercentage: 0.7
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: 'top',
-                labels: { 
-                  boxWidth: 16, 
-                  boxHeight: 8,
-                  font: { size: 10, weight: 'bold' }, 
-                  padding: 12,
-                  color: '#d1d5db' 
-                }
-              },
-              datalabels: {
-                color: '#ffffff',
-                font: { weight: '900', size: 10 },
-                anchor: 'end',
-                align: 'start',
-                offset: -16,
-                formatter: (val) => val ? val : ''
-              }
-            },
-            scales: {
-              x: {
-                grid: { display: false },
-                ticks: { font: { size: 10, weight: 'bold' }, color: '#9ca3af' }
-              },
-              y: {
-                grid: { color: 'rgba(55, 65, 81, 0.3)' },
-                ticks: { font: { size: 10, weight: 'bold' }, color: '#9ca3af', stepSize: 10 },
-                min: 0,
-                max: 50
-              }
-            }
-          }
-        });
-      }
-
-      // Chart 2: Critical Worn Chart
-      const canvasCrit = document.getElementById('chartCritical');
-      if (canvasCrit) {
-        const ctxCrit = canvasCrit.getContext('2d');
-        new Chart(ctxCrit, {
-          type: 'bar',
-          data: {
-            labels: ['MBLM', 'CDI', 'IP BAYAN', 'MHU'],
+            labels: ['AGM', 'CDI', 'IP BAYAN', 'MAS', 'MBLM', 'MHU', 'MME'],
             datasets: [{
-              label: 'Total Unit Critical',
-              data: [10, 5, 11, null],
-              backgroundColor: '#ef4444',
-              borderRadius: 2,
-              barPercentage: 0.5
+              label: 'PPU Achievement (%)',
+              data: [100, 90.6, 81.4, 100, 95.2, 90.2, 100],
+              backgroundColor: [
+                '#3b82f6', // AGM - Blue
+                '#10b981', // CDI - Emerald
+                '#f59e0b', // IP BAYAN - Amber
+                '#ec4899', // MAS - Pink/Magenta
+                '#a855f7', // MBLM - Purple
+                '#06b6d4', // MHU - Cyan
+                '#3b82f6'  // MME - Blue
+              ],
+              borderRadius: 6,
+              barPercentage: 0.55
             }]
           },
           options: {
@@ -557,21 +557,61 @@
                 color: '#ffffff',
                 font: { weight: '900', size: 10 },
                 anchor: 'end',
-                align: 'start',
-                offset: -16,
-                formatter: (val) => val ? val : ''
+                align: 'end',
+                offset: 2,
+                formatter: (val) => val + '%'
               }
             },
             scales: {
               x: {
                 grid: { display: false },
-                ticks: { font: { size: 10, weight: 'bold' }, color: '#9ca3af' }
+                ticks: { font: { size: 10, weight: '800' }, color: '#d1d5db' }
               },
               y: {
-                grid: { color: 'rgba(55, 65, 81, 0.3)' },
-                ticks: { font: { size: 10, weight: 'bold' }, color: '#9ca3af', stepSize: 2 },
+                grid: { color: 'rgba(31, 42, 62, 0.6)' },
+                ticks: { 
+                  font: { size: 10, weight: '700' }, 
+                  color: '#9ca3af',
+                  callback: (val) => val + '%'
+                },
                 min: 0,
-                max: 12
+                max: 115
+              }
+            }
+          }
+        });
+      }
+
+      // 2. Total Over Interval Donut Chart
+      const canvasDonut = document.getElementById('chartOverIntervalDonut');
+      if (canvasDonut) {
+        const ctxDonut = canvasDonut.getContext('2d');
+        new Chart(ctxDonut, {
+          type: 'doughnut',
+          data: {
+            labels: ['CDI', 'IP BAYAN', 'MBLM', 'MHU'],
+            datasets: [{
+              data: [3, 13, 8, 5],
+              backgroundColor: [
+                '#f43f5e', // CDI - Rose
+                '#f97316', // IP BAYAN - Orange
+                '#f59e0b', // MBLM - Amber
+                '#facc15'  // MHU - Yellow
+              ],
+              borderWidth: 2,
+              borderColor: '#121826'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '72%',
+            plugins: {
+              legend: { display: false },
+              datalabels: {
+                color: '#ffffff',
+                font: { weight: '900', size: 11 },
+                formatter: (val) => val + ' Unit'
               }
             }
           }
