@@ -173,17 +173,6 @@
                         </select>
                     </div>
 
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-emerald-500/40 transition">
-                    <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">AVG ACHIEVEMENT %</p>
-                        <h3 id="achAvgPercent" class="text-2xl font-black text-emerald-400 mt-0.5">0.0%</h3>
-                        <p class="text-[10px] text-emerald-400 font-bold">Rata-rata Ketercapaian</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
-                        <i data-lucide="trending-up" class="w-5 h-5"></i>
-                    </div>
-                </div>
-
                     <!-- Filter BRAND UCR (Kolom AH) -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">BRAND UCR</label>
@@ -202,41 +191,44 @@
                 </div>
             </div>
 
-            <!-- KPI Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-amber-500/40 transition">
-                    <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PARTS</p>
-                        <h3 id="achTotalParts" class="text-2xl font-black text-white mt-0.5">0 <span class="text-xs font-bold text-slate-400">Part</span></h3>
-                        <p class="text-[10px] text-slate-400 font-bold">Total Komponen Terekam</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
-                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
-                    </div>
-                </div>
+            <!-- KPI Cards (Hanya 3 Kartu) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+    <!-- TOTAL REPLACED PARTS -->
+    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-amber-500/40 transition">
+        <div>
+            <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PARTS</p>
+            <h3 id="achTotalParts" class="text-2xl font-black text-white mt-0.5">0 <span class="text-xs font-bold text-slate-400">Part</span></h3>
+            <p class="text-[10px] text-slate-400 font-bold">Total Komponen Terekam</p>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+        </div>
+    </div>
 
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
-                    <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS TERCAPAI</p>
-                        <h3 id="achAboveCount" class="text-2xl font-black text-cyan-400 mt-0.5">0 <span class="text-xs font-bold text-cyan-300">Part</span></h3>
-                        <p class="text-[10px] text-cyan-400 font-bold">Status Tercapai</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
-                        <i data-lucide="award" class="w-5 h-5"></i>
-                    </div>
-                </div>
+    <!-- PARTS TERCAPAI -->
+    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
+        <div>
+            <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS TERCAPAI</p>
+            <h3 id="achAboveCount" class="text-2xl font-black text-cyan-400 mt-0.5">0 <span class="text-xs font-bold text-cyan-300">Part</span></h3>
+            <p class="text-[10px] text-cyan-400 font-bold">Status Tercapai</p>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
+            <i data-lucide="award" class="w-5 h-5"></i>
+        </div>
+    </div>
 
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
-                    <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS TIDAK TERCAPAI</p>
-                        <h3 id="achUnderCount" class="text-2xl font-black text-rose-500 mt-0.5">0 <span class="text-xs font-bold text-rose-400">Part</span></h3>
-                        <p class="text-[10px] text-rose-400 font-bold">Status Tidak Tercapai</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
-                        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
-                    </div>
-                </div>
-            </div>
+    <!-- PARTS TIDAK TERCAPAI -->
+    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
+        <div>
+            <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS TIDAK TERCAPAI</p>
+            <h3 id="achUnderCount" class="text-2xl font-black text-rose-500 mt-0.5">0 <span class="text-xs font-bold text-rose-400">Part</span></h3>
+            <p class="text-[10px] text-rose-400 font-bold">Status Tidak Tercapai</p>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+        </div>
+    </div>
+</div>
 
             <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -346,10 +338,10 @@
             return rows.map(row => {
                 // Mapping Presisi Sesuai Kolom Spreadsheet:
                 // Kolom AF = Index 31 (Model Unit)
-                // Kolom AJ = Index 35 (Brand UCR)
+                // Kolom AH = Index 33 (Brand UCR)
                 // Kolom AK = Index 36 (Status)
                 const model = row[31] ? row[31].toString().trim() : '-';
-                const brand = row[35] ? row[35].toString().trim() : '-';
+                const brand = row[33] ? row[33].toString().trim() : '-';
                 const status = row[36] ? row[36].toString().trim() : '-';
 
                 const unit = row[30] ? row[30].toString().trim() : (row[1] || '-');
@@ -401,16 +393,14 @@
         }
 
         function updateKPICards(data) {
-            const total = data.length;
-            const avgAch = total > 0 ? (data.reduce((acc, curr) => acc + curr.ach, 0) / total).toFixed(1) : 0;
-            const tercapai = data.filter(i => i.status.includes('TERCAPAI') && !i.status.includes('TIDAK')).length;
-            const tidakTercapai = data.filter(i => i.status.includes('TIDAK')).length;
+    const total = data.length;
+    const tercapai = data.filter(i => i.status.includes('TERCAPAI') && !i.status.includes('TIDAK')).length;
+    const tidakTercapai = data.filter(i => i.status.includes('TIDAK')).length;
 
-            document.getElementById('achTotalParts').innerHTML = `${total.toLocaleString()} <span class="text-xs font-bold text-slate-400">Part</span>`;
-            document.getElementById('achAvgPercent').textContent = `${avgAch}%`;
-            document.getElementById('achAboveCount').innerHTML = `${tercapai.toLocaleString()} <span class="text-xs font-bold text-cyan-300">Part</span>`;
-            document.getElementById('achUnderCount').innerHTML = `${tidakTercapai.toLocaleString()} <span class="text-xs font-bold text-rose-400">Part</span>`;
-        }
+    document.getElementById('achTotalParts').innerHTML = `${total.toLocaleString()} <span class="text-xs font-bold text-slate-400">Part</span>`;
+    document.getElementById('achAboveCount').innerHTML = `${tercapai.toLocaleString()} <span class="text-xs font-bold text-cyan-300">Part</span>`;
+    document.getElementById('achUnderCount').innerHTML = `${tidakTercapai.toLocaleString()} <span class="text-xs font-bold text-rose-400">Part</span>`;
+}
 
         function renderAchTable(data) {
             const tbody = document.getElementById('achTableBody');
