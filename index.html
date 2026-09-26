@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <!-- Filter Controls Compact -->
+            <!-- Filter Controls Compact (Hanya 2 Filter Model & Brand + 1 Filter Status) -->
             <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 card-shadow space-y-3">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                     <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
@@ -164,32 +164,28 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">SITE</label>
-                        <select id="achSiteFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
-                            <option value="ALL">Semua Site</option>
-                        </select>
-                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <!-- Filter MODEL UNIT (Kolom AF) -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">MODEL UNIT</label>
                         <select id="achModelFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Model</option>
                         </select>
                     </div>
+
+                    <!-- Filter BRAND UCR (Kolom AH) -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">BRAND UCR</label>
                         <select id="achBrandFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Brand</option>
                         </select>
                     </div>
+
+                    <!-- Filter STATUS (Kolom AK) -->
                     <div>
-                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">KETERCAPAIAN</label>
+                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">STATUS</label>
                         <select id="achStatusFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Status</option>
-                            <option value="ABOVE TARGET">ABOVE TARGET (>= 100%)</option>
-                            <option value="ON TARGET">ON TARGET (80% - 99%)</option>
-                            <option value="UNDER TARGET">UNDER TARGET (< 80%)</option>
                         </select>
                     </div>
                 </div>
@@ -201,7 +197,7 @@
                     <div>
                         <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PARTS</p>
                         <h3 id="achTotalParts" class="text-2xl font-black text-white mt-0.5">0 <span class="text-xs font-bold text-slate-400">Part</span></h3>
-                        <p class="text-[10px] text-slate-400 font-bold">Tercatat di seluruh Site</p>
+                        <p class="text-[10px] text-slate-400 font-bold">Total Komponen Terekam</p>
                     </div>
                     <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
                         <i data-lucide="refresh-cw" class="w-5 h-5"></i>
@@ -221,9 +217,9 @@
 
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
                     <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS ABOVE TARGET</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS TERCAPAI</p>
                         <h3 id="achAboveCount" class="text-2xl font-black text-cyan-400 mt-0.5">0 <span class="text-xs font-bold text-cyan-300">Part</span></h3>
-                        <p class="text-[10px] text-cyan-400 font-bold">Achieved >= 100% Target</p>
+                        <p class="text-[10px] text-cyan-400 font-bold">Status Tercapai</p>
                     </div>
                     <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
                         <i data-lucide="award" class="w-5 h-5"></i>
@@ -232,9 +228,9 @@
 
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
                     <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS UNDER TARGET</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS TIDAK TERCAPAI</p>
                         <h3 id="achUnderCount" class="text-2xl font-black text-rose-500 mt-0.5">0 <span class="text-xs font-bold text-rose-400">Part</span></h3>
-                        <p class="text-[10px] text-rose-400 font-bold">Membutuhkan Evaluasi</p>
+                        <p class="text-[10px] text-rose-400 font-bold">Status Tidak Tercapai</p>
                     </div>
                     <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
                         <i data-lucide="alert-triangle" class="w-5 h-5"></i>
@@ -248,7 +244,7 @@
                     <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
                         <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                            Achievement After Replace per Site (%)
+                            Achievement After Replace per Model (%)
                         </h3>
                     </div>
                     <div id="achSiteChart" class="min-h-[260px]"></div>
@@ -281,15 +277,14 @@
                     <table class="w-full text-left text-xs font-medium text-slate-300">
                         <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
                             <tr>
-                                <th class="p-2.5">SITE</th>
                                 <th class="p-2.5">NO UNIT</th>
-                                <th class="p-2.5">MODEL</th>
+                                <th class="p-2.5">MODEL (AF)</th>
                                 <th class="p-2.5">KOMPONEN</th>
-                                <th class="p-2.5">BRAND UCR</th>
+                                <th class="p-2.5">BRAND UCR (AH)</th>
                                 <th class="p-2.5 text-right">TARGET (HM)</th>
                                 <th class="p-2.5 text-right">ACTUAL (HM)</th>
                                 <th class="p-2.5 text-right">ACHIEVEMENT (%)</th>
-                                <th class="p-2.5 text-center">STATUS</th>
+                                <th class="p-2.5 text-center">STATUS (AK)</th>
                             </tr>
                         </thead>
                         <tbody id="achTableBody" class="divide-y divide-slate-800/80">
@@ -300,116 +295,20 @@
             </div>
         </div>
 
-        <!-- ==================== TAB 2: RATA-RATA KETERCAPAIAN BY MODEL ==================== -->
-        <div id="tab-avg-by-model" class="tab-page hidden space-y-4">
-            <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-950/40 p-4 border border-slate-800 card-shadow">
-                <div class="relative z-10">
-                    <div class="inline-flex items-center space-x-2 bg-cyan-500/10 text-cyan-400 text-[9px] font-black px-2.5 py-0.5 rounded-full border border-cyan-500/30 mb-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                        <span class="text-white">SHEET 2 ANALYTICS</span>
-                    </div>
-                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Rata-Rata Ketercapaian By Model</h2>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
-                <div id="modelAvgChart" class="min-h-[280px]"></div>
-            </div>
-
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
-                <div class="overflow-x-auto custom-scrollbar">
-                    <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800 text-slate-300 uppercase text-[9px] font-black tracking-wider">
-                            <tr>
-                                <th class="p-2.5">MODEL UNIT</th>
-                                <th class="p-2.5">KOMPONEN</th>
-                                <th class="p-2.5 text-right">BENCHMARK TARGET (HM)</th>
-                                <th class="p-2.5 text-right">AVG ACTUAL (HM)</th>
-                                <th class="p-2.5 text-right">AVG ACH (%)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="modelAvgTableBody" class="divide-y divide-slate-800">
-                            <!-- JS Populated -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== TAB 3: REVIEW PART UC ON TRACK ==================== -->
-        <div id="tab-part-on-track" class="tab-page hidden space-y-4">
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
-                <div class="flex items-center space-x-3 mb-3">
-                    <div class="bg-emerald-500/20 text-emerald-400 p-2 rounded-lg border border-emerald-500/30">
-                        <i data-lucide="activity" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-lg font-black text-white uppercase">Review Part UC On Track</h2>
-                    </div>
-                </div>
-                <div class="overflow-x-auto custom-scrollbar">
-                    <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800 text-slate-300 uppercase text-[9px] font-black tracking-wider">
-                            <tr>
-                                <th class="p-2.5">SITE</th>
-                                <th class="p-2.5">NO UNIT</th>
-                                <th class="p-2.5">MODEL</th>
-                                <th class="p-2.5">PART NAME</th>
-                                <th class="p-2.5">BRAND UCR</th>
-                                <th class="p-2.5 text-right">CURRENT HM</th>
-                                <th class="p-2.5 text-right">EST. REMAINING (HM)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="onTrackTableBody" class="divide-y divide-slate-800">
-                            <!-- JS Populated -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== TAB 4: REVIEW HISTORICAL REPLACE UC ==================== -->
-        <div id="tab-historical-replace" class="tab-page hidden space-y-4">
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
-                <div class="flex items-center space-x-3 mb-3">
-                    <div class="bg-amber-500/20 text-amber-400 p-2 rounded-lg border border-amber-500/30">
-                        <i data-lucide="history" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-lg font-black text-white uppercase">Review Historical Replace UC</h2>
-                    </div>
-                </div>
-                <div class="overflow-x-auto custom-scrollbar">
-                    <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800 text-slate-300 uppercase text-[9px] font-black tracking-wider">
-                            <tr>
-                                <th class="p-2.5">TANGGAL REPLACE</th>
-                                <th class="p-2.5">SITE</th>
-                                <th class="p-2.5">NO UNIT</th>
-                                <th class="p-2.5">KOMPONEN</th>
-                                <th class="p-2.5">BRAND DIPASANG</th>
-                                <th class="p-2.5 text-right">HM REPLACE</th>
-                                <th class="p-2.5 text-right">FINAL ACH (%)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historicalTableBody" class="divide-y divide-slate-800">
-                            <!-- JS Populated -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <!-- Tab Lainnya Dikosongkan Singkat untuk Fokus -->
+        <div id="tab-avg-by-model" class="tab-page hidden"></div>
+        <div id="tab-part-on-track" class="tab-page hidden"></div>
+        <div id="tab-historical-replace" class="tab-page hidden"></div>
 
     </main>
 
     <script>
-        // Tautan Google Sheets CSV Publik
+        // Tautan CSV Publik Google Spreadsheet
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtMyBr-pH_YCgL_xO2H-hf96lxX2ls63nCx8dhv2f56dP6L9YmjBtKRHGMIiUgzSjsm_t-dSyytIAj/pub?output=csv';
 
         let globalData = [];
         let achChartInstance = null;
         let brandChartInstance = null;
-        let modelChartInstance = null;
 
         function refreshIcons() {
             if (window.lucide) {
@@ -421,11 +320,13 @@
         function fetchDataFromCSV() {
             Papa.parse(CSV_URL, {
                 download: true,
-                header: true,
+                header: false, // Digunakan false agar membaca persis berdasarkan urutan indeks kolom
                 skipEmptyLines: true,
                 complete: function(results) {
-                    if (results.data && results.data.length > 0) {
-                        globalData = processCSVData(results.data);
+                    if (results.data && results.data.length > 1) {
+                        // Abaikan baris header (index 0)
+                        const rawRows = results.data.slice(1);
+                        globalData = processCSVData(rawRows);
                         populateFilterOptions(globalData);
                         renderDashboard(globalData);
                         
@@ -435,65 +336,62 @@
                 },
                 error: function(err) {
                     console.error("Gagal mengambil CSV Google Spreadsheet:", err);
-                    document.getElementById('syncText').textContent = 'Menggunakan Data Sample';
+                    document.getElementById('syncText').textContent = 'Gagal Memuat Data';
                 }
             });
         }
 
-        /* Normalisasi Header & Tipe Data CSV */
-        function processCSVData(rawData) {
-            return rawData.map(row => {
-                const site = row['SITE'] || row['site'] || 'N/A';
-                const unit = row['NO UNIT'] || row['UNIT'] || row['unit'] || 'N/A';
-                const model = row['MODEL'] || row['model'] || 'N/A';
-                const component = row['KOMPONEN'] || row['PART'] || row['component'] || 'N/A';
-                const brand = row['BRAND UCR'] || row['BRAND'] || row['brand'] || 'N/A';
+        /* Konversi Huruf Kolom Spreadsheet ke Indeks Angka (A=0, AF=31, AH=33, AK=36) */
+        function processCSVData(rows) {
+            return rows.map(row => {
+                // Mapping Presisi Sesuai Kolom Spreadsheet:
+                // Kolom AF = Index 31 (Model Unit)
+                // Kolom AH = Index 33 (Brand UCR)
+                // Kolom AK = Index 36 (Status)
+                const model = row[31] ? row[31].toString().trim() : '-';
+                const brand = row[33] ? row[33].toString().trim() : '-';
+                const status = row[36] ? row[36].toString().trim() : '-';
+
+                const unit = row[30] ? row[30].toString().trim() : (row[1] || '-');
+                const component = row[28] ? row[28].toString().trim() : (row[3] || '-');
+                const targetHm = parseFloat(row[32]) || 0;
+                const actualHm = parseFloat(row[34]) || 0;
                 
-                const targetHm = parseFloat(row['TARGET (HM)'] || row['TARGET'] || row['targetHm']) || 0;
-                const actualHm = parseFloat(row['ACTUAL (HM)'] || row['ACTUAL'] || row['actualHm']) || 0;
-                
-                let ach = parseFloat(row['ACHIEVEMENT (%)'] || row['ACH']) || 0;
+                let ach = parseFloat(row[35]) || 0;
                 if (!ach && targetHm > 0) {
                     ach = (actualHm / targetHm) * 100;
                 }
 
-                let status = row['STATUS'] || '';
-                if (!status) {
-                    if (ach >= 100) status = 'ABOVE TARGET';
-                    else if (ach >= 80) status = 'ON TARGET';
-                    else status = 'UNDER TARGET';
-                }
-
                 return {
-                    site: site.toUpperCase().trim(),
-                    unit: unit.toUpperCase().trim(),
-                    model: model.toUpperCase().trim(),
-                    component: component.toUpperCase().trim(),
-                    brand: brand.toUpperCase().trim(),
+                    unit: unit.toUpperCase(),
+                    model: model.toUpperCase(),
+                    component: component.toUpperCase(),
+                    brand: brand.toUpperCase(),
                     targetHm: targetHm,
                     actualHm: actualHm,
                     ach: parseFloat(ach.toFixed(1)),
-                    status: status.toUpperCase().trim()
+                    status: status.toUpperCase()
                 };
-            });
+            }).filter(item => item.model !== '-' && item.model !== '');
         }
 
+        /* Mengisi Dropdown Filter Otomatis */
         function populateFilterOptions(data) {
-            const sites = [...new Set(data.map(i => i.site))].sort();
             const models = [...new Set(data.map(i => i.model))].sort();
             const brands = [...new Set(data.map(i => i.brand))].sort();
+            const statuses = [...new Set(data.map(i => i.status))].sort();
 
-            const siteSel = document.getElementById('achSiteFilter');
             const modelSel = document.getElementById('achModelFilter');
             const brandSel = document.getElementById('achBrandFilter');
+            const statusSel = document.getElementById('achStatusFilter');
 
-            siteSel.innerHTML = '<option value="ALL">Semua Site</option>';
-            modelsSel = '<option value="ALL">Semua Model</option>';
+            modelSel.innerHTML = '<option value="ALL">Semua Model</option>';
             brandSel.innerHTML = '<option value="ALL">Semua Brand</option>';
+            statusSel.innerHTML = '<option value="ALL">Semua Status</option>';
 
-            sites.forEach(s => siteSel.appendChild(new Option(s, s)));
             models.forEach(m => modelSel.appendChild(new Option(m, m)));
             brands.forEach(b => brandSel.appendChild(new Option(b, b)));
+            statuses.forEach(s => statusSel.appendChild(new Option(s, s)));
         }
 
         function renderDashboard(data) {
@@ -505,13 +403,13 @@
         function updateKPICards(data) {
             const total = data.length;
             const avgAch = total > 0 ? (data.reduce((acc, curr) => acc + curr.ach, 0) / total).toFixed(1) : 0;
-            const above = data.filter(i => i.ach >= 100).length;
-            const under = data.filter(i => i.ach < 80).length;
+            const tercapai = data.filter(i => i.status.includes('TERCAPAI') && !i.status.includes('TIDAK')).length;
+            const tidakTercapai = data.filter(i => i.status.includes('TIDAK')).length;
 
             document.getElementById('achTotalParts').innerHTML = `${total.toLocaleString()} <span class="text-xs font-bold text-slate-400">Part</span>`;
             document.getElementById('achAvgPercent').textContent = `${avgAch}%`;
-            document.getElementById('achAboveCount').innerHTML = `${above.toLocaleString()} <span class="text-xs font-bold text-cyan-300">Part</span>`;
-            document.getElementById('achUnderCount').innerHTML = `${under.toLocaleString()} <span class="text-xs font-bold text-rose-400">Part</span>`;
+            document.getElementById('achAboveCount').innerHTML = `${tercapai.toLocaleString()} <span class="text-xs font-bold text-cyan-300">Part</span>`;
+            document.getElementById('achUnderCount').innerHTML = `${tidakTercapai.toLocaleString()} <span class="text-xs font-bold text-rose-400">Part</span>`;
         }
 
         function renderAchTable(data) {
@@ -523,42 +421,36 @@
             if (countBadge) countBadge.textContent = `Menampilkan ${data.length} Data`;
 
             data.forEach(item => {
-                let statusBadge = item.status.includes('ABOVE') 
-                    ? `<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded-md text-[9px] font-black inline-block">ABOVE TARGET</span>`
-                    : item.status.includes('ON')
-                    ? `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded-md text-[9px] font-black inline-block">ON TARGET</span>`
-                    : `<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2 py-0.5 rounded-md text-[9px] font-black inline-block">UNDER TARGET</span>`;
+                let statusBadge = !item.status.includes('TIDAK') && item.status.includes('TERCAPAI') 
+                    ? `<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-0.5 rounded-md text-[9px] font-black inline-block">${item.status}</span>`
+                    : `<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2.5 py-0.5 rounded-md text-[9px] font-black inline-block">${item.status}</span>`;
 
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-800/60 transition';
                 tr.innerHTML = `
-                    <td class="p-2.5 font-black text-white">${item.site}</td>
                     <td class="p-2.5 font-mono font-bold text-amber-400">${item.unit}</td>
-                    <td class="p-2.5 font-bold text-slate-300">${item.model}</td>
+                    <td class="p-2.5 font-bold text-white">${item.model}</td>
                     <td class="p-2.5 font-bold text-slate-200">${item.component}</td>
                     <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
                     <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
                     <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-right font-mono font-black ${item.ach >= 100 ? 'text-emerald-400' : item.ach >= 80 ? 'text-amber-400' : 'text-rose-500'}">${item.ach}%</td>
+                    <td class="p-2.5 text-right font-mono font-black ${item.ach >= 100 ? 'text-emerald-400' : 'text-amber-400'}">${item.ach}%</td>
                     <td class="p-2.5 text-center">${statusBadge}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
+        /* Eksekusi Filter Real-Time */
         function applyAchFilter() {
-            const site = document.getElementById('achSiteFilter').value;
             const model = document.getElementById('achModelFilter').value;
             const brand = document.getElementById('achBrandFilter').value;
             const status = document.getElementById('achStatusFilter').value;
 
             const filtered = globalData.filter(item => {
-                return (site === 'ALL' || item.site === site) &&
-                       (model === 'ALL' || item.model === model) &&
+                return (model === 'ALL' || item.model === model) &&
                        (brand === 'ALL' || item.brand === brand) &&
-                       (status === 'ALL' || (status === 'ABOVE TARGET' && item.ach >= 100) ||
-                        (status === 'ON TARGET' && item.ach >= 80 && item.ach < 100) ||
-                        (status === 'UNDER TARGET' && item.ach < 80));
+                       (status === 'ALL' || item.status === status);
             });
 
             renderDashboard(filtered);
@@ -566,7 +458,6 @@
 
         function resetFilters(type) {
             if (type === 'ach') {
-                document.getElementById('achSiteFilter').value = 'ALL';
                 document.getElementById('achModelFilter').value = 'ALL';
                 document.getElementById('achBrandFilter').value = 'ALL';
                 document.getElementById('achStatusFilter').value = 'ALL';
@@ -575,36 +466,36 @@
         }
 
         function updateCharts(data) {
-            // Group By Site
-            const siteGroups = {};
+            // Chart By Model
+            const modelGroups = {};
             data.forEach(item => {
-                if (!siteGroups[item.site]) siteGroups[item.site] = [];
-                siteGroups[item.site].push(item.ach);
+                if (!modelGroups[item.model]) modelGroups[item.model] = [];
+                modelGroups[item.model].push(item.ach);
             });
 
-            const siteCategories = Object.keys(siteGroups);
-            const siteAverages = siteCategories.map(s => {
-                const sum = siteGroups[s].reduce((a, b) => a + b, 0);
-                return parseFloat((sum / siteGroups[s].length).toFixed(1));
+            const modelCategories = Object.keys(modelGroups).slice(0, 10); // Ambil top 10
+            const modelAverages = modelCategories.map(m => {
+                const sum = modelGroups[m].reduce((a, b) => a + b, 0);
+                return parseFloat((sum / modelGroups[m].length).toFixed(1));
             });
 
             if (achChartInstance) achChartInstance.destroy();
             const achSiteOptions = {
-                series: [{ name: 'Achievement (%)', data: siteAverages }],
+                series: [{ name: 'Achievement (%)', data: modelAverages }],
                 chart: { type: 'bar', height: 260, toolbar: { show: false }, background: 'transparent' },
                 theme: { mode: 'dark' },
                 plotOptions: { bar: { borderRadius: 6, columnWidth: '45%', distributed: true } },
                 colors: ['#f59e0b', '#10b981', '#3b82f6', '#ec4899', '#06b6d4', '#a855f7'],
                 dataLabels: { enabled: true, formatter: (val) => val + '%', style: { fontSize: '10px', fontWeight: 'bold' } },
                 legend: { show: false },
-                xaxis: { categories: siteCategories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
-                yaxis: { max: 120, labels: { style: { colors: '#94a3b8' }, formatter: (v) => v + '%' } },
+                xaxis: { categories: modelCategories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
+                yaxis: { labels: { style: { colors: '#94a3b8' }, formatter: (v) => v + '%' } },
                 grid: { borderColor: '#334155', strokeDashArray: 4 }
             };
             achChartInstance = new ApexCharts(document.querySelector("#achSiteChart"), achSiteOptions);
             achChartInstance.render();
 
-            // Group By Brand
+            // Chart By Brand
             const brandCounts = {};
             data.forEach(item => {
                 brandCounts[item.brand] = (brandCounts[item.brand] || 0) + 1;
