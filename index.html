@@ -173,7 +173,7 @@
                         </select>
                     </div>
 
-                    <!-- Filter BRAND UCR (Kolom AH) -->
+                    <!-- Filter BRAND UCR (Kolom AJ) -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">BRAND UCR</label>
                         <select id="achBrandFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
@@ -338,10 +338,10 @@
             return rows.map(row => {
                 // Mapping Presisi Sesuai Kolom Spreadsheet:
                 // Kolom AF = Index 31 (Model Unit)
-                // Kolom AH = Index 33 (Brand UCR)
+                // Kolom AJ = Index 35 (Brand UCR)
                 // Kolom AK = Index 36 (Status)
                 const model = row[31] ? row[31].toString().trim() : '-';
-                const brand = row[33] ? row[33].toString().trim() : '-';
+                const brand = row[35] ? row[35].toString().trim() : '-';
                 const status = row[36] ? row[36].toString().trim() : '-';
 
                 const unit = row[30] ? row[30].toString().trim() : (row[1] || '-');
