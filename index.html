@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RESUME-LIFETIME-BRAND-UCR</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #0b0f19; color: #f3f4f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .card-dark { background-color: #111827; border: 1px solid #1f2937; }
+    .card-inner { background-color: #1f2937; border: 1px solid #374151; }
+  </style>
+</head>
+<body class="p-6 space-y-6">
+
+  <!-- HEADER -->
+  <header class="flex justify-between items-center bg-[#111827] p-4 rounded-xl border border-gray-800">
+    <div class="flex items-center space-x-3">
+      <div class="bg-amber-500 text-black p-3 rounded-lg font-bold">
+        <i class="fa-solid fa-chart-line text-xl"></i>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold tracking-wide text-white">RESUME-LIFETIME-BRAND-UCR</h1>
+        <p class="text-xs text-amber-500 font-medium">Monitoring & Analytics Lifetime UCR</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-3 bg-gray-800/60 p-2 px-4 rounded-lg border border-gray-700">
+      <div class="bg-gray-700 p-2 rounded-full text-gray-300">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="text-right">
+        <p class="text-sm font-semibold text-white">Administrator System</p>
+        <p class="text-xs text-amber-500">Role: Plant / Technical</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS (4 SHEETS) -->
+  <nav class="flex space-x-3">
+    <button onclick="switchTab('sheet1')" id="btn-sheet1" class="tab-btn bg-amber-500 text-black font-semibold px-4 py-2 rounded-lg text-sm transition">
+      <i class="fa-solid fa-rotate text-xs mr-1"></i> Review Achievement After Replace
+    </button>
+    <button onclick="switchTab('sheet2')" id="btn-sheet2" class="tab-btn bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium px-4 py-2 rounded-lg text-sm transition">
+      <i class="fa-solid fa-chart-column text-xs mr-1"></i> Rata-Rata Ketercapaian By Model
+    </button>
+    <button onclick="switchTab('sheet3')" id="btn-sheet3" class="tab-btn bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium px-4 py-2 rounded-lg text-sm transition">
+      <i class="fa-solid fa-list-check text-xs mr-1"></i> Review part UC On Track
+    </button>
+    <button onclick="switchTab('sheet4')" id="btn-sheet4" class="tab-btn bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium px-4 py-2 rounded-lg text-sm transition">
+      <i class="fa-solid fa-clock-rotate-left text-xs mr-1"></i> Review Historycal replace UC
+    </button>
+  </nav>
+
+  <!-- TAB CONTENT CONTAINER -->
+  <main id="tab-content">
+
+    <!-- SHEET 1: REVIEW ACHIEVEMENT AFTER REPLACE -->
+    <section id="sheet1" class="tab-page space-y-6">
+      
+      <!-- Banner Title -->
+      <div class="card-dark p-4 rounded-xl">
+        <span class="bg-amber-500/20 text-amber-400 text-xs font-semibold px-2.5 py-1 rounded-full border border-amber-500/30">
+          PLANT • Achievement Monitoring
+        </span>
+        <h2 class="text-2xl font-bold mt-2 text-white">REVIEW ACHIEVEMENT AFTER REPLACE</h2>
+        <p class="text-xs text-gray-400">MONITORING KETERCAPAIAN LIFETIME SETELAH PENGGANTIAN UC</p>
+      </div>
+
+      <!-- Filter Section -->
+      <div class="card-dark p-4 rounded-xl space-y-3">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-2 text-amber-500 font-bold text-sm">
+            <i class="fa-solid fa-filter"></i>
+            <span>Filter Unit & Site Monitoring</span>
+          </div>
+          <button class="text-xs text-gray-400 hover:text-white transition flex items-center gap-1">
+            <i class="fa-solid fa-rotate-left"></i> Reset Filter
+          </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">SITE</label>
+            <select class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-amber-500">
+              <option>Semua Site</option>
+              <option>MBLM</option>
+              <option>CDI</option>
+              <option>IP BAYAN</option>
+              <option>MHU</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">MODEL</label>
+            <select class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-amber-500">
+              <option>Semua Model</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">STATUS BRAND</label>
+            <select class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-amber-500">
+              <option>Semua Status</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Metrics Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="card-dark p-4 rounded-xl flex justify-between items-center border-l-4 border-blue-500">
+          <div>
+            <p class="text-xs text-gray-400 uppercase font-semibold">TOTAL UNIT MONITORED</p>
+            <h3 class="text-2xl font-bold text-white my-1">164 Unit</h3>
+            <p class="text-xs text-gray-500">Dalam monitoring Replace</p>
+          </div>
+          <div class="bg-blue-900/40 p-3 rounded-full text-blue-400">
+            <i class="fa-solid fa-truck-monster text-xl"></i>
+          </div>
+        </div>
+
+        <div class="card-dark p-4 rounded-xl flex justify-between items-center border-l-4 border-amber-500">
+          <div>
+            <p class="text-xs text-gray-400 uppercase font-semibold">WASPADA ( > 60% S/D < 80% )</p>
+            <h3 class="text-2xl font-bold text-amber-500 my-1">23 Unit</h3>
+            <p class="text-xs text-amber-500/80">Perlu Pengawasan Ketat</p>
+          </div>
+          <div class="bg-amber-900/40 p-3 rounded-full text-amber-500">
+            <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+          </div>
+        </div>
+
+        <div class="card-dark p-4 rounded-xl flex justify-between items-center border-l-4 border-red-500">
+          <div>
+            <p class="text-xs text-gray-400 uppercase font-semibold">KRITIS (80% UP WORN)</p>
+            <h3 class="text-2xl font-bold text-red-500 my-1">26 Unit</h3>
+            <p class="text-xs text-red-500/80">Perlu Schedule Replace</p>
+          </div>
+          <div class="bg-red-900/40 p-3 rounded-full text-red-500">
+            <i class="fa-solid fa-circle-radiation text-xl"></i>
+          </div>
+        </div>
+
+        <div class="card-dark p-4 rounded-xl flex justify-between items-center border-l-4 border-emerald-500">
+          <div>
+            <p class="text-xs text-gray-400 uppercase font-semibold">NORMAL ( UNDER 60% )</p>
+            <h3 class="text-2xl font-bold text-emerald-500 my-1">115 Unit</h3>
+            <p class="text-xs text-emerald-500/80">Kondisi Aman</p>
+          </div>
+          <div class="bg-emerald-900/40 p-3 rounded-full text-emerald-500">
+            <i class="fa-solid fa-circle-check text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card-dark p-4 rounded-xl space-y-3">
+          <h3 class="text-sm font-bold text-white">Distribusi Status Condition Per Site</h3>
+          <div class="h-64">
+            <canvas id="chartDistribution"></canvas>
+          </div>
+        </div>
+        <div class="card-dark p-4 rounded-xl space-y-3">
+          <h3 class="text-sm font-bold text-white">Total Unit Critical Worn Masing-masing Site</h3>
+          <div class="h-64">
+            <canvas id="chartCritical"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <div class="card-dark p-4 rounded-xl space-y-3 overflow-x-auto">
+        <h3 class="text-sm font-bold text-white">Data Monitoring Replace UC</h3>
+        <table class="w-full text-left text-xs text-gray-300">
+          <thead class="bg-gray-800 text-gray-400 uppercase border-b border-gray-700">
+            <tr>
+              <th class="p-3">SITE</th>
+              <th class="p-3">NO UNIT</th>
+              <th class="p-3">MODEL</th>
+              <th class="p-3">DATE LAST</th>
+              <th class="p-3">HM LAST</th>
+              <th class="p-3">WORN LAST</th>
+              <th class="p-3">STATUS</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800">
+            <tr class="hover:bg-gray-800/50">
+              <td class="p-3 font-semibold">MBLM</td>
+              <td class="p-3">EX-01</td>
+              <td class="p-3">PC2000</td>
+              <td class="p-3">2026-09-20</td>
+              <td class="p-3">12,450</td>
+              <td class="p-3">85%</td>
+              <td class="p-3"><span class="bg-red-500/20 text-red-400 px-2 py-1 rounded-md text-[10px] font-bold">KRITIS</span></td>
+            </tr>
+            <tr class="hover:bg-gray-800/50">
+              <td class="p-3 font-semibold">CDI</td>
+              <td class="p-3">EX-05</td>
+              <td class="p-3">PC1250</td>
+              <td class="p-3">2026-09-22</td>
+              <td class="p-3">8,200</td>
+              <td class="p-3">65%</td>
+              <td class="p-3"><span class="bg-amber-500/20 text-amber-400 px-2 py-1 rounded-md text-[10px] font-bold">WASPADA</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- SHEET 2, 3, 4 PLACEHOLDERS -->
+    <section id="sheet2" class="tab-page hidden card-dark p-6 rounded-xl">
+      <h2 class="text-xl font-bold text-amber-500">Rata-Rata Ketercapaian By Model</h2>
+      <p class="text-gray-400 text-sm mt-2">Halaman ini akan memuat analisis rata-rata ketercapaian lifetime berdasarkan model unit.</p>
+    </section>
+
+    <section id="sheet3" class="tab-page hidden card-dark p-6 rounded-xl">
+      <h2 class="text-xl font-bold text-amber-500">Review part UC On Track</h2>
+      <p class="text-gray-400 text-sm mt-2">Halaman ini akan memuat status part Undercarriage yang saat ini berjalan on-track.</p>
+    </section>
+
+    <section id="sheet4" class="tab-page hidden card-dark p-6 rounded-xl">
+      <h2 class="text-xl font-bold text-amber-500">Review Historycal replace UC</h2>
+      <p class="text-gray-400 text-sm mt-2">Halaman ini akan memuat riwayat/historis penggantian part Undercarriage.</p>
+    </section>
+
+  </main>
+
+  <!-- JS SCRIPT FOR TABS & CHARTS -->
+  <script>
+    // Tab Switching Logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-page').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-amber-500', 'text-black', 'font-semibold');
+        el.classList.add('bg-gray-800', 'text-gray-300');
+      });
+
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + tabId);
+      activeBtn.classList.remove('bg-gray-800', 'text-gray-300');
+      activeBtn.classList.add('bg-amber-500', 'text-black', 'font-semibold');
+    }
+
+    // Initialize Chart.js
+    window.onload = function() {
+      // Distribution Chart
+      const ctxDist = document.getElementById('chartDistribution').getContext('2d');
+      new Chart(ctxDist, {
+        type: 'bar',
+        data: {
+          labels: ['MBLM', 'CDI', 'IP BAYAN', 'MHU'],
+          datasets: [
+            { label: 'Aman / Normal', data: [36, 9, 21, 49], backgroundColor: '#10b981' },
+            { label: 'Waspada', data: [5, 6, 12, 0], backgroundColor: '#f59e0b' },
+            { label: 'Kritis', data: [10, 5, 11, 0], backgroundColor: '#ef4444' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#9ca3af' } } },
+          scales: {
+            x: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } },
+            y: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } }
+          }
+        }
+      });
+
+      // Critical Chart
+      const ctxCrit = document.getElementById('chartCritical').getContext('2d');
+      new Chart(ctxCrit, {
+        type: 'bar',
+        data: {
+          labels: ['MBLM', 'CDI', 'IP BAYAN', 'MHU'],
+          datasets: [{
+            label: 'Total Unit Critical',
+            data: [10, 5, 11, 0],
+            backgroundColor: '#ef4444'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } },
+            y: { ticks: { color: '#9ca3af' }, grid: { color: '#1f2937' } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
