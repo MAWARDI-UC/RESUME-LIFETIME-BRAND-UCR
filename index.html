@@ -13,6 +13,9 @@
     
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- PapaParse CDN untuk Membaca CSV Google Spreadsheet -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     
     <!-- Google Fonts: Inter -->
     <style>
@@ -74,48 +77,52 @@
     <!-- Top Frozen / Sticky Header Navbar -->
     <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between h-14">
                 <!-- Brand Title -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold shadow-inner glow-amber">
-                        <i data-lucide="layers" class="w-6 h-6 text-amber-500"></i>
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold shadow-inner glow-amber">
+                        <i data-lucide="layers" class="w-5 h-5 text-amber-500"></i>
                     </div>
                     <div>
-                        <h1 class="font-black text-lg sm:text-xl leading-none text-white tracking-wider uppercase">RESUME-LIFETIME-BRAND-UCR</h1>
-                        <span class="text-xs text-amber-400 font-bold tracking-wide">BSS Undercarriage Lifetime & Brand Analytics</span>
+                        <h1 class="font-black text-base sm:text-lg leading-none text-white tracking-wider uppercase">RESUME-LIFETIME-BRAND-UCR</h1>
+                        <span class="text-[10px] text-amber-400 font-bold tracking-wide">BSS Undercarriage Lifetime & Brand Analytics</span>
                     </div>
                 </div>
 
-                <!-- User Profile Badge -->
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-3 bg-slate-800/90 px-3.5 py-1.5 rounded-xl border border-slate-700/80 shadow-sm">
-                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-400 font-bold text-sm">
-                            <i data-lucide="user-check" class="w-4 h-4"></i>
+                <!-- User Profile Badge & Live Sync Status -->
+                <div class="flex items-center space-x-3">
+                    <div id="syncStatus" class="hidden sm:flex items-center space-x-1.5 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-lg text-[10px] font-bold text-emerald-400">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span id="syncText">Connected to Sheets</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-slate-800/90 px-3 py-1 rounded-lg border border-slate-700/80 shadow-sm">
+                        <div class="w-7 h-7 rounded-md bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-400 font-bold text-xs">
+                            <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
                         </div>
                         <div class="text-xs">
-                            <p class="font-extrabold text-slate-100">Administrator System</p>
-                            <p class="text-slate-400 text-[10px] font-semibold">Role: <span class="text-amber-400 font-bold">Plant / Technical</span></p>
+                            <p class="font-extrabold text-slate-100 text-[11px] leading-tight">Administrator System</p>
+                            <p class="text-slate-400 text-[9px] font-semibold leading-tight">Role: <span class="text-amber-400 font-bold">Plant / Technical</span></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Navigation Tabs (4 Sheets) -->
-            <nav class="flex space-x-2 border-t border-slate-800/80 py-2 overflow-x-auto custom-scrollbar">
-                <button onclick="switchTab('ach-after-replace')" id="btn-ach-after-replace" class="tab-btn px-4 py-2 rounded-lg text-xs font-black bg-amber-500 text-slate-950 flex items-center space-x-2 shadow-md shadow-amber-500/20 whitespace-nowrap transition-all duration-200">
-                    <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <!-- Navigation Tabs -->
+            <nav class="flex space-x-2 border-t border-slate-800/80 py-1.5 overflow-x-auto custom-scrollbar">
+                <button onclick="switchTab('ach-after-replace')" id="btn-ach-after-replace" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-black bg-amber-500 text-slate-950 flex items-center space-x-2 shadow-md shadow-amber-500/20 whitespace-nowrap transition-all duration-200">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
                     <span>Review Achievement After Replace</span>
                 </button>
-                <button onclick="switchTab('avg-by-model')" id="btn-avg-by-model" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
-                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                <button onclick="switchTab('avg-by-model')" id="btn-avg-by-model" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
+                    <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i>
                     <span>Rata-Rata Ketercapaian By Model</span>
                 </button>
-                <button onclick="switchTab('part-on-track')" id="btn-part-on-track" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
-                    <i data-lucide="activity" class="w-4 h-4"></i>
+                <button onclick="switchTab('part-on-track')" id="btn-part-on-track" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
+                    <i data-lucide="activity" class="w-3.5 h-3.5"></i>
                     <span>Review part UC On Track</span>
                 </button>
-                <button onclick="switchTab('historical-replace')" id="btn-historical-replace" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
-                    <i data-lucide="history" class="w-4 h-4"></i>
+                <button onclick="switchTab('historical-replace')" id="btn-historical-replace" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
+                    <i data-lucide="history" class="w-3.5 h-3.5"></i>
                     <span>Review Historycal replace UC</span>
                 </button>
             </nav>
@@ -123,75 +130,62 @@
     </header>
 
     <!-- Main Content Container -->
-    <main class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-6">
+    <main class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 space-y-4">
 
         <!-- ==================== TAB 1: REVIEW ACHIEVEMENT AFTER REPLACE ==================== -->
-        <div id="tab-ach-after-replace" class="tab-page space-y-6">
-            <!-- Hero Banner -->
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950/40 p-6 border border-slate-800 card-shadow">
-                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div id="tab-ach-after-replace" class="tab-page space-y-4">
+            <!-- Hero Banner Compact -->
+            <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950/40 px-5 py-4 border border-slate-800 card-shadow">
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-2">
                     <div>
-                        <div class="flex items-center space-x-2 mb-2">
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide uppercase bg-amber-500 text-slate-950">SHEET 1 ANALYTICS</span>
-                            <span class="text-xs text-emerald-400 font-bold flex items-center space-x-1">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <div class="flex items-center space-x-2 mb-1">
+                            <span class="px-2 py-0.5 rounded-full text-[9px] font-black tracking-wide uppercase bg-amber-500 text-slate-950">SHEET 1 ANALYTICS</span>
+                            <span class="text-[11px] text-emerald-400 font-bold flex items-center space-x-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                                 <span>Post-Replacement Performance</span>
                             </span>
                         </div>
-                        <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">Review Achievement After Replace</h2>
-                        <p class="text-xs text-amber-400 font-bold tracking-wider uppercase mt-1">EVALUASI KETERCAPAIAN LIFETIME SETELAH PENGGANTIAN KOMPONEN UNDERCARRIAGE</p>
+                        <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Review Achievement After Replace</h2>
+                        <p class="text-[10px] text-amber-400 font-bold tracking-wider uppercase">EVALUASI KETERCAPAIAN LIFETIME SETELAH PENGGANTIAN KOMPONEN UNDERCARRIAGE</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Filter Controls -->
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 card-shadow space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <!-- Filter Controls Compact -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 card-shadow space-y-3">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                     <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
-                        <i data-lucide="filter" class="w-4 h-4"></i>
+                        <i data-lucide="filter" class="w-3.5 h-3.5"></i>
                         <span class="text-slate-100 font-black">Filter Achievement After Replace</span>
                     </div>
-                    <button onclick="resetFilters('ach')" class="text-xs text-slate-400 hover:text-amber-400 flex items-center space-x-1.5 transition px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700">
-                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                    <button onclick="resetFilters('ach')" class="text-[11px] text-slate-400 hover:text-amber-400 flex items-center space-x-1 transition px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700">
+                        <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
                         <span class="font-bold">Reset Filter</span>
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                     <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">SITE</label>
-                        <select id="achSiteFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
+                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">SITE</label>
+                        <select id="achSiteFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Site</option>
-                            <option value="AGM">AGM</option>
-                            <option value="CDI">CDI</option>
-                            <option value="IP BAYAN">IP BAYAN</option>
-                            <option value="MAS">MAS</option>
-                            <option value="MBLM">MBLM</option>
-                            <option value="MHU">MHU</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">MODEL UNIT</label>
-                        <select id="achModelFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
+                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">MODEL UNIT</label>
+                        <select id="achModelFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Model</option>
-                            <option value="D375A-6R">D375A-6R</option>
-                            <option value="PC2000-8">PC2000-8</option>
-                            <option value="PC1250-8">PC1250-8</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">BRAND UCR</label>
-                        <select id="achBrandFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
+                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">BRAND UCR</label>
+                        <select id="achBrandFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Brand</option>
-                            <option value="KOMATSU GENUINE">KOMATSU GENUINE</option>
-                            <option value="BERCO">BERCO</option>
-                            <option value="ITR">ITR</option>
-                            <option value="KTSU">KTSU</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1.5">KETERCAPAIAN</label>
-                        <select id="achStatusFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
+                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">KETERCAPAIAN</label>
+                        <select id="achStatusFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Status</option>
                             <option value="ABOVE TARGET">ABOVE TARGET (>= 100%)</option>
                             <option value="ON TARGET">ON TARGET (80% - 99%)</option>
@@ -202,100 +196,100 @@
             </div>
 
             <!-- KPI Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl card-shadow flex justify-between items-center hover:border-amber-500/40 transition">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-amber-500/40 transition">
                     <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PARTS</p>
-                        <h3 id="achTotalParts" class="text-3xl font-black text-white mt-1">1,240 <span class="text-sm font-bold text-slate-400">Part</span></h3>
-                        <p class="text-[11px] text-slate-400 font-bold mt-0.5">Tercatat di seluruh Site</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PARTS</p>
+                        <h3 id="achTotalParts" class="text-2xl font-black text-white mt-0.5">0 <span class="text-xs font-bold text-slate-400">Part</span></h3>
+                        <p class="text-[10px] text-slate-400 font-bold">Tercatat di seluruh Site</p>
                     </div>
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
-                        <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl card-shadow flex justify-between items-center hover:border-emerald-500/40 transition">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-emerald-500/40 transition">
                     <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-black tracking-wider">AVG ACHIEVEMENT %</p>
-                        <h3 id="achAvgPercent" class="text-3xl font-black text-emerald-400 mt-1">96.4%</h3>
-                        <p class="text-[11px] text-emerald-400 font-bold mt-0.5">Memenuhi Standard Operational</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">AVG ACHIEVEMENT %</p>
+                        <h3 id="achAvgPercent" class="text-2xl font-black text-emerald-400 mt-0.5">0.0%</h3>
+                        <p class="text-[10px] text-emerald-400 font-bold">Rata-rata Ketercapaian</p>
                     </div>
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
-                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-5 h-5"></i>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
                     <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-black tracking-wider">PARTS ABOVE TARGET</p>
-                        <h3 id="achAboveCount" class="text-3xl font-black text-cyan-400 mt-1">782 <span class="text-sm font-bold text-cyan-300">Part</span></h3>
-                        <p class="text-[11px] text-cyan-400 font-bold mt-0.5">Achieved >= 100% Target</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS ABOVE TARGET</p>
+                        <h3 id="achAboveCount" class="text-2xl font-black text-cyan-400 mt-0.5">0 <span class="text-xs font-bold text-cyan-300">Part</span></h3>
+                        <p class="text-[10px] text-cyan-400 font-bold">Achieved >= 100% Target</p>
                     </div>
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
-                        <i data-lucide="award" class="w-6 h-6"></i>
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
+                        <i data-lucide="award" class="w-5 h-5"></i>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
                     <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-black tracking-wider">PARTS UNDER TARGET</p>
-                        <h3 id="achUnderCount" class="text-3xl font-black text-rose-500 mt-1">42 <span class="text-sm font-bold text-rose-400">Part</span></h3>
-                        <p class="text-[11px] text-rose-400 font-bold mt-0.5">Membutuhkan Analisis Brand</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PARTS UNDER TARGET</p>
+                        <h3 id="achUnderCount" class="text-2xl font-black text-rose-500 mt-0.5">0 <span class="text-xs font-bold text-rose-400">Part</span></h3>
+                        <p class="text-[10px] text-rose-400 font-bold">Membutuhkan Evaluasi</p>
                     </div>
-                    <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
-                        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+                        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Charts Row -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-8 bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow">
-                    <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                <div class="lg:col-span-8 bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
                         <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                             Achievement After Replace per Site (%)
                         </h3>
                     </div>
-                    <div id="achSiteChart" class="min-h-[280px]"></div>
+                    <div id="achSiteChart" class="min-h-[260px]"></div>
                 </div>
 
-                <div class="lg:col-span-4 bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow flex flex-col justify-between">
-                    <div class="flex items-center justify-between mb-2 border-b border-slate-800 pb-3">
+                <div class="lg:col-span-4 bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-2 border-b border-slate-800 pb-2">
                         <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
                             Distribusi Brand UCR
                         </h3>
                     </div>
-                    <div id="achBrandChart" class="flex justify-center items-center py-2 min-h-[250px]"></div>
+                    <div id="achBrandChart" class="flex justify-center items-center py-2 min-h-[230px]"></div>
                 </div>
             </div>
 
             <!-- Sheet 1 Data Table -->
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow space-y-4">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-3">
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-2">
                     <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                        <i data-lucide="list" class="w-4 h-4 text-amber-500"></i>
+                        <i data-lucide="list" class="w-3.5 h-3.5 text-amber-500"></i>
                         Detail Achievement After Replace Komponen
                     </h3>
-                    <span id="achTableCount" class="text-xs font-extrabold bg-slate-800 text-amber-400 px-3 py-1 rounded-lg border border-slate-700">
-                        Menampilkan Data
+                    <span id="achTableCount" class="text-[11px] font-extrabold bg-slate-800 text-amber-400 px-2.5 py-0.5 rounded-md border border-slate-700">
+                        Memuat Data...
                     </span>
                 </div>
 
                 <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800/90 text-slate-300 uppercase text-[10px] font-black tracking-wider border-b border-slate-700">
+                        <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
                             <tr>
-                                <th class="p-3.5">SITE</th>
-                                <th class="p-3.5">NO UNIT</th>
-                                <th class="p-3.5">MODEL</th>
-                                <th class="p-3.5">KOMPONEN</th>
-                                <th class="p-3.5">BRAND UCR</th>
-                                <th class="p-3.5 text-right">TARGET (HM)</th>
-                                <th class="p-3.5 text-right">ACTUAL (HM)</th>
-                                <th class="p-3.5 text-right">ACHIEVEMENT (%)</th>
-                                <th class="p-3.5 text-center">STATUS</th>
+                                <th class="p-2.5">SITE</th>
+                                <th class="p-2.5">NO UNIT</th>
+                                <th class="p-2.5">MODEL</th>
+                                <th class="p-2.5">KOMPONEN</th>
+                                <th class="p-2.5">BRAND UCR</th>
+                                <th class="p-2.5 text-right">TARGET (HM)</th>
+                                <th class="p-2.5 text-right">ACTUAL (HM)</th>
+                                <th class="p-2.5 text-right">ACHIEVEMENT (%)</th>
+                                <th class="p-2.5 text-center">STATUS</th>
                             </tr>
                         </thead>
                         <tbody id="achTableBody" class="divide-y divide-slate-800/80">
@@ -307,85 +301,31 @@
         </div>
 
         <!-- ==================== TAB 2: RATA-RATA KETERCAPAIAN BY MODEL ==================== -->
-        <div id="tab-avg-by-model" class="tab-page hidden space-y-6">
-            <!-- Hero Banner -->
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-950/40 p-6 border border-slate-800 card-shadow">
+        <div id="tab-avg-by-model" class="tab-page hidden space-y-4">
+            <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-950/40 p-4 border border-slate-800 card-shadow">
                 <div class="relative z-10">
-                    <div class="inline-flex items-center space-x-2 bg-cyan-500/10 text-cyan-400 text-[10px] font-black px-3 py-1 rounded-full border border-cyan-500/30 mb-2">
-                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <div class="inline-flex items-center space-x-2 bg-cyan-500/10 text-cyan-400 text-[9px] font-black px-2.5 py-0.5 rounded-full border border-cyan-500/30 mb-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
                         <span class="text-white">SHEET 2 ANALYTICS</span>
-                        <span class="text-slate-500">•</span>
-                        <span class="text-cyan-400">Model Performance</span>
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">Rata-Rata Ketercapaian By Model</h2>
-                    <p class="text-xs font-black text-amber-500 tracking-widest uppercase mt-1">ANALISIS RATA-RATA LIFETIME BERDASARKAN MODEL UNIT UNIT HEAVY EQUIPMENT</p>
+                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Rata-Rata Ketercapaian By Model</h2>
                 </div>
             </div>
 
-            <!-- KPI Cards Sheet 2 -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow flex justify-between items-center">
-                    <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-black">TOP MODEL PERFORMANCE</p>
-                        <h3 class="text-2xl font-black text-emerald-400 mt-1">PC2000-8</h3>
-                        <p class="text-[11px] text-slate-400 font-bold">Average Achievement: 102.5%</p>
-                    </div>
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
-                        <i data-lucide="trophy" class="w-6 h-6"></i>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow flex justify-between items-center">
-                    <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-black">MOST MONITORED MODEL</p>
-                        <h3 class="text-2xl font-black text-amber-400 mt-1">D375A-6R</h3>
-                        <p class="text-[11px] text-slate-400 font-bold">Total Unit: 184 Fleet</p>
-                    </div>
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
-                        <i data-lucide="truck" class="w-6 h-6"></i>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow flex justify-between items-center">
-                    <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-black">FLEET OVERALL AVG</p>
-                        <h3 class="text-2xl font-black text-cyan-400 mt-1">95.2%</h3>
-                        <p class="text-[11px] text-slate-400 font-bold">Seluruh Model Unit</p>
-                    </div>
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
-                        <i data-lucide="gauge" class="w-6 h-6"></i>
-                    </div>
-                </div>
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+                <div id="modelAvgChart" class="min-h-[280px]"></div>
             </div>
 
-            <!-- Model Chart -->
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow">
-                <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
-                    <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-                        Perbandingan Rata-Rata Ketercapaian Target Per Model Unit (%)
-                    </h3>
-                </div>
-                <div id="modelAvgChart" class="min-h-[300px]"></div>
-            </div>
-
-            <!-- Table Sheet 2 -->
-            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 card-shadow space-y-4">
-                <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
-                    <i data-lucide="table" class="w-4 h-4 text-amber-500"></i>
-                    Matriks Rata-Rata Ketercapaian By Model & Komponen
-                </h3>
-
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
                 <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800 text-slate-300 uppercase text-[10px] font-black tracking-wider">
+                        <thead class="bg-slate-800 text-slate-300 uppercase text-[9px] font-black tracking-wider">
                             <tr>
-                                <th class="p-3.5">MODEL UNIT</th>
-                                <th class="p-3.5">KOMPONEN</th>
-                                <th class="p-3.5 text-right">BENCHMARK TARGET (HM)</th>
-                                <th class="p-3.5 text-right">AVG ACTUAL (HM)</th>
-                                <th class="p-3.5 text-right">AVG ACH (%)</th>
-                                <th class="p-3.5 text-center">EVALUASI BRAND BEST PERFORMER</th>
+                                <th class="p-2.5">MODEL UNIT</th>
+                                <th class="p-2.5">KOMPONEN</th>
+                                <th class="p-2.5 text-right">BENCHMARK TARGET (HM)</th>
+                                <th class="p-2.5 text-right">AVG ACTUAL (HM)</th>
+                                <th class="p-2.5 text-right">AVG ACH (%)</th>
                             </tr>
                         </thead>
                         <tbody id="modelAvgTableBody" class="divide-y divide-slate-800">
@@ -397,45 +337,27 @@
         </div>
 
         <!-- ==================== TAB 3: REVIEW PART UC ON TRACK ==================== -->
-        <div id="tab-part-on-track" class="tab-page hidden space-y-6">
-            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 card-shadow">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="bg-emerald-500/20 text-emerald-400 p-3 rounded-xl border border-emerald-500/30">
-                        <i data-lucide="activity" class="w-6 h-6"></i>
+        <div id="tab-part-on-track" class="tab-page hidden space-y-4">
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="bg-emerald-500/20 text-emerald-400 p-2 rounded-lg border border-emerald-500/30">
+                        <i data-lucide="activity" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-black text-white uppercase tracking-wide">Review Part UC On Track</h2>
-                        <p class="text-xs font-bold text-slate-400 mt-0.5">Monitoring kesehatan & potensi umur pakai komponen Undercarriage yang sedang beroperasi</p>
+                        <h2 class="text-lg font-black text-white uppercase">Review Part UC On Track</h2>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                        <p class="text-[10px] text-slate-400 font-black uppercase">HEALTHY ON TRACK (&lt;70% WORN)</p>
-                        <h3 class="text-2xl font-black text-emerald-400 mt-1">312 Part</h3>
-                    </div>
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                        <p class="text-[10px] text-slate-400 font-black uppercase">ATTENTION NEEDED (70% - 85% WORN)</p>
-                        <h3 class="text-2xl font-black text-amber-400 mt-1">58 Part</h3>
-                    </div>
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                        <p class="text-[10px] text-slate-400 font-black uppercase">NEAR REPLACEMENT (>85% WORN)</p>
-                        <h3 class="text-2xl font-black text-rose-500 mt-1">19 Part</h3>
-                    </div>
-                </div>
-
                 <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800 text-slate-300 uppercase text-[10px] font-black tracking-wider">
+                        <thead class="bg-slate-800 text-slate-300 uppercase text-[9px] font-black tracking-wider">
                             <tr>
-                                <th class="p-3.5">SITE</th>
-                                <th class="p-3.5">NO UNIT</th>
-                                <th class="p-3.5">MODEL</th>
-                                <th class="p-3.5">PART NAME</th>
-                                <th class="p-3.5">BRAND UCR</th>
-                                <th class="p-3.5 text-right">CURRENT HM</th>
-                                <th class="p-3.5 text-right">EST. REMAINING (HM)</th>
-                                <th class="p-3.5 text-center">CONDITION STATUS</th>
+                                <th class="p-2.5">SITE</th>
+                                <th class="p-2.5">NO UNIT</th>
+                                <th class="p-2.5">MODEL</th>
+                                <th class="p-2.5">PART NAME</th>
+                                <th class="p-2.5">BRAND UCR</th>
+                                <th class="p-2.5 text-right">CURRENT HM</th>
+                                <th class="p-2.5 text-right">EST. REMAINING (HM)</th>
                             </tr>
                         </thead>
                         <tbody id="onTrackTableBody" class="divide-y divide-slate-800">
@@ -447,30 +369,27 @@
         </div>
 
         <!-- ==================== TAB 4: REVIEW HISTORICAL REPLACE UC ==================== -->
-        <div id="tab-historical-replace" class="tab-page hidden space-y-6">
-            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 card-shadow">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="bg-amber-500/20 text-amber-400 p-3 rounded-xl border border-amber-500/30">
-                        <i data-lucide="history" class="w-6 h-6"></i>
+        <div id="tab-historical-replace" class="tab-page hidden space-y-4">
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="bg-amber-500/20 text-amber-400 p-2 rounded-lg border border-amber-500/30">
+                        <i data-lucide="history" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-black text-white uppercase tracking-wide">Review Historycal Replace UC</h2>
-                        <p class="text-xs font-bold text-slate-400 mt-0.5">Arsip dan rekam jejak historis penggantian komponen Undercarriage seluruh unit site</p>
+                        <h2 class="text-lg font-black text-white uppercase">Review Historical Replace UC</h2>
                     </div>
                 </div>
-
                 <div class="overflow-x-auto custom-scrollbar">
                     <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800 text-slate-300 uppercase text-[10px] font-black tracking-wider">
+                        <thead class="bg-slate-800 text-slate-300 uppercase text-[9px] font-black tracking-wider">
                             <tr>
-                                <th class="p-3.5">TANGGAL REPLACE</th>
-                                <th class="p-3.5">SITE</th>
-                                <th class="p-3.5">NO UNIT</th>
-                                <th class="p-3.5">KOMPONEN</th>
-                                <th class="p-3.5">BRAND DIPASANG</th>
-                                <th class="p-3.5 text-right">HM REPLACE</th>
-                                <th class="p-3.5 text-right">FINAL ACH (%)</th>
-                                <th class="p-3.5 text-center">REASON / CATATAN</th>
+                                <th class="p-2.5">TANGGAL REPLACE</th>
+                                <th class="p-2.5">SITE</th>
+                                <th class="p-2.5">NO UNIT</th>
+                                <th class="p-2.5">KOMPONEN</th>
+                                <th class="p-2.5">BRAND DIPASANG</th>
+                                <th class="p-2.5 text-right">HM REPLACE</th>
+                                <th class="p-2.5 text-right">FINAL ACH (%)</th>
                             </tr>
                         </thead>
                         <tbody id="historicalTableBody" class="divide-y divide-slate-800">
@@ -484,43 +403,227 @@
     </main>
 
     <script>
-        /* Lucide Icons Initializer Function */
+        // Tautan Google Sheets CSV Publik
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtMyBr-pH_YCgL_xO2H-hf96lxX2ls63nCx8dhv2f56dP6L9YmjBtKRHGMIiUgzSjsm_t-dSyytIAj/pub?output=csv';
+
+        let globalData = [];
+        let achChartInstance = null;
+        let brandChartInstance = null;
+        let modelChartInstance = null;
+
         function refreshIcons() {
             if (window.lucide) {
                 lucide.createIcons();
             }
         }
 
-        /* Sample Datasets */
-        const achSampleData = [
-            { site: 'MBLM', unit: 'DZ422', model: 'D375A-6R', component: 'TRACK LINK ASSY', brand: 'KOMATSU GENUINE', targetHm: 5000, actualHm: 5200, ach: 104.0, status: 'ABOVE TARGET' },
-            { site: 'IP BAYAN', unit: 'EX019', model: 'PC2000-8', component: 'CARRIER ROLLER', brand: 'ITR', targetHm: 5000, actualHm: 3800, ach: 76.0, status: 'UNDER TARGET' },
-            { site: 'CDI', unit: 'EX005', model: 'PC1250-8', component: 'TRACK ROLLER', brand: 'BERCO', targetHm: 4500, actualHm: 4300, ach: 95.5, status: 'ON TARGET' },
-            { site: 'MHU', unit: 'DZ008', model: 'D375A-6R', component: 'IDLER GROUP', brand: 'KOMATSU GENUINE', targetHm: 6000, actualHm: 5900, ach: 98.3, status: 'ON TARGET' },
-            { site: 'AGM', unit: 'EX012', model: 'PC2000-8', component: 'SPROCKET SEGMENT', brand: 'KTSU', targetHm: 4500, actualHm: 4800, ach: 106.6, status: 'ABOVE TARGET' },
-            { site: 'MAS', unit: 'DZ104', model: 'D375A-6R', component: 'TRACK LINK ASSY', brand: 'ITR', targetHm: 5000, actualHm: 3400, ach: 68.0, status: 'UNDER TARGET' }
-        ];
+        /* Ambil Data dari Google Spreadsheet via PapaParse */
+        function fetchDataFromCSV() {
+            Papa.parse(CSV_URL, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    if (results.data && results.data.length > 0) {
+                        globalData = processCSVData(results.data);
+                        populateFilterOptions(globalData);
+                        renderDashboard(globalData);
+                        
+                        document.getElementById('syncStatus').classList.remove('hidden');
+                        document.getElementById('syncText').textContent = 'Live Data Connected (' + globalData.length + ' rows)';
+                    }
+                },
+                error: function(err) {
+                    console.error("Gagal mengambil CSV Google Spreadsheet:", err);
+                    document.getElementById('syncText').textContent = 'Menggunakan Data Sample';
+                }
+            });
+        }
 
-        const modelAvgSampleData = [
-            { model: 'D375A-6R', component: 'TRACK LINK', target: 5000, avgActual: 4850, ach: 97.0, bestBrand: 'KOMATSU GENUINE' },
-            { model: 'D375A-6R', component: 'TRACK ROLLER', target: 4500, avgActual: 4410, ach: 98.0, bestBrand: 'BERCO' },
-            { model: 'PC2000-8', component: 'CARRIER ROLLER', target: 5000, avgActual: 5120, ach: 102.4, bestBrand: 'KOMATSU GENUINE' },
-            { model: 'PC1250-8', component: 'SPROCKET', target: 4000, avgActual: 3880, ach: 97.0, bestBrand: 'KTSU' }
-        ];
+        /* Normalisasi Header & Tipe Data CSV */
+        function processCSVData(rawData) {
+            return rawData.map(row => {
+                const site = row['SITE'] || row['site'] || 'N/A';
+                const unit = row['NO UNIT'] || row['UNIT'] || row['unit'] || 'N/A';
+                const model = row['MODEL'] || row['model'] || 'N/A';
+                const component = row['KOMPONEN'] || row['PART'] || row['component'] || 'N/A';
+                const brand = row['BRAND UCR'] || row['BRAND'] || row['brand'] || 'N/A';
+                
+                const targetHm = parseFloat(row['TARGET (HM)'] || row['TARGET'] || row['targetHm']) || 0;
+                const actualHm = parseFloat(row['ACTUAL (HM)'] || row['ACTUAL'] || row['actualHm']) || 0;
+                
+                let ach = parseFloat(row['ACHIEVEMENT (%)'] || row['ACH']) || 0;
+                if (!ach && targetHm > 0) {
+                    ach = (actualHm / targetHm) * 100;
+                }
 
-        const onTrackSampleData = [
-            { site: 'MBLM', unit: 'DZ401', model: 'D375A-6R', part: 'TRACK LINK RH', brand: 'BERCO', currentHm: 3200, estRemaining: 1800, status: 'HEALTHY' },
-            { site: 'AGM', unit: 'EX088', model: 'PC1250-8', part: 'IDLER LH', brand: 'KOMATSU GENUINE', currentHm: 4100, estRemaining: 400, status: 'ATTENTION' },
-            { site: 'IP BAYAN', unit: 'EX019', model: 'PC2000-8', part: 'CARRIER ROLLER #2', brand: 'ITR', currentHm: 4700, estRemaining: 150, status: 'NEAR REPLACEMENT' }
-        ];
+                let status = row['STATUS'] || '';
+                if (!status) {
+                    if (ach >= 100) status = 'ABOVE TARGET';
+                    else if (ach >= 80) status = 'ON TARGET';
+                    else status = 'UNDER TARGET';
+                }
 
-        const historicalSampleData = [
-            { date: '2026-02-15', site: 'MBLM', unit: 'DZ422', component: 'TRACK LINK LH', brand: 'KOMATSU GENUINE', hmReplace: 5200, ach: 104.0, reason: 'Normal Wear Out' },
-            { date: '2026-01-28', site: 'CDI', unit: 'EX005', component: 'SPROCKET SEGMENT', brand: 'ITR', hmReplace: 3900, ach: 86.6, reason: 'Impact Crack' },
-            { date: '2026-01-10', site: 'MAS', unit: 'DZ104', component: 'CARRIER ROLLER', brand: 'BERCO', hmReplace: 4800, ach: 96.0, reason: 'Seal Leakage' }
-        ];
+                return {
+                    site: site.toUpperCase().trim(),
+                    unit: unit.toUpperCase().trim(),
+                    model: model.toUpperCase().trim(),
+                    component: component.toUpperCase().trim(),
+                    brand: brand.toUpperCase().trim(),
+                    targetHm: targetHm,
+                    actualHm: actualHm,
+                    ach: parseFloat(ach.toFixed(1)),
+                    status: status.toUpperCase().trim()
+                };
+            });
+        }
 
-        /* Tab Switching Functionality */
+        function populateFilterOptions(data) {
+            const sites = [...new Set(data.map(i => i.site))].sort();
+            const models = [...new Set(data.map(i => i.model))].sort();
+            const brands = [...new Set(data.map(i => i.brand))].sort();
+
+            const siteSel = document.getElementById('achSiteFilter');
+            const modelSel = document.getElementById('achModelFilter');
+            const brandSel = document.getElementById('achBrandFilter');
+
+            siteSel.innerHTML = '<option value="ALL">Semua Site</option>';
+            modelsSel = '<option value="ALL">Semua Model</option>';
+            brandSel.innerHTML = '<option value="ALL">Semua Brand</option>';
+
+            sites.forEach(s => siteSel.appendChild(new Option(s, s)));
+            models.forEach(m => modelSel.appendChild(new Option(m, m)));
+            brands.forEach(b => brandSel.appendChild(new Option(b, b)));
+        }
+
+        function renderDashboard(data) {
+            renderAchTable(data);
+            updateKPICards(data);
+            updateCharts(data);
+        }
+
+        function updateKPICards(data) {
+            const total = data.length;
+            const avgAch = total > 0 ? (data.reduce((acc, curr) => acc + curr.ach, 0) / total).toFixed(1) : 0;
+            const above = data.filter(i => i.ach >= 100).length;
+            const under = data.filter(i => i.ach < 80).length;
+
+            document.getElementById('achTotalParts').innerHTML = `${total.toLocaleString()} <span class="text-xs font-bold text-slate-400">Part</span>`;
+            document.getElementById('achAvgPercent').textContent = `${avgAch}%`;
+            document.getElementById('achAboveCount').innerHTML = `${above.toLocaleString()} <span class="text-xs font-bold text-cyan-300">Part</span>`;
+            document.getElementById('achUnderCount').innerHTML = `${under.toLocaleString()} <span class="text-xs font-bold text-rose-400">Part</span>`;
+        }
+
+        function renderAchTable(data) {
+            const tbody = document.getElementById('achTableBody');
+            const countBadge = document.getElementById('achTableCount');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+            if (countBadge) countBadge.textContent = `Menampilkan ${data.length} Data`;
+
+            data.forEach(item => {
+                let statusBadge = item.status.includes('ABOVE') 
+                    ? `<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded-md text-[9px] font-black inline-block">ABOVE TARGET</span>`
+                    : item.status.includes('ON')
+                    ? `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded-md text-[9px] font-black inline-block">ON TARGET</span>`
+                    : `<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2 py-0.5 rounded-md text-[9px] font-black inline-block">UNDER TARGET</span>`;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/60 transition';
+                tr.innerHTML = `
+                    <td class="p-2.5 font-black text-white">${item.site}</td>
+                    <td class="p-2.5 font-mono font-bold text-amber-400">${item.unit}</td>
+                    <td class="p-2.5 font-bold text-slate-300">${item.model}</td>
+                    <td class="p-2.5 font-bold text-slate-200">${item.component}</td>
+                    <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
+                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono font-black ${item.ach >= 100 ? 'text-emerald-400' : item.ach >= 80 ? 'text-amber-400' : 'text-rose-500'}">${item.ach}%</td>
+                    <td class="p-2.5 text-center">${statusBadge}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function applyAchFilter() {
+            const site = document.getElementById('achSiteFilter').value;
+            const model = document.getElementById('achModelFilter').value;
+            const brand = document.getElementById('achBrandFilter').value;
+            const status = document.getElementById('achStatusFilter').value;
+
+            const filtered = globalData.filter(item => {
+                return (site === 'ALL' || item.site === site) &&
+                       (model === 'ALL' || item.model === model) &&
+                       (brand === 'ALL' || item.brand === brand) &&
+                       (status === 'ALL' || (status === 'ABOVE TARGET' && item.ach >= 100) ||
+                        (status === 'ON TARGET' && item.ach >= 80 && item.ach < 100) ||
+                        (status === 'UNDER TARGET' && item.ach < 80));
+            });
+
+            renderDashboard(filtered);
+        }
+
+        function resetFilters(type) {
+            if (type === 'ach') {
+                document.getElementById('achSiteFilter').value = 'ALL';
+                document.getElementById('achModelFilter').value = 'ALL';
+                document.getElementById('achBrandFilter').value = 'ALL';
+                document.getElementById('achStatusFilter').value = 'ALL';
+                renderDashboard(globalData);
+            }
+        }
+
+        function updateCharts(data) {
+            // Group By Site
+            const siteGroups = {};
+            data.forEach(item => {
+                if (!siteGroups[item.site]) siteGroups[item.site] = [];
+                siteGroups[item.site].push(item.ach);
+            });
+
+            const siteCategories = Object.keys(siteGroups);
+            const siteAverages = siteCategories.map(s => {
+                const sum = siteGroups[s].reduce((a, b) => a + b, 0);
+                return parseFloat((sum / siteGroups[s].length).toFixed(1));
+            });
+
+            if (achChartInstance) achChartInstance.destroy();
+            const achSiteOptions = {
+                series: [{ name: 'Achievement (%)', data: siteAverages }],
+                chart: { type: 'bar', height: 260, toolbar: { show: false }, background: 'transparent' },
+                theme: { mode: 'dark' },
+                plotOptions: { bar: { borderRadius: 6, columnWidth: '45%', distributed: true } },
+                colors: ['#f59e0b', '#10b981', '#3b82f6', '#ec4899', '#06b6d4', '#a855f7'],
+                dataLabels: { enabled: true, formatter: (val) => val + '%', style: { fontSize: '10px', fontWeight: 'bold' } },
+                legend: { show: false },
+                xaxis: { categories: siteCategories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
+                yaxis: { max: 120, labels: { style: { colors: '#94a3b8' }, formatter: (v) => v + '%' } },
+                grid: { borderColor: '#334155', strokeDashArray: 4 }
+            };
+            achChartInstance = new ApexCharts(document.querySelector("#achSiteChart"), achSiteOptions);
+            achChartInstance.render();
+
+            // Group By Brand
+            const brandCounts = {};
+            data.forEach(item => {
+                brandCounts[item.brand] = (brandCounts[item.brand] || 0) + 1;
+            });
+
+            if (brandChartInstance) brandChartInstance.destroy();
+            const achBrandOptions = {
+                series: Object.values(brandCounts),
+                labels: Object.keys(brandCounts),
+                chart: { type: 'donut', height: 230, background: 'transparent' },
+                colors: ['#f59e0b', '#3b82f6', '#10b981', '#06b6d4', '#ec4899'],
+                legend: { position: 'bottom', labels: { colors: '#cbd5e1' }, fontSize: '10px', fontWeight: 600 },
+                stroke: { colors: ['#0f172a'] }
+            };
+            brandChartInstance = new ApexCharts(document.querySelector("#achBrandChart"), achBrandOptions);
+            brandChartInstance.render();
+        }
+
+        /* Tab Switching */
         function switchTab(tabId) {
             document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
 
@@ -541,188 +644,9 @@
             refreshIcons();
         }
 
-        /* Rendering Table Sheet 1 */
-        function renderAchTable(data) {
-            const tbody = document.getElementById('achTableBody');
-            const countBadge = document.getElementById('achTableCount');
-            if (!tbody) return;
-
-            tbody.innerHTML = '';
-            if (countBadge) countBadge.textContent = `Menampilkan ${data.length} Data`;
-
-            data.forEach(item => {
-                let statusBadge = item.status === 'ABOVE TARGET' 
-                    ? `<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-1 rounded-lg text-[10px] font-black inline-block">ABOVE TARGET</span>`
-                    : item.status === 'ON TARGET'
-                    ? `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-1 rounded-lg text-[10px] font-black inline-block">ON TARGET</span>`
-                    : `<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2.5 py-1 rounded-lg text-[10px] font-black inline-block">UNDER TARGET</span>`;
-
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-800/60 transition';
-                tr.innerHTML = `
-                    <td class="p-3.5 font-black text-white">${item.site}</td>
-                    <td class="p-3.5 font-mono font-bold text-amber-400">${item.unit}</td>
-                    <td class="p-3.5 font-bold text-slate-300">${item.model}</td>
-                    <td class="p-3.5 font-bold text-slate-200">${item.component}</td>
-                    <td class="p-3.5 font-bold text-cyan-400">${item.brand}</td>
-                    <td class="p-3.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
-                    <td class="p-3.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString()} HM</td>
-                    <td class="p-3.5 text-right font-mono font-black ${item.ach >= 100 ? 'text-emerald-400' : item.ach >= 80 ? 'text-amber-400' : 'text-rose-500'}">${item.ach.toFixed(1)}%</td>
-                    <td class="p-3.5 text-center">${statusBadge}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        /* Filter Logic Sheet 1 */
-        function applyAchFilter() {
-            const site = document.getElementById('achSiteFilter').value;
-            const model = document.getElementById('achModelFilter').value;
-            const brand = document.getElementById('achBrandFilter').value;
-            const status = document.getElementById('achStatusFilter').value;
-
-            const filtered = achSampleData.filter(item => {
-                return (site === 'ALL' || item.site === site) &&
-                       (model === 'ALL' || item.model === model) &&
-                       (brand === 'ALL' || item.brand === brand) &&
-                       (status === 'ALL' || item.status === status);
-            });
-
-            renderAchTable(filtered);
-        }
-
-        function resetFilters(type) {
-            if (type === 'ach') {
-                document.getElementById('achSiteFilter').value = 'ALL';
-                document.getElementById('achModelFilter').value = 'ALL';
-                document.getElementById('achBrandFilter').value = 'ALL';
-                document.getElementById('achStatusFilter').value = 'ALL';
-                renderAchTable(achSampleData);
-            }
-        }
-
-        /* Render Sheet 2 Table */
-        function renderModelAvgTable() {
-            const tbody = document.getElementById('modelAvgTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            modelAvgSampleData.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-800/60 transition';
-                tr.innerHTML = `
-                    <td class="p-3.5 font-black text-white">${row.model}</td>
-                    <td class="p-3.5 font-bold text-slate-200">${row.component}</td>
-                    <td class="p-3.5 text-right font-mono text-slate-400">${row.target.toLocaleString()} HM</td>
-                    <td class="p-3.5 text-right font-mono font-bold text-white">${row.avgActual.toLocaleString()} HM</td>
-                    <td class="p-3.5 text-right font-mono font-black text-emerald-400">${row.ach.toFixed(1)}%</td>
-                    <td class="p-3.5 text-center font-bold text-amber-400">${row.bestBrand}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        /* Render Sheet 3 Table */
-        function renderOnTrackTable() {
-            const tbody = document.getElementById('onTrackTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            onTrackSampleData.forEach(row => {
-                let badge = row.status === 'HEALTHY'
-                    ? `<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-1 rounded-lg text-[10px] font-black inline-block">HEALTHY ON TRACK</span>`
-                    : row.status === 'ATTENTION'
-                    ? `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-1 rounded-lg text-[10px] font-black inline-block">ATTENTION</span>`
-                    : `<span class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-2.5 py-1 rounded-lg text-[10px] font-black inline-block">NEAR REPLACEMENT</span>`;
-
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-800/60 transition';
-                tr.innerHTML = `
-                    <td class="p-3.5 font-black text-white">${row.site}</td>
-                    <td class="p-3.5 font-mono text-amber-400 font-bold">${row.unit}</td>
-                    <td class="p-3.5 font-bold text-slate-300">${row.model}</td>
-                    <td class="p-3.5 font-bold text-slate-200">${row.part}</td>
-                    <td class="p-3.5 font-bold text-cyan-400">${row.brand}</td>
-                    <td class="p-3.5 text-right font-mono font-bold text-white">${row.currentHm.toLocaleString()} HM</td>
-                    <td class="p-3.5 text-right font-mono font-black text-amber-400">${row.estRemaining.toLocaleString()} HM</td>
-                    <td class="p-3.5 text-center">${badge}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        /* Render Sheet 4 Table */
-        function renderHistoricalTable() {
-            const tbody = document.getElementById('historicalTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            historicalSampleData.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-800/60 transition';
-                tr.innerHTML = `
-                    <td class="p-3.5 font-mono text-slate-400">${row.date}</td>
-                    <td class="p-3.5 font-black text-white">${row.site}</td>
-                    <td class="p-3.5 font-mono text-amber-400 font-bold">${row.unit}</td>
-                    <td class="p-3.5 font-bold text-slate-200">${row.component}</td>
-                    <td class="p-3.5 font-bold text-cyan-400">${row.brand}</td>
-                    <td class="p-3.5 text-right font-mono font-bold text-white">${row.hmReplace.toLocaleString()} HM</td>
-                    <td class="p-3.5 text-right font-mono font-black ${row.ach >= 100 ? 'text-emerald-400' : 'text-amber-400'}">${row.ach.toFixed(1)}%</td>
-                    <td class="p-3.5 text-center text-slate-300 font-semibold">${row.reason}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function initCharts() {
-            // Chart Sheet 1: Bar Chart Site Achievement
-            const achSiteOptions = {
-                series: [{ name: 'Achievement (%)', data: [98.5, 91.2, 86.4, 95.0, 102.3, 94.1] }],
-                chart: { type: 'bar', height: 280, toolbar: { show: false }, background: 'transparent' },
-                theme: { mode: 'dark' },
-                plotOptions: { bar: { borderRadius: 6, columnWidth: '45%', distributed: true } },
-                colors: ['#f59e0b', '#10b981', '#3b82f6', '#ec4899', '#06b6d4', '#a855f7'],
-                dataLabels: { enabled: true, formatter: (val) => val + '%', style: { fontSize: '11px', fontWeight: 'bold' } },
-                legend: { show: false },
-                xaxis: { categories: ['AGM', 'CDI', 'IP BAYAN', 'MAS', 'MBLM', 'MHU'], labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
-                yaxis: { max: 120, labels: { style: { colors: '#94a3b8' }, formatter: (v) => v + '%' } },
-                grid: { borderColor: '#334155', strokeDashArray: 4 }
-            };
-            new ApexCharts(document.querySelector("#achSiteChart"), achSiteOptions).render();
-
-            // Chart Sheet 1: Donut Brand
-            const achBrandOptions = {
-                series: [520, 310, 240, 170],
-                labels: ['KOMATSU GENUINE', 'BERCO', 'ITR', 'KTSU'],
-                chart: { type: 'donut', height: 250, background: 'transparent' },
-                colors: ['#f59e0b', '#3b82f6', '#10b981', '#06b6d4'],
-                legend: { position: 'bottom', labels: { colors: '#cbd5e1' }, fontSize: '11px', fontWeight: 600 },
-                stroke: { colors: ['#0f172a'] }
-            };
-            new ApexCharts(document.querySelector("#achBrandChart"), achBrandOptions).render();
-
-            // Chart Sheet 2: Model Avg Bar Chart
-            const modelAvgOptions = {
-                series: [{ name: 'Avg Lifetime Achievement (%)', data: [97.5, 102.5, 95.0] }],
-                chart: { type: 'bar', height: 300, toolbar: { show: false }, background: 'transparent' },
-                plotOptions: { bar: { borderRadius: 8, columnWidth: '35%' } },
-                colors: ['#06b6d4'],
-                dataLabels: { enabled: true, formatter: (v) => v + '%', style: { fontSize: '12px', fontWeight: 'bold' } },
-                xaxis: { categories: ['D375A-6R', 'PC2000-8', 'PC1250-8'], labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
-                yaxis: { max: 120, labels: { style: { colors: '#94a3b8' }, formatter: (v) => v + '%' } },
-                grid: { borderColor: '#334155', strokeDashArray: 4 }
-            };
-            new ApexCharts(document.querySelector("#modelAvgChart"), modelAvgOptions).render();
-        }
-
-        /* On Document Load */
         window.onload = function() {
             refreshIcons();
-            renderAchTable(achSampleData);
-            renderModelAvgTable();
-            renderOnTrackTable();
-            renderHistoricalTable();
-            initCharts();
+            fetchDataFromCSV();
         };
     </script>
 </body>
