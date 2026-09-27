@@ -14,10 +14,9 @@
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- PapaParse CDN untuk Membaca CSV Google Spreadsheet -->
+    <!-- PapaParse CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     
-    <!-- Google Fonts: Inter -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
@@ -27,7 +26,6 @@
             color: #f8fafc;
         }
 
-        /* Custom Scrollbar Styles */
         .custom-scrollbar::-webkit-scrollbar {
             height: 6px;
             width: 6px;
@@ -43,7 +41,6 @@
             background: #f59e0b;
         }
 
-        /* Glow & Depth utilities */
         .glow-amber {
             box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
         }
@@ -74,11 +71,10 @@
 </head>
 <body class="min-h-screen pb-12 antialiased selection:bg-amber-500/30 selection:text-amber-200">
 
-    <!-- Top Frozen / Sticky Header Navbar -->
+    <!-- Top Header Navbar -->
     <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-14">
-                <!-- Brand Title -->
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold shadow-inner glow-amber">
                         <i data-lucide="layers" class="w-5 h-5 text-amber-500"></i>
@@ -89,7 +85,6 @@
                     </div>
                 </div>
 
-                <!-- User Profile Badge & Live Sync Status -->
                 <div class="flex items-center space-x-3">
                     <div id="syncStatus" class="hidden sm:flex items-center space-x-1.5 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-lg text-[10px] font-bold text-emerald-400">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -129,10 +124,9 @@
         </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Content -->
     <main class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 space-y-4">
 
-        <!-- ==================== TAB 1: REVIEW ACHIEVEMENT AFTER REPLACE ==================== -->
         <div id="tab-ach-after-replace" class="tab-page space-y-4">
             <!-- Hero Banner Compact -->
             <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950/40 px-5 py-4 border border-slate-800 card-shadow">
@@ -151,7 +145,7 @@
                 </div>
             </div>
 
-            <!-- Filter Controls Compact -->
+            <!-- Filter Controls -->
             <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 card-shadow space-y-3">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                     <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
@@ -165,23 +159,18 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <!-- Filter MODEL UNIT -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">MODEL UNIT</label>
                         <select id="achModelFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Model</option>
                         </select>
                     </div>
-
-                    <!-- Filter BRAND UCR -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">BRAND UCR</label>
                         <select id="achBrandFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
                             <option value="ALL">Semua Brand</option>
                         </select>
                     </div>
-
-                    <!-- Filter STATUS -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">STATUS</label>
                         <select id="achStatusFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
@@ -193,7 +182,6 @@
 
             <!-- KPI Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <!-- TOTAL REPLACED PARTS -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-amber-500/40 transition">
                     <div>
                         <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PAKET UCR</p>
@@ -205,7 +193,6 @@
                     </div>
                 </div>
 
-                <!-- PARTS TERCAPAI -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
                     <div>
                         <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PAKET TERCAPAI</p>
@@ -217,7 +204,6 @@
                     </div>
                 </div>
 
-                <!-- PARTS TIDAK TERCAPAI -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
                     <div>
                         <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PAKET TIDAK TERCAPAI</p>
@@ -232,7 +218,6 @@
 
             <!-- Charts Row -->
             <div class="grid grid-cols-1 gap-4">
-                <!-- Chart 1: Per Model -->
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
                     <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
                         <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
@@ -243,7 +228,6 @@
                     <div id="achSiteChart" class="min-h-[360px]"></div>
                 </div>
 
-                <!-- Chart 2: Per Brand UCR -->
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
                     <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
                         <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
@@ -255,7 +239,7 @@
                 </div>
             </div>
 
-            <!-- Sheet 1 Data Table -->
+            <!-- Data Table: Detail Replacement Paket UCR -->
             <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-2">
                     <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
@@ -273,23 +257,21 @@
                             <tr>
                                 <th class="p-2.5">NO UNIT</th>
                                 <th class="p-2.5">MODEL (AF)</th>
-                                <th class="p-2.5">KOMPONEN</th>
+                                <th class="p-2.5">NO UNIT (AH)</th>
                                 <th class="p-2.5">BRAND UCR (AJ)</th>
-                                <th class="p-2.5 text-right">TARGET (HM)</th>
-                                <th class="p-2.5 text-right">ACTUAL (HM)</th>
-                                <th class="p-2.5 text-right">% ACH</th>
+                                <th class="p-2.5 text-right">TARGET (HM) (AL)</th>
+                                <th class="p-2.5 text-right">ACTUAL (HM) (AI)</th>
                                 <th class="p-2.5 text-center">STATUS (AK)</th>
                             </tr>
                         </thead>
                         <tbody id="achTableBody" class="divide-y divide-slate-800/80">
-                            <!-- JS Populated -->
+                            <!-- Populated by JS -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- Tab Lainnya -->
         <div id="tab-avg-by-model" class="tab-page hidden"></div>
         <div id="tab-part-on-track" class="tab-page hidden"></div>
         <div id="tab-historical-replace" class="tab-page hidden"></div>
@@ -309,7 +291,6 @@
             }
         }
 
-        /* Ambil Data dari Google Spreadsheet via PapaParse */
         function fetchDataFromCSV() {
             Papa.parse(CSV_URL, {
                 download: true,
@@ -333,37 +314,37 @@
             });
         }
 
-        /* Konversi Huruf Kolom Spreadsheet ke Indeks Angka */
         function processCSVData(rows) {
             return rows.map(row => {
+                // Pemetaan Kolom Spreadsheet:
+                // AE (index 30) -> No Unit
+                // AF (index 31) -> Model
+                // AH (index 33) -> No Unit Singkat (Substitusi Komponen)
+                // AI (index 34) -> Actual HM
+                // AJ (index 35) -> Brand UCR
+                // AK (index 36) -> Status
+                // AL (index 37) -> Target HM
+
+                const unit = row[30] ? row[30].toString().trim() : '-';
                 const model = row[31] ? row[31].toString().trim() : '-';
+                const unitAH = row[33] ? row[33].toString().trim() : '-';
+                const actualHm = parseFloat(row[34]) || 0;
                 const brand = row[35] ? row[35].toString().trim() : '-';
                 const status = row[36] ? row[36].toString().trim() : '-';
-
-                const unit = row[30] ? row[30].toString().trim() : (row[1] ? row[1].toString().trim() : '-');
-                const component = row[28] ? row[28].toString().trim() : (row[3] ? row[3].toString().trim() : '-');
-                const targetHm = parseFloat(row[32]) || 0;
-                const actualHm = parseFloat(row[34]) || 0;
-                
-                let ach = parseFloat(row[33]) || 0;
-                if (!ach && targetHm > 0) {
-                    ach = (actualHm / targetHm) * 100;
-                }
+                const targetHm = parseFloat(row[37]) || 0;
 
                 return {
-                    model: model.toUpperCase(),
                     unit: unit.toUpperCase(),
-                    component: component.toUpperCase(),
-                    brand: brand.toUpperCase(),
-                    targetHm: targetHm,
+                    model: model.toUpperCase(),
+                    unitAH: unitAH.toUpperCase(),
                     actualHm: actualHm,
-                    ach: Math.round(ach),
-                    status: status.toUpperCase()
+                    brand: brand.toUpperCase(),
+                    status: status.toUpperCase(),
+                    targetHm: targetHm
                 };
             }).filter(item => item.model !== '-' && item.model !== '');
         }
 
-        /* Mengisi Dropdown Filter Otomatis */
         function populateFilterOptions(data) {
             const models = [...new Set(data.map(i => i.model))].sort();
             const brands = [...new Set(data.map(i => i.brand))].sort();
@@ -416,18 +397,16 @@
                 tr.innerHTML = `
                     <td class="p-2.5 font-mono font-bold text-amber-400">${item.unit}</td>
                     <td class="p-2.5 font-bold text-white">${item.model}</td>
-                    <td class="p-2.5 font-bold text-slate-200">${item.component}</td>
+                    <td class="p-2.5 font-bold text-slate-200">${item.unitAH}</td>
                     <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
                     <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
                     <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-right font-mono font-black ${item.ach >= 100 ? 'text-emerald-400' : 'text-amber-400'}">${item.ach}%</td>
                     <td class="p-2.5 text-center">${statusBadge}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        /* Eksekusi Filter Real-Time */
         function applyAchFilter() {
             const model = document.getElementById('achModelFilter').value;
             const brand = document.getElementById('achBrandFilter').value;
@@ -452,7 +431,6 @@
         }
 
         function updateCharts(data) {
-            // 1. DIAGRAM BATANG PER MODEL
             const modelMap = {};
             
             data.forEach(item => {
@@ -517,7 +495,6 @@
             achChartInstance = new ApexCharts(document.querySelector("#achSiteChart"), achModelOptions);
             achChartInstance.render();
 
-            // 2. DIAGRAM BATANG PER BRAND UCR
             const brandMap = {};
 
             data.forEach(item => {
@@ -583,7 +560,6 @@
             brandChartInstance.render();
         }
 
-        /* Tab Switching */
         function switchTab(tabId) {
             document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
 
