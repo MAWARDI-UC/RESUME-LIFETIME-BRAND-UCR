@@ -232,26 +232,28 @@
 
             <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                <div class="lg:col-span-8 bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
-                    <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
-                        <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                            Achievement After Replace per Model (%)
-                        </h3>
-                    </div>
-                    <div id="achSiteChart" class="min-h-[260px]"></div>
-                </div>
+    <!-- Chart 1: Per Model -->
+    <div class="lg:col-span-6 bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+        <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                Achievement After Replace Per Model (Qty Part)
+            </h3>
+        </div>
+        <div id="achSiteChart" class="min-h-[280px]"></div>
+    </div>
 
-                <div class="lg:col-span-4 bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow flex flex-col justify-between">
-                    <div class="flex items-center justify-between mb-2 border-b border-slate-800 pb-2">
-                        <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                            Distribusi Brand UCR
-                        </h3>
-                    </div>
-                    <div id="achBrandChart" class="flex justify-center items-center py-2 min-h-[230px]"></div>
-                </div>
-            </div>
+    <!-- Chart 2: Per Brand UCR -->
+    <div class="lg:col-span-6 bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+        <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                Distribusi Brand UCR (Tercapai vs Tidak Tercapai)
+            </h3>
+        </div>
+        <div id="achBrandChart" class="min-h-[280px]"></div>
+    </div>
+</div>
 
             <!-- Sheet 1 Data Table -->
             <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
@@ -456,53 +458,141 @@
         }
 
         function updateCharts(data) {
-            // Chart By Model
-            const modelGroups = {};
-            data.forEach(item => {
-                if (!modelGroups[item.model]) modelGroups[item.model] = [];
-                modelGroups[item.model].push(item.ach);
-            });
-
-            const modelCategories = Object.keys(modelGroups).slice(0, 10); // Ambil top 10
-            const modelAverages = modelCategories.map(m => {
-                const sum = modelGroups[m].reduce((a, b) => a + b, 0);
-                return parseFloat((sum / modelGroups[m].length).toFixed(1));
-            });
-
-            if (achChartInstance) achChartInstance.destroy();
-            const achSiteOptions = {
-                series: [{ name: 'Achievement (%)', data: modelAverages }],
-                chart: { type: 'bar', height: 260, toolbar: { show: false }, background: 'transparent' },
-                theme: { mode: 'dark' },
-                plotOptions: { bar: { borderRadius: 6, columnWidth: '45%', distributed: true } },
-                colors: ['#f59e0b', '#10b981', '#3b82f6', '#ec4899', '#06b6d4', '#a855f7'],
-                dataLabels: { enabled: true, formatter: (val) => val + '%', style: { fontSize: '10px', fontWeight: 'bold' } },
-                legend: { show: false },
-                xaxis: { categories: modelCategories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
-                yaxis: { labels: { style: { colors: '#94a3b8' }, formatter: (v) => v + '%' } },
-                grid: { borderColor: '#334155', strokeDashArray: 4 }
-            };
-            achChartInstance = new ApexCharts(document.querySelector("#achSiteChart"), achSiteOptions);
-            achChartInstance.render();
-
-            // Chart By Brand
-            const brandCounts = {};
-            data.forEach(item => {
-                brandCounts[item.brand] = (brandCounts[item.brand] || 0) + 1;
-            });
-
-            if (brandChartInstance) brandChartInstance.destroy();
-            const achBrandOptions = {
-                series: Object.values(brandCounts),
-                labels: Object.keys(brandCounts),
-                chart: { type: 'donut', height: 230, background: 'transparent' },
-                colors: ['#f59e0b', '#3b82f6', '#10b981', '#06b6d4', '#ec4899'],
-                legend: { position: 'bottom', labels: { colors: '#cbd5e1' }, fontSize: '10px', fontWeight: 600 },
-                stroke: { colors: ['#0f172a'] }
-            };
-            brandChartInstance = new ApexCharts(document.querySelector("#achBrandChart"), achBrandOptions);
-            brandChartInstance.render();
+            // ==========================================
+    // 1. DIAGRAM BATANG PER MODEL (TERCAPAI VS TIDAK TERCAPAI)
+    // ==========================================
+    const modelMap = {};
+    
+    data.forEach(item => {
+        if (!item.model || item.model === '-') return;
+        if (!modelMap[item.model]) {
+            modelMap[item.model] = { tercapai: 0, tidakTercapai: 0 };
         }
+        
+        // Cek status berdasarkan kolom AK
+        if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
+            modelMap[item.model].tercapai += 1;
+        } else {
+            modelMap[item.model].tidakTercapai += 1;
+        }
+    });
+
+    const modelCategories = Object.keys(modelMap).sort();
+    const modelTercapai = modelCategories.map(m => modelMap[m].tercapai);
+    const modelTidakTercapai = modelCategories.map(m => modelMap[m].tidakTercapai);
+
+    if (achChartInstance) achChartInstance.destroy();
+    
+    const achModelOptions = {
+        series: [
+            { name: 'Tercapai', data: modelTercapai },
+            { name: 'Tidak Tercapai', data: modelTidakTercapai }
+        ],
+        chart: {
+            type: 'bar',
+            height: 280,
+            stacked: false, // Diset false agar tampil 2 batang berdampingan per model
+            toolbar: { show: false },
+            background: 'transparent'
+        },
+        theme: { mode: 'dark' },
+        colors: ['#10b981', '#f43f5e'], // Emerald (Tercapai) & Rose (Tidak Tercapai)
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                borderRadius: 4
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            style: { fontSize: '10px', fontWeight: 'bold' }
+        },
+        legend: {
+            show: true,
+            position: 'top',
+            labels: { colors: '#cbd5e1' }
+        },
+        xaxis: {
+            categories: modelCategories,
+            labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
+        },
+        yaxis: {
+            labels: { style: { colors: '#94a3b8' } }
+        },
+        grid: { borderColor: '#334155', strokeDashArray: 4 }
+    };
+    
+    achChartInstance = new ApexCharts(document.querySelector("#achSiteChart"), achModelOptions);
+    achChartInstance.render();
+
+    // ==========================================
+    // 2. DIAGRAM BATANG PER BRAND UCR (TERCAPAI VS TIDAK TERCAPAI)
+    // ==========================================
+    const brandMap = {};
+
+    data.forEach(item => {
+        if (!item.brand || item.brand === '-') return;
+        if (!brandMap[item.brand]) {
+            brandMap[item.brand] = { tercapai: 0, tidakTercapai: 0 };
+        }
+
+        if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
+            brandMap[item.brand].tercapai += 1;
+        } else {
+            brandMap[item.brand].tidakTercapai += 1;
+        }
+    });
+
+    const brandCategories = Object.keys(brandMap).sort();
+    const brandTercapai = brandCategories.map(b => brandMap[b].tercapai);
+    const brandTidakTercapai = brandCategories.map(b => brandMap[b].tidakTercapai);
+
+    if (brandChartInstance) brandChartInstance.destroy();
+
+    const achBrandOptions = {
+        series: [
+            { name: 'Tercapai', data: brandTercapai },
+            { name: 'Tidak Tercapai', data: brandTidakTercapai }
+        ],
+        chart: {
+            type: 'bar',
+            height: 280,
+            stacked: false, // Menampilkan 2 batang per Brand
+            toolbar: { show: false },
+            background: 'transparent'
+        },
+        theme: { mode: 'dark' },
+        colors: ['#10b981', '#f43f5e'], // Emerald (Tercapai) & Rose (Tidak Tercapai)
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                borderRadius: 4
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            style: { fontSize: '10px', fontWeight: 'bold' }
+        },
+        legend: {
+            show: true,
+            position: 'top',
+            labels: { colors: '#cbd5e1' }
+        },
+        xaxis: {
+            categories: brandCategories,
+            labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
+        },
+        yaxis: {
+            labels: { style: { colors: '#94a3b8' } }
+        },
+        grid: { borderColor: '#334155', strokeDashArray: 4 }
+    };
+
+    brandChartInstance = new ApexCharts(document.querySelector("#achBrandChart"), achBrandOptions);
+    brandChartInstance.render();
+}
 
         /* Tab Switching */
         function switchTab(tabId) {
