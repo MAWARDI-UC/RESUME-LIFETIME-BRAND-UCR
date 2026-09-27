@@ -282,7 +282,7 @@ HTML
             <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 card-shadow flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div class="flex items-center space-x-2 text-cyan-400 font-bold text-xs uppercase tracking-wider">
                     <i data-lucide="filter" class="w-4 h-4"></i>
-                    <span class="text-slate-100 font-black">FILTER MODEL UNIT (KOLOM N)</span>
+                    <span class="text-slate-100 font-black">FILTER MODEL UNIT</span>
                 </div>
                 <div class="w-full sm:w-72">
                     <select id="avgModelSelectFilter" onchange="onAvgModelFilterChange()" class="w-full bg-slate-950 border border-cyan-500/50 rounded-lg px-3 py-1.5 text-xs font-bold text-cyan-300 focus:outline-none focus:border-amber-500 transition shadow-sm">
@@ -297,19 +297,19 @@ HTML
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
                     <p class="text-[9px] text-slate-400 uppercase font-black">TOTAL MODEL UNIT</p>
                     <h3 id="avgTotalModelUnit" class="text-2xl font-black text-cyan-400 mt-0.5">0</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Jumlah Model Unik (Kolom N)</p>
+                    <p class="text-[10px] text-slate-400 font-bold">Jumlah Model Unit</p>
                 </div>
                 <!-- KPI 2: TOTAL PERGANTIAN -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
                     <p class="text-[9px] text-slate-400 uppercase font-black">TOTAL PERGANTIAN</p>
                     <h3 id="avgTotalPergantian" class="text-2xl font-black text-white mt-0.5">0</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Jumlah Pergantian (Kolom O)</p>
+                    <p class="text-[10px] text-slate-400 font-bold">Jumlah Pergantian</p>
                 </div>
                 <!-- KPI 3: RATA-RATA LIFETIME -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
                     <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA LIFETIME</p>
                     <h3 id="avgRataRataLifetime" class="text-2xl font-black text-amber-400 mt-0.5">-</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Nilai Lifetime (Kolom R)</p>
+                    <p class="text-[10px] text-slate-400 font-bold">Nilai Lifetime</p>
                 </div>
             </div>
 
@@ -752,8 +752,8 @@ HTML
 
             const options = {
                 series: [
-                    { name: 'Target HM (Kolom P)', data: targets },
-                    { name: 'Actual HM (Kolom Q)', data: actuals }
+                    { name: 'Lifetime Terendah', data: targets },
+                    { name: 'Lifetime Tertinggi', data: actuals }
                 ],
                 chart: { type: 'bar', height: 320, toolbar: { show: false }, background: 'transparent' },
                 theme: { mode: 'dark' },
