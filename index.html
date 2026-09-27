@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="id" class="dark">
 <head>
@@ -277,22 +278,38 @@
                 <p class="text-[10px] text-cyan-400 font-bold tracking-wider uppercase">ANALISIS RATA-RATA HM TARGET VS ACTUAL DAN PERSENTASE ACH PER MODEL UNIT</p>
             </div>
 
+            <!-- Filter Model Khusus Tab 2 (Sesuai Kolom N) -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 card-shadow flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="flex items-center space-x-2 text-cyan-400 font-bold text-xs uppercase tracking-wider">
+                    <i data-lucide="filter" class="w-4 h-4"></i>
+                    <span class="text-slate-100 font-black">FILTER MODEL UNIT (KOLOM N)</span>
+                </div>
+                <div class="w-full sm:w-72">
+                    <select id="avgModelSelectFilter" onchange="onAvgModelFilterChange()" class="w-full bg-slate-950 border border-cyan-500/50 rounded-lg px-3 py-1.5 text-xs font-bold text-cyan-300 focus:outline-none focus:border-amber-500 transition shadow-sm">
+                        <option value="ALL">Semua Model</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- KPI Summary Cards for Avg Tab -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <!-- KPI 1: TOTAL MODEL UNIT -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
-                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA ACH SYSTEM</p>
-                    <h3 id="avgTotalAchPct" class="text-2xl font-black text-cyan-400 mt-0.5">0%</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Ketercapaian Kumulatif</p>
+                    <p class="text-[9px] text-slate-400 uppercase font-black">TOTAL MODEL UNIT</p>
+                    <h3 id="avgTotalModelUnit" class="text-2xl font-black text-cyan-400 mt-0.5">0</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Jumlah Model Unik (Kolom N)</p>
                 </div>
+                <!-- KPI 2: TOTAL PERGANTIAN -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
-                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA TARGET HM</p>
-                    <h3 id="avgTotalTargetHm" class="text-2xl font-black text-white mt-0.5">0 HM</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Acuan Standar Perbaikan</p>
+                    <p class="text-[9px] text-slate-400 uppercase font-black">TOTAL PERGANTIAN</p>
+                    <h3 id="avgTotalPergantian" class="text-2xl font-black text-white mt-0.5">0</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Jumlah Pergantian (Kolom O)</p>
                 </div>
+                <!-- KPI 3: RATA-RATA LIFETIME -->
                 <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
-                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA ACTUAL HM</p>
-                    <h3 id="avgTotalActualHm" class="text-2xl font-black text-amber-400 mt-0.5">0 HM</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Realisasi Jam Kerja</p>
+                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA LIFETIME</p>
+                    <h3 id="avgRataRataLifetime" class="text-2xl font-black text-amber-400 mt-0.5">-</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Nilai Lifetime (Kolom R)</p>
                 </div>
             </div>
 
@@ -309,11 +326,11 @@
                     <table class="w-full text-left text-xs font-medium text-slate-300">
                         <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
                             <tr>
-                                <th class="p-2.5">MODEL UNIT</th>
-                                <th class="p-2.5 text-center">TOTAL UNIT/PART</th>
-                                <th class="p-2.5 text-right">AVG TARGET (HM)</th>
-                                <th class="p-2.5 text-right">AVG ACTUAL (HM)</th>
-                                <th class="p-2.5 text-center">RATA-RATA ACH (%)</th>
+                                <th class="p-2.5">MODEL UNIT (KOLOM N)</th>
+                                <th class="p-2.5 text-center">TOTAL PERGANTIAN (KOLOM O)</th>
+                                <th class="p-2.5 text-right">TARGET (HM) (KOLOM P)</th>
+                                <th class="p-2.5 text-right">ACTUAL (HM) (KOLOM Q)</th>
+                                <th class="p-2.5 text-right">RATA-RATA LIFETIME (KOLOM R)</th>
                             </tr>
                         </thead>
                         <tbody id="avgModelTableBody" class="divide-y divide-slate-800/80"></tbody>
@@ -418,9 +435,17 @@
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtMyBr-pH_YCgL_xO2H-hf96lxX2ls63nCx8dhv2f56dP6L9YmjBtKRHGMIiUgzSjsm_t-dSyytIAj/pub?output=csv';
 
         let globalData = [];
+        let summaryModelData = []; // Menampung Data Kolom N, O, P, Q, R
+
         let achChartInstance = null;
         let brandChartInstance = null;
         let avgModelChartInstance = null;
+
+        function parseIndoFloat(val) {
+            if (!val) return 0;
+            const clean = val.toString().replace(/\./g, '').replace(',', '.').trim();
+            return parseFloat(clean) || 0;
+        }
 
         function refreshIcons() {
             if (window.lucide) {
@@ -437,9 +462,13 @@
                     if (results.data && results.data.length > 1) {
                         const rawRows = results.data.slice(1);
                         globalData = processCSVData(rawRows);
+                        summaryModelData = processSummaryModelData(rawRows);
+
                         populateFilterOptions(globalData);
+                        populateAvgModelFilter(summaryModelData);
+
                         renderDashboard(globalData);
-                        renderAvgTab(globalData);
+                        renderAvgTab(summaryModelData);
                         renderOnTrackTab(globalData);
                         renderHistoricalTab(globalData);
                         
@@ -459,10 +488,10 @@
                 const unit = row[30] ? row[30].toString().trim() : '-';
                 const model = row[31] ? row[31].toString().trim() : '-';
                 const unitAH = row[33] ? row[33].toString().trim() : '-';
-                const actualHm = parseFloat(row[34]) || 0;
+                const actualHm = parseIndoFloat(row[34]);
                 const brand = row[35] ? row[35].toString().trim() : '-';
                 const status = row[36] ? row[36].toString().trim() : '-';
-                const targetHm = parseFloat(row[37]) || 0;
+                const targetHm = parseIndoFloat(row[37]);
 
                 return {
                     unit: unit.toUpperCase(),
@@ -474,6 +503,24 @@
                     targetHm: targetHm
                 };
             }).filter(item => item.model !== '-' && item.model !== '');
+        }
+
+        // Memproses Kolom N (Index 13), O (Index 14), P (Index 15), Q (Index 16), R (Index 17)
+        function processSummaryModelData(rows) {
+            const list = [];
+            rows.forEach(row => {
+                const modelN = row[13] ? row[13].toString().trim() : '';
+                if (modelN && modelN !== '-' && modelN.toUpperCase() !== 'MODEL') {
+                    list.push({
+                        model: modelN.toUpperCase(),
+                        pergantian: parseIndoFloat(row[14]), // Kolom O
+                        targetHm: parseIndoFloat(row[15]),   // Kolom P
+                        actualHm: parseIndoFloat(row[16]),   // Kolom Q
+                        lifetimeR: parseIndoFloat(row[17])   // Kolom R
+                    });
+                }
+            });
+            return list;
         }
 
         function populateFilterOptions(data) {
@@ -492,6 +539,21 @@
             models.forEach(m => modelSel.appendChild(new Option(m, m)));
             brands.forEach(b => brandSel.appendChild(new Option(b, b)));
             statuses.forEach(s => statusSel.appendChild(new Option(s, s)));
+        }
+
+        function populateAvgModelFilter(summaryData) {
+            const select = document.getElementById('avgModelSelectFilter');
+            if (!select) return;
+
+            select.innerHTML = '<option value="ALL">Semua Model</option>';
+            const models = summaryData.map(item => item.model).sort();
+
+            models.forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m;
+                opt.textContent = m;
+                select.appendChild(opt);
+            });
         }
 
         /* ------------------ TAB 1 LOGIC ------------------ */
@@ -531,8 +593,8 @@
                     <td class="p-2.5 font-bold text-white">${item.model}</td>
                     <td class="p-2.5 font-bold text-slate-200">${item.unitAH}</td>
                     <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
-                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString('id-ID')} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString('id-ID')} HM</td>
                     <td class="p-2.5 text-center">${statusBadge}</td>
                 `;
                 tbody.appendChild(tr);
@@ -654,48 +716,49 @@
             brandChartInstance.render();
         }
 
-        /* ------------------ TAB 2 LOGIC ------------------ */
-        function renderAvgTab(data) {
-            const modelSummary = {};
+        /* ------------------ TAB 2 LOGIC (SESUAI REQUEST DISESUAIKAN KOLOM N, O, P, Q, R) ------------------ */
+        function renderAvgTab(summaryList) {
+            const selectedModel = document.getElementById('avgModelSelectFilter') ? document.getElementById('avgModelSelectFilter').value : 'ALL';
+            
+            let filteredList = summaryList;
+            if (selectedModel !== 'ALL') {
+                filteredList = summaryList.filter(item => item.model === selectedModel);
+            }
 
-            let totalTarget = 0;
-            let totalActual = 0;
+            // KPI 1: Total Model Unit (Jumlah Kolom N)
+            const totalModelUnit = filteredList.length;
+            document.getElementById('avgTotalModelUnit').textContent = totalModelUnit.toLocaleString('id-ID');
 
-            data.forEach(item => {
-                totalTarget += item.targetHm;
-                totalActual += item.actualHm;
+            // KPI 2: Total Pergantian (Jumlah Kolom O)
+            const totalPergantian = filteredList.reduce((sum, item) => sum + item.pergantian, 0);
+            document.getElementById('avgTotalPergantian').textContent = totalPergantian.toLocaleString('id-ID');
 
-                if (!modelSummary[item.model]) {
-                    modelSummary[item.model] = { count: 0, targetSum: 0, actualSum: 0 };
-                }
-                modelSummary[item.model].count += 1;
-                modelSummary[item.model].targetSum += item.targetHm;
-                modelSummary[item.model].actualSum += item.actualHm;
-            });
+            // KPI 3: Rata-Rata Lifetime (Kolom R)
+            // Jika Pilihan "Semua Model" -> Tidak Dimunculkan (Atau 0 HM / -)
+            if (selectedModel === 'ALL') {
+                document.getElementById('avgRataRataLifetime').textContent = '-';
+            } else {
+                const targetModelObj = filteredList[0];
+                const lifetimeVal = targetModelObj ? targetModelObj.lifetimeR : 0;
+                document.getElementById('avgRataRataLifetime').textContent = `${lifetimeVal.toLocaleString('id-ID')} HM`;
+            }
 
-            const avgTargetAll = data.length ? Math.round(totalTarget / data.length) : 0;
-            const avgActualAll = data.length ? Math.round(totalActual / data.length) : 0;
-            const totalAchPct = avgTargetAll ? Math.round((avgActualAll / avgTargetAll) * 100) : 0;
-
-            document.getElementById('avgTotalAchPct').textContent = `${totalAchPct}%`;
-            document.getElementById('avgTotalTargetHm').textContent = `${avgTargetAll.toLocaleString()} HM`;
-            document.getElementById('avgTotalActualHm').textContent = `${avgActualAll.toLocaleString()} HM`;
-
-            const categories = Object.keys(modelSummary).sort();
-            const avgTargets = categories.map(m => Math.round(modelSummary[m].targetSum / modelSummary[m].count));
-            const avgActuals = categories.map(m => Math.round(modelSummary[m].actualSum / modelSummary[m].count));
+            // Render Chart
+            const categories = filteredList.map(item => item.model);
+            const targets = filteredList.map(item => item.targetHm);
+            const actuals = filteredList.map(item => item.actualHm);
 
             if (avgModelChartInstance) avgModelChartInstance.destroy();
 
             const options = {
                 series: [
-                    { name: 'Rata-Rata Target HM', data: avgTargets },
-                    { name: 'Rata-Rata Actual HM', data: avgActuals }
+                    { name: 'Target HM (Kolom P)', data: targets },
+                    { name: 'Actual HM (Kolom Q)', data: actuals }
                 ],
-                chart: { type: 'bar', height: 300, toolbar: { show: false }, background: 'transparent' },
+                chart: { type: 'bar', height: 320, toolbar: { show: false }, background: 'transparent' },
                 theme: { mode: 'dark' },
                 colors: ['#06b6d4', '#f59e0b'],
-                plotOptions: { bar: { horizontal: false, columnWidth: '50%', borderRadius: 4 } },
+                plotOptions: { bar: { horizontal: false, columnWidth: '55%', borderRadius: 4 } },
                 dataLabels: { enabled: false },
                 xaxis: { categories: categories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
                 yaxis: { labels: { style: { colors: '#94a3b8' } } },
@@ -705,27 +768,27 @@
             avgModelChartInstance = new ApexCharts(document.querySelector("#avgModelChart"), options);
             avgModelChartInstance.render();
 
+            // Render Table
             const tbody = document.getElementById('avgModelTableBody');
             if (!tbody) return;
             tbody.innerHTML = '';
 
-            categories.forEach(m => {
-                const info = modelSummary[m];
-                const avgT = Math.round(info.targetSum / info.count);
-                const avgA = Math.round(info.actualSum / info.count);
-                const achPct = avgT ? ((avgA / avgT) * 100).toFixed(1) : '0.0';
-
+            filteredList.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-800/60 transition';
                 tr.innerHTML = `
-                    <td class="p-2.5 font-bold text-white">${m}</td>
-                    <td class="p-2.5 text-center font-bold text-amber-400">${info.count}</td>
-                    <td class="p-2.5 text-right font-mono text-slate-400">${avgT.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-right font-mono font-bold text-white">${avgA.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-center font-bold ${achPct >= 100 ? 'text-emerald-400' : 'text-rose-400'}">${achPct}%</td>
+                    <td class="p-2.5 font-bold text-white">${item.model}</td>
+                    <td class="p-2.5 text-center font-bold text-amber-400">${item.pergantian.toLocaleString('id-ID')}</td>
+                    <td class="p-2.5 text-right font-mono text-cyan-400">${item.targetHm.toLocaleString('id-ID')} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString('id-ID')} HM</td>
+                    <td class="p-2.5 text-right font-mono font-black text-amber-400">${item.lifetimeR.toLocaleString('id-ID')} HM</td>
                 `;
                 tbody.appendChild(tr);
             });
+        }
+
+        function onAvgModelFilterChange() {
+            renderAvgTab(summaryModelData);
         }
 
         /* ------------------ TAB 3 LOGIC ------------------ */
@@ -755,9 +818,9 @@
                     <td class="p-2.5 font-mono font-bold text-amber-400">${item.unit}</td>
                     <td class="p-2.5 font-bold text-white">${item.model}</td>
                     <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
-                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-right font-mono font-bold text-white">${runningHm.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-right font-mono font-bold text-amber-400">${remainingHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString('id-ID')} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${runningHm.toLocaleString('id-ID')} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-amber-400">${remainingHm.toLocaleString('id-ID')} HM</td>
                     <td class="p-2.5 text-center">
                         <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
                             <div class="${progressColor} h-2.5 rounded-full" style="width: ${pct}%"></div>
@@ -768,9 +831,9 @@
                 tbody.appendChild(tr);
             });
 
-            document.getElementById('ontrackTotal').textContent = data.length;
-            document.getElementById('ontrackAvgHm').textContent = data.length ? `${Math.round(sumRunning / data.length).toLocaleString()} HM` : '0 HM';
-            document.getElementById('ontrackAvgRemaining').textContent = data.length ? `${Math.round(sumRemaining / data.length).toLocaleString()} HM` : '0 HM';
+            document.getElementById('ontrackTotal').textContent = data.length.toLocaleString('id-ID');
+            document.getElementById('ontrackAvgHm').textContent = data.length ? `${Math.round(sumRunning / data.length).toLocaleString('id-ID')} HM` : '0 HM';
+            document.getElementById('ontrackAvgRemaining').textContent = data.length ? `${Math.round(sumRemaining / data.length).toLocaleString('id-ID')} HM` : '0 HM';
         }
 
         /* ------------------ TAB 4 LOGIC ------------------ */
@@ -781,7 +844,7 @@
 
             data.forEach(item => {
                 const diff = item.actualHm - item.targetHm;
-                const diffText = (diff >= 0 ? '+' : '') + diff.toLocaleString() + ' HM';
+                const diffText = (diff >= 0 ? '+' : '') + diff.toLocaleString('id-ID') + ' HM';
                 const diffColor = diff >= 0 ? 'text-emerald-400' : 'text-rose-400';
 
                 const tr = document.createElement('tr');
@@ -791,8 +854,8 @@
                     <td class="p-2.5 font-bold text-white">${item.model}</td>
                     <td class="p-2.5 font-bold text-slate-400">${item.unitAH}</td>
                     <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
-                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
-                    <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString('id-ID')} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString('id-ID')} HM</td>
                     <td class="p-2.5 text-right font-mono font-bold ${diffColor}">${diffText}</td>
                     <td class="p-2.5 text-center">
                         <span class="px-2 py-0.5 rounded text-[9px] font-black ${item.status.includes('TERCAPAI') && !item.status.includes('TIDAK') ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'}">
