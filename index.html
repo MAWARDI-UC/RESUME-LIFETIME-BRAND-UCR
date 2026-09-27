@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="id" class="dark">
 <head>
@@ -112,10 +111,6 @@ HTML
                 <button onclick="switchTab('avg-by-model')" id="btn-avg-by-model" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
                     <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i>
                     <span>Rata-Rata Ketercapaian By Model</span>
-                </button>
-                <button onclick="switchTab('part-on-track')" id="btn-part-on-track" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
-                    <i data-lucide="activity" class="w-3.5 h-3.5"></i>
-                    <span>Review part UC On Track</span>
                 </button>
                 <button onclick="switchTab('historical-replace')" id="btn-historical-replace" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
                     <i data-lucide="history" class="w-3.5 h-3.5"></i>
@@ -339,60 +334,7 @@ HTML
             </div>
         </div>
 
-        <!-- TAB 3: Review part UC On Track -->
-        <div id="tab-part-on-track" class="tab-page hidden space-y-4">
-            <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950/40 px-5 py-4 border border-slate-800 card-shadow">
-                <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Review part UC On Track</h2>
-                <p class="text-[10px] text-emerald-400 font-bold tracking-wider uppercase">MONITORING UNIT DAN KOMPONEN UNDERCARRIAGE YANG AKTIF BEROPERASI (ON TRACK)</p>
-            </div>
-
-            <!-- Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
-                    <p class="text-[9px] text-slate-400 uppercase font-black">TOTAL UNIT ON TRACK</p>
-                    <h3 id="ontrackTotal" class="text-2xl font-black text-emerald-400 mt-0.5">0</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Komponen Aktif</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
-                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA RUNNING HM</p>
-                    <h3 id="ontrackAvgHm" class="text-2xl font-black text-white mt-0.5">0 HM</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Jam Berjalan Saat Ini</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
-                    <p class="text-[9px] text-slate-400 uppercase font-black">SISA ESTIMASI UMUR</p>
-                    <h3 id="ontrackAvgRemaining" class="text-2xl font-black text-amber-400 mt-0.5">0 HM</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Estimasi Sisa Umur Komponen</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
-                    <p class="text-[9px] text-slate-400 uppercase font-black">STATUS KESEHATAN UC</p>
-                    <h3 id="ontrackHealth" class="text-2xl font-black text-cyan-400 mt-0.5">GOOD</h3>
-                    <p class="text-[10px] text-slate-400 font-bold">Indikator Umur Pakai</p>
-                </div>
-            </div>
-
-            <!-- Table -->
-            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
-                <h3 class="text-xs font-black text-white uppercase tracking-wider">Daftar Komponen On Track</h3>
-                <div class="overflow-x-auto custom-scrollbar">
-                    <table class="w-full text-left text-xs font-medium text-slate-300">
-                        <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
-                            <tr>
-                                <th class="p-2.5">NO UNIT</th>
-                                <th class="p-2.5">MODEL</th>
-                                <th class="p-2.5">BRAND UCR</th>
-                                <th class="p-2.5 text-right">TARGET (HM)</th>
-                                <th class="p-2.5 text-right">RUNNING (HM)</th>
-                                <th class="p-2.5 text-right">SISA HM</th>
-                                <th class="p-2.5 text-center">PROGRES LIFETIME</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ontrackTableBody" class="divide-y divide-slate-800/80"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 4: Review Historical replace UC -->
+        <!-- TAB 3: Review Historical replace UC -->
         <div id="tab-historical-replace" class="tab-page hidden space-y-4">
             <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-rose-950/40 px-5 py-4 border border-slate-800 card-shadow">
                 <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Review Historical Replace UC</h2>
@@ -435,7 +377,7 @@ HTML
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtMyBr-pH_YCgL_xO2H-hf96lxX2ls63nCx8dhv2f56dP6L9YmjBtKRHGMIiUgzSjsm_t-dSyytIAj/pub?output=csv';
 
         let globalData = [];
-        let summaryModelData = []; // Menampung Data Kolom N, O, P, Q, R
+        let summaryModelData = [];
 
         let achChartInstance = null;
         let brandChartInstance = null;
@@ -469,7 +411,6 @@ HTML
 
                         renderDashboard(globalData);
                         renderAvgTab(summaryModelData);
-                        renderOnTrackTab(globalData);
                         renderHistoricalTab(globalData);
                         
                         document.getElementById('syncStatus').classList.remove('hidden');
@@ -505,7 +446,6 @@ HTML
             }).filter(item => item.model !== '-' && item.model !== '');
         }
 
-        // Memproses Kolom N (Index 13), O (Index 14), P (Index 15), Q (Index 16), R (Index 17)
         function processSummaryModelData(rows) {
             const list = [];
             rows.forEach(row => {
@@ -513,10 +453,10 @@ HTML
                 if (modelN && modelN !== '-' && modelN.toUpperCase() !== 'MODEL') {
                     list.push({
                         model: modelN.toUpperCase(),
-                        pergantian: parseIndoFloat(row[14]), // Kolom O
-                        targetHm: parseIndoFloat(row[15]),   // Kolom P
-                        actualHm: parseIndoFloat(row[16]),   // Kolom Q
-                        lifetimeR: parseIndoFloat(row[17])   // Kolom R
+                        pergantian: parseIndoFloat(row[14]),
+                        targetHm: parseIndoFloat(row[15]),
+                        actualHm: parseIndoFloat(row[16]),
+                        lifetimeR: parseIndoFloat(row[17])
                     });
                 }
             });
@@ -716,7 +656,7 @@ HTML
             brandChartInstance.render();
         }
 
-        /* ------------------ TAB 2 LOGIC (SESUAI REQUEST DISESUAIKAN KOLOM N, O, P, Q, R) ------------------ */
+        /* ------------------ TAB 2 LOGIC ------------------ */
         function renderAvgTab(summaryList) {
             const selectedModel = document.getElementById('avgModelSelectFilter') ? document.getElementById('avgModelSelectFilter').value : 'ALL';
             
@@ -725,16 +665,12 @@ HTML
                 filteredList = summaryList.filter(item => item.model === selectedModel);
             }
 
-            // KPI 1: Total Model Unit (Jumlah Kolom N)
             const totalModelUnit = filteredList.length;
             document.getElementById('avgTotalModelUnit').textContent = totalModelUnit.toLocaleString('id-ID');
 
-            // KPI 2: Total Pergantian (Jumlah Kolom O)
             const totalPergantian = filteredList.reduce((sum, item) => sum + item.pergantian, 0);
             document.getElementById('avgTotalPergantian').textContent = totalPergantian.toLocaleString('id-ID');
 
-            // KPI 3: Rata-Rata Lifetime (Kolom R)
-            // Jika Pilihan "Semua Model" -> Tidak Dimunculkan (Atau 0 HM / -)
             if (selectedModel === 'ALL') {
                 document.getElementById('avgRataRataLifetime').textContent = '-';
             } else {
@@ -743,7 +679,6 @@ HTML
                 document.getElementById('avgRataRataLifetime').textContent = `${lifetimeVal.toLocaleString('id-ID')} HM`;
             }
 
-            // Render Chart
             const categories = filteredList.map(item => item.model);
             const targets = filteredList.map(item => item.targetHm);
             const actuals = filteredList.map(item => item.actualHm);
@@ -768,7 +703,6 @@ HTML
             avgModelChartInstance = new ApexCharts(document.querySelector("#avgModelChart"), options);
             avgModelChartInstance.render();
 
-            // Render Table
             const tbody = document.getElementById('avgModelTableBody');
             if (!tbody) return;
             tbody.innerHTML = '';
@@ -791,52 +725,7 @@ HTML
             renderAvgTab(summaryModelData);
         }
 
-        /* ------------------ TAB 3 LOGIC ------------------ */
-        function renderOnTrackTab(data) {
-            const tbody = document.getElementById('ontrackTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            let sumRunning = 0;
-            let sumRemaining = 0;
-
-            data.forEach(item => {
-                const runningHm = item.actualHm;
-                const remainingHm = Math.max(0, item.targetHm - runningHm);
-                const pct = item.targetHm ? Math.min(100, Math.round((runningHm / item.targetHm) * 100)) : 0;
-
-                sumRunning += runningHm;
-                sumRemaining += remainingHm;
-
-                let progressColor = 'bg-emerald-500';
-                if (pct > 80) progressColor = 'bg-amber-500';
-                if (pct >= 100) progressColor = 'bg-rose-500';
-
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-800/60 transition';
-                tr.innerHTML = `
-                    <td class="p-2.5 font-mono font-bold text-amber-400">${item.unit}</td>
-                    <td class="p-2.5 font-bold text-white">${item.model}</td>
-                    <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
-                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString('id-ID')} HM</td>
-                    <td class="p-2.5 text-right font-mono font-bold text-white">${runningHm.toLocaleString('id-ID')} HM</td>
-                    <td class="p-2.5 text-right font-mono font-bold text-amber-400">${remainingHm.toLocaleString('id-ID')} HM</td>
-                    <td class="p-2.5 text-center">
-                        <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
-                            <div class="${progressColor} h-2.5 rounded-full" style="width: ${pct}%"></div>
-                        </div>
-                        <span class="text-[9px] font-bold text-slate-400">${pct}% Target</span>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            document.getElementById('ontrackTotal').textContent = data.length.toLocaleString('id-ID');
-            document.getElementById('ontrackAvgHm').textContent = data.length ? `${Math.round(sumRunning / data.length).toLocaleString('id-ID')} HM` : '0 HM';
-            document.getElementById('ontrackAvgRemaining').textContent = data.length ? `${Math.round(sumRemaining / data.length).toLocaleString('id-ID')} HM` : '0 HM';
-        }
-
-        /* ------------------ TAB 4 LOGIC ------------------ */
+        /* ------------------ TAB 3 LOGIC (HISTORICAL REPLACE) ------------------ */
         function renderHistoricalTab(data) {
             const tbody = document.getElementById('histTableBody');
             if (!tbody) return;
