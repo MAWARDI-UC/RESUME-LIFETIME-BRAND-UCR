@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <!-- Filter Controls Compact (Hanya 2 Filter Model & Brand + 1 Filter Status) -->
+            <!-- Filter Controls Compact -->
             <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 card-shadow space-y-3">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                     <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <!-- Filter MODEL UNIT (Kolom AF) -->
+                    <!-- Filter MODEL UNIT -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">MODEL UNIT</label>
                         <select id="achModelFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
@@ -173,7 +173,7 @@
                         </select>
                     </div>
 
-                    <!-- Filter BRAND UCR (Kolom AJ) -->
+                    <!-- Filter BRAND UCR -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">BRAND UCR</label>
                         <select id="achBrandFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
@@ -181,7 +181,7 @@
                         </select>
                     </div>
 
-                    <!-- Filter STATUS (Kolom AK) -->
+                    <!-- Filter STATUS -->
                     <div>
                         <label class="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1">STATUS</label>
                         <select id="achStatusFilter" onchange="applyAchFilter()" class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500 transition">
@@ -191,72 +191,69 @@
                 </div>
             </div>
 
-            <!-- KPI Cards (Hanya 3 Kartu) -->
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-    <!-- TOTAL REPLACED PARTS -->
-    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-amber-500/40 transition">
-        <div>
-            <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PAKET UCR</p>
-            <h3 id="achTotalParts" class="text-2xl font-black text-white mt-0.5">0 <span class="text-xs font-bold text-slate-400">Part</span></h3>
-            <p class="text-[10px] text-slate-400 font-bold">Total Pergantian Terekam</p>
-        </div>
-        <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
-            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
-        </div>
-    </div>
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <!-- TOTAL REPLACED PARTS -->
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-amber-500/40 transition">
+                    <div>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">TOTAL REPLACED PAKET UCR</p>
+                        <h3 id="achTotalParts" class="text-2xl font-black text-white mt-0.5">0 <span class="text-xs font-bold text-slate-400">Part</span></h3>
+                        <p class="text-[10px] text-slate-400 font-bold">Total Pergantian Terekam</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    </div>
+                </div>
 
-    <!-- PARTS TERCAPAI -->
-    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
-        <div>
-            <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PAKET TERCAPAI</p>
-            <h3 id="achAboveCount" class="text-2xl font-black text-cyan-400 mt-0.5">0 <span class="text-xs font-bold text-cyan-300">Part</span></h3>
-            <p class="text-[10px] text-cyan-400 font-bold">Status Tercapai</p>
-        </div>
-        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
-            <i data-lucide="award" class="w-5 h-5"></i>
-        </div>
-    </div>
+                <!-- PARTS TERCAPAI -->
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-cyan-500/40 transition">
+                    <div>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PAKET TERCAPAI</p>
+                        <h3 id="achAboveCount" class="text-2xl font-black text-cyan-400 mt-0.5">0 <span class="text-xs font-bold text-cyan-300">Part</span></h3>
+                        <p class="text-[10px] text-cyan-400 font-bold">Status Tercapai</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                </div>
 
-    <!-- PARTS TIDAK TERCAPAI -->
-    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
-        <div>
-            <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PAKET TIDAK TERCAPAI</p>
-            <h3 id="achUnderCount" class="text-2xl font-black text-rose-500 mt-0.5">0 <span class="text-xs font-bold text-rose-400">Part</span></h3>
-            <p class="text-[10px] text-rose-400 font-bold">Status Tidak Tercapai</p>
-        </div>
-        <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
-            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
-        </div>
-    </div>
-</div>
+                <!-- PARTS TIDAK TERCAPAI -->
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow flex justify-between items-center hover:border-rose-500/40 transition">
+                    <div>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-wider">PAKET TIDAK TERCAPAI</p>
+                        <h3 id="achUnderCount" class="text-2xl font-black text-rose-500 mt-0.5">0 <span class="text-xs font-bold text-rose-400">Part</span></h3>
+                        <p class="text-[10px] text-rose-400 font-bold">Status Tidak Tercapai</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+                        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Charts Row (Dibuat Atas - Bawah agar grafik Model lebih lebar) -->
-<div class="grid grid-cols-1 gap-4">
-    
-    <!-- Chart 1: Per Model (Full Width / Full Lebar) -->
-    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
-        <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                Achievement After Replace Per Model (Qty Part)
-            </h3>
-        </div>
-        <!-- Tinggi chart ditambah sedikit agar lebih lega -->
-        <div id="achSiteChart" class="min-h-[360px]"></div>
-    </div>
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Chart 1: Per Model -->
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+                        <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            Achievement After Replace Per Model (Qty Part)
+                        </h3>
+                    </div>
+                    <div id="achSiteChart" class="min-h-[360px]"></div>
+                </div>
 
-    <!-- Chart 2: Per Brand UCR (Full Width) -->
-    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
-        <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                Distribusi Brand UCR (Tercapai vs Tidak Tercapai)
-            </h3>
-        </div>
-        <div id="achBrandChart" class="min-h-[300px]"></div>
-    </div>
-
-</div>
+                <!-- Chart 2: Per Brand UCR -->
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+                        <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                            Distribusi Brand UCR (Tercapai vs Tidak Tercapai)
+                        </h3>
+                    </div>
+                    <div id="achBrandChart" class="min-h-[300px]"></div>
+                </div>
+            </div>
 
             <!-- Sheet 1 Data Table -->
             <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
@@ -274,11 +271,13 @@
                     <table class="w-full text-left text-xs font-medium text-slate-300">
                         <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
                             <tr>
-                                <th class="p-2.5">MODEL (AF)</th>
                                 <th class="p-2.5">NO UNIT</th>
-                                <th class="p-2.5">BRAND UCR (AH)</th>
+                                <th class="p-2.5">MODEL (AF)</th>
+                                <th class="p-2.5">KOMPONEN</th>
+                                <th class="p-2.5">BRAND UCR (AJ)</th>
                                 <th class="p-2.5 text-right">TARGET (HM)</th>
                                 <th class="p-2.5 text-right">ACTUAL (HM)</th>
+                                <th class="p-2.5 text-right">% ACH</th>
                                 <th class="p-2.5 text-center">STATUS (AK)</th>
                             </tr>
                         </thead>
@@ -290,7 +289,7 @@
             </div>
         </div>
 
-        <!-- Tab Lainnya Dikosongkan Singkat untuk Fokus -->
+        <!-- Tab Lainnya -->
         <div id="tab-avg-by-model" class="tab-page hidden"></div>
         <div id="tab-part-on-track" class="tab-page hidden"></div>
         <div id="tab-historical-replace" class="tab-page hidden"></div>
@@ -298,7 +297,6 @@
     </main>
 
     <script>
-        // Tautan CSV Publik Google Spreadsheet
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtMyBr-pH_YCgL_xO2H-hf96lxX2ls63nCx8dhv2f56dP6L9YmjBtKRHGMIiUgzSjsm_t-dSyytIAj/pub?output=csv';
 
         let globalData = [];
@@ -315,11 +313,10 @@
         function fetchDataFromCSV() {
             Papa.parse(CSV_URL, {
                 download: true,
-                header: false, // Digunakan false agar membaca persis berdasarkan urutan indeks kolom
+                header: false,
                 skipEmptyLines: true,
                 complete: function(results) {
                     if (results.data && results.data.length > 1) {
-                        // Abaikan baris header (index 0)
                         const rawRows = results.data.slice(1);
                         globalData = processCSVData(rawRows);
                         populateFilterOptions(globalData);
@@ -336,33 +333,31 @@
             });
         }
 
-        /* Konversi Huruf Kolom Spreadsheet ke Indeks Angka (A=0, AF=31, AH=33, AK=36) */
+        /* Konversi Huruf Kolom Spreadsheet ke Indeks Angka */
         function processCSVData(rows) {
             return rows.map(row => {
-                // Mapping Presisi Sesuai Kolom Spreadsheet:
-                // Kolom AF = Index 31 (Model Unit)
-                // Kolom AJ = Index 35 (Brand UCR)
-                // Kolom AK = Index 36 (Status)
                 const model = row[31] ? row[31].toString().trim() : '-';
                 const brand = row[35] ? row[35].toString().trim() : '-';
                 const status = row[36] ? row[36].toString().trim() : '-';
 
-                const unit = row[30] ? row[30].toString().trim() : (row[1] || '-');
-                const component = row[28] ? row[28].toString().trim() : (row[3] || '-');
+                const unit = row[30] ? row[30].toString().trim() : (row[1] ? row[1].toString().trim() : '-');
+                const component = row[28] ? row[28].toString().trim() : (row[3] ? row[3].toString().trim() : '-');
                 const targetHm = parseFloat(row[32]) || 0;
                 const actualHm = parseFloat(row[34]) || 0;
                 
-                let ach = parseFloat(row[35]) || 0;
+                let ach = parseFloat(row[33]) || 0;
                 if (!ach && targetHm > 0) {
                     ach = (actualHm / targetHm) * 100;
                 }
 
                 return {
                     model: model.toUpperCase(),
-                    nounit: nounit.toUpperCase(),
+                    unit: unit.toUpperCase(),
+                    component: component.toUpperCase(),
                     brand: brand.toUpperCase(),
                     targetHm: targetHm,
                     actualHm: actualHm,
+                    ach: Math.round(ach),
                     status: status.toUpperCase()
                 };
             }).filter(item => item.model !== '-' && item.model !== '');
@@ -394,14 +389,14 @@
         }
 
         function updateKPICards(data) {
-    const total = data.length;
-    const tercapai = data.filter(i => i.status.includes('TERCAPAI') && !i.status.includes('TIDAK')).length;
-    const tidakTercapai = data.filter(i => i.status.includes('TIDAK')).length;
+            const total = data.length;
+            const tercapai = data.filter(i => i.status.includes('TERCAPAI') && !i.status.includes('TIDAK')).length;
+            const tidakTercapai = data.filter(i => i.status.includes('TIDAK')).length;
 
-    document.getElementById('achTotalParts').innerHTML = `${total.toLocaleString()} <span class="text-xs font-bold text-slate-400">Part</span>`;
-    document.getElementById('achAboveCount').innerHTML = `${tercapai.toLocaleString()} <span class="text-xs font-bold text-cyan-300">Part</span>`;
-    document.getElementById('achUnderCount').innerHTML = `${tidakTercapai.toLocaleString()} <span class="text-xs font-bold text-rose-400">Part</span>`;
-}
+            document.getElementById('achTotalParts').innerHTML = `${total.toLocaleString()} <span class="text-xs font-bold text-slate-400">Part</span>`;
+            document.getElementById('achAboveCount').innerHTML = `${tercapai.toLocaleString()} <span class="text-xs font-bold text-cyan-300">Part</span>`;
+            document.getElementById('achUnderCount').innerHTML = `${tidakTercapai.toLocaleString()} <span class="text-xs font-bold text-rose-400">Part</span>`;
+        }
 
         function renderAchTable(data) {
             const tbody = document.getElementById('achTableBody');
@@ -457,141 +452,136 @@
         }
 
         function updateCharts(data) {
-            // ==========================================
-    // 1. DIAGRAM BATANG PER MODEL (TERCAPAI VS TIDAK TERCAPAI)
-    // ==========================================
-    const modelMap = {};
-    
-    data.forEach(item => {
-        if (!item.model || item.model === '-') return;
-        if (!modelMap[item.model]) {
-            modelMap[item.model] = { tercapai: 0, tidakTercapai: 0 };
+            // 1. DIAGRAM BATANG PER MODEL
+            const modelMap = {};
+            
+            data.forEach(item => {
+                if (!item.model || item.model === '-') return;
+                if (!modelMap[item.model]) {
+                    modelMap[item.model] = { tercapai: 0, tidakTercapai: 0 };
+                }
+                
+                if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
+                    modelMap[item.model].tercapai += 1;
+                } else {
+                    modelMap[item.model].tidakTercapai += 1;
+                }
+            });
+
+            const modelCategories = Object.keys(modelMap).sort();
+            const modelTercapai = modelCategories.map(m => modelMap[m].tercapai);
+            const modelTidakTercapai = modelCategories.map(m => modelMap[m].tidakTercapai);
+
+            if (achChartInstance) achChartInstance.destroy();
+            
+            const achModelOptions = {
+                series: [
+                    { name: 'Tercapai', data: modelTercapai },
+                    { name: 'Tidak Tercapai', data: modelTidakTercapai }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 280,
+                    stacked: false,
+                    toolbar: { show: false },
+                    background: 'transparent'
+                },
+                theme: { mode: 'dark' },
+                colors: ['#10b981', '#f43f5e'],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        borderRadius: 4
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    style: { fontSize: '10px', fontWeight: 'bold' }
+                },
+                legend: {
+                    show: true,
+                    position: 'top',
+                    labels: { colors: '#cbd5e1' }
+                },
+                xaxis: {
+                    categories: modelCategories,
+                    labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
+                },
+                yaxis: {
+                    labels: { style: { colors: '#94a3b8' } }
+                },
+                grid: { borderColor: '#334155', strokeDashArray: 4 }
+            };
+            
+            achChartInstance = new ApexCharts(document.querySelector("#achSiteChart"), achModelOptions);
+            achChartInstance.render();
+
+            // 2. DIAGRAM BATANG PER BRAND UCR
+            const brandMap = {};
+
+            data.forEach(item => {
+                if (!item.brand || item.brand === '-') return;
+                if (!brandMap[item.brand]) {
+                    brandMap[item.brand] = { tercapai: 0, tidakTercapai: 0 };
+                }
+
+                if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
+                    brandMap[item.brand].tercapai += 1;
+                } else {
+                    brandMap[item.brand].tidakTercapai += 1;
+                }
+            });
+
+            const brandCategories = Object.keys(brandMap).sort();
+            const brandTercapai = brandCategories.map(b => brandMap[b].tercapai);
+            const brandTidakTercapai = brandCategories.map(b => brandMap[b].tidakTercapai);
+
+            if (brandChartInstance) brandChartInstance.destroy();
+
+            const achBrandOptions = {
+                series: [
+                    { name: 'Tercapai', data: brandTercapai },
+                    { name: 'Tidak Tercapai', data: brandTidakTercapai }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 280,
+                    stacked: false,
+                    toolbar: { show: false },
+                    background: 'transparent'
+                },
+                theme: { mode: 'dark' },
+                colors: ['#10b981', '#f43f5e'],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        borderRadius: 4
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    style: { fontSize: '10px', fontWeight: 'bold' }
+                },
+                legend: {
+                    show: true,
+                    position: 'top',
+                    labels: { colors: '#cbd5e1' }
+                },
+                xaxis: {
+                    categories: brandCategories,
+                    labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
+                },
+                yaxis: {
+                    labels: { style: { colors: '#94a3b8' } }
+                },
+                grid: { borderColor: '#334155', strokeDashArray: 4 }
+            };
+
+            brandChartInstance = new ApexCharts(document.querySelector("#achBrandChart"), achBrandOptions);
+            brandChartInstance.render();
         }
-        
-        // Cek status berdasarkan kolom AK
-        if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
-            modelMap[item.model].tercapai += 1;
-        } else {
-            modelMap[item.model].tidakTercapai += 1;
-        }
-    });
-
-    const modelCategories = Object.keys(modelMap).sort();
-    const modelTercapai = modelCategories.map(m => modelMap[m].tercapai);
-    const modelTidakTercapai = modelCategories.map(m => modelMap[m].tidakTercapai);
-
-    if (achChartInstance) achChartInstance.destroy();
-    
-    const achModelOptions = {
-        series: [
-            { name: 'Tercapai', data: modelTercapai },
-            { name: 'Tidak Tercapai', data: modelTidakTercapai }
-        ],
-        chart: {
-            type: 'bar',
-            height: 280,
-            stacked: false, // Diset false agar tampil 2 batang berdampingan per model
-            toolbar: { show: false },
-            background: 'transparent'
-        },
-        theme: { mode: 'dark' },
-        colors: ['#10b981', '#f43f5e'], // Emerald (Tercapai) & Rose (Tidak Tercapai)
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                borderRadius: 4
-            }
-        },
-        dataLabels: {
-            enabled: true,
-            style: { fontSize: '10px', fontWeight: 'bold' }
-        },
-        legend: {
-            show: true,
-            position: 'top',
-            labels: { colors: '#cbd5e1' }
-        },
-        xaxis: {
-            categories: modelCategories,
-            labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
-        },
-        yaxis: {
-            labels: { style: { colors: '#94a3b8' } }
-        },
-        grid: { borderColor: '#334155', strokeDashArray: 4 }
-    };
-    
-    achChartInstance = new ApexCharts(document.querySelector("#achSiteChart"), achModelOptions);
-    achChartInstance.render();
-
-    // ==========================================
-    // 2. DIAGRAM BATANG PER BRAND UCR (TERCAPAI VS TIDAK TERCAPAI)
-    // ==========================================
-    const brandMap = {};
-
-    data.forEach(item => {
-        if (!item.brand || item.brand === '-') return;
-        if (!brandMap[item.brand]) {
-            brandMap[item.brand] = { tercapai: 0, tidakTercapai: 0 };
-        }
-
-        if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
-            brandMap[item.brand].tercapai += 1;
-        } else {
-            brandMap[item.brand].tidakTercapai += 1;
-        }
-    });
-
-    const brandCategories = Object.keys(brandMap).sort();
-    const brandTercapai = brandCategories.map(b => brandMap[b].tercapai);
-    const brandTidakTercapai = brandCategories.map(b => brandMap[b].tidakTercapai);
-
-    if (brandChartInstance) brandChartInstance.destroy();
-
-    const achBrandOptions = {
-        series: [
-            { name: 'Tercapai', data: brandTercapai },
-            { name: 'Tidak Tercapai', data: brandTidakTercapai }
-        ],
-        chart: {
-            type: 'bar',
-            height: 280,
-            stacked: false, // Menampilkan 2 batang per Brand
-            toolbar: { show: false },
-            background: 'transparent'
-        },
-        theme: { mode: 'dark' },
-        colors: ['#10b981', '#f43f5e'], // Emerald (Tercapai) & Rose (Tidak Tercapai)
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                borderRadius: 4
-            }
-        },
-        dataLabels: {
-            enabled: true,
-            style: { fontSize: '10px', fontWeight: 'bold' }
-        },
-        legend: {
-            show: true,
-            position: 'top',
-            labels: { colors: '#cbd5e1' }
-        },
-        xaxis: {
-            categories: brandCategories,
-            labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
-        },
-        yaxis: {
-            labels: { style: { colors: '#94a3b8' } }
-        },
-        grid: { borderColor: '#334155', strokeDashArray: 4 }
-    };
-
-    brandChartInstance = new ApexCharts(document.querySelector("#achBrandChart"), achBrandOptions);
-    brandChartInstance.render();
-}
 
         /* Tab Switching */
         function switchTab(tabId) {
