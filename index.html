@@ -118,7 +118,7 @@
                 </button>
                 <button onclick="switchTab('historical-replace')" id="btn-historical-replace" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap transition-all duration-200">
                     <i data-lucide="history" class="w-3.5 h-3.5"></i>
-                    <span>Review Historycal replace UC</span>
+                    <span>Review Historical replace UC</span>
                 </button>
             </nav>
         </div>
@@ -127,8 +127,8 @@
     <!-- Main Content -->
     <main class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 space-y-4">
 
+        <!-- TAB 1: Review Achievement After Replace -->
         <div id="tab-ach-after-replace" class="tab-page space-y-4">
-            <!-- Hero Banner Compact -->
             <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950/40 px-5 py-4 border border-slate-800 card-shadow">
                 <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-2">
                     <div>
@@ -217,7 +217,7 @@
             </div>
 
             <!-- Charts Row -->
-            <div class="grid grid-cols-1 gap-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
                     <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
                         <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
@@ -225,7 +225,7 @@
                             Achievement After Replace Per Model (Qty Part)
                         </h3>
                     </div>
-                    <div id="achSiteChart" class="min-h-[360px]"></div>
+                    <div id="achSiteChart" class="min-h-[300px]"></div>
                 </div>
 
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
@@ -239,7 +239,7 @@
                 </div>
             </div>
 
-            <!-- Data Table: Detail Replacement Paket UCR -->
+            <!-- Table -->
             <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-2">
                     <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
@@ -264,17 +264,153 @@
                                 <th class="p-2.5 text-center">STATUS</th>
                             </tr>
                         </thead>
-                        <tbody id="achTableBody" class="divide-y divide-slate-800/80">
-                            <!-- Populated by JS -->
-                        </tbody>
+                        <tbody id="achTableBody" class="divide-y divide-slate-800/80"></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <div id="tab-avg-by-model" class="tab-page hidden"></div>
-        <div id="tab-part-on-track" class="tab-page hidden"></div>
-        <div id="tab-historical-replace" class="tab-page hidden"></div>
+        <!-- TAB 2: Rata-Rata Ketercapaian By Model -->
+        <div id="tab-avg-by-model" class="tab-page hidden space-y-4">
+            <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-950/40 px-5 py-4 border border-slate-800 card-shadow">
+                <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Rata-Rata Ketercapaian By Model</h2>
+                <p class="text-[10px] text-cyan-400 font-bold tracking-wider uppercase">ANALISIS RATA-RATA HM TARGET VS ACTUAL DAN PERSENTASE ACH PER MODEL UNIT</p>
+            </div>
+
+            <!-- KPI Summary Cards for Avg Tab -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
+                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA ACH SYSTEM</p>
+                    <h3 id="avgTotalAchPct" class="text-2xl font-black text-cyan-400 mt-0.5">0%</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Ketercapaian Kumulatif</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
+                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA TARGET HM</p>
+                    <h3 id="avgTotalTargetHm" class="text-2xl font-black text-white mt-0.5">0 HM</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Acuan Standar Perbaikan</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
+                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA ACTUAL HM</p>
+                    <h3 id="avgTotalActualHm" class="text-2xl font-black text-amber-400 mt-0.5">0 HM</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Realisasi Jam Kerja</p>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow">
+                <h3 class="text-xs font-black text-white uppercase tracking-wider mb-3">Rata-Rata Lifetime Undercarriage Per Model Unit (HM)</h3>
+                <div id="avgModelChart" class="min-h-[320px]"></div>
+            </div>
+
+            <!-- Model Summary Table -->
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
+                <h3 class="text-xs font-black text-white uppercase tracking-wider">Tabel Ringkasan Per Model</h3>
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left text-xs font-medium text-slate-300">
+                        <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
+                            <tr>
+                                <th class="p-2.5">MODEL UNIT</th>
+                                <th class="p-2.5 text-center">TOTAL UNIT/PART</th>
+                                <th class="p-2.5 text-right">AVG TARGET (HM)</th>
+                                <th class="p-2.5 text-right">AVG ACTUAL (HM)</th>
+                                <th class="p-2.5 text-center">RATA-RATA ACH (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="avgModelTableBody" class="divide-y divide-slate-800/80"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Review part UC On Track -->
+        <div id="tab-part-on-track" class="tab-page hidden space-y-4">
+            <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950/40 px-5 py-4 border border-slate-800 card-shadow">
+                <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Review part UC On Track</h2>
+                <p class="text-[10px] text-emerald-400 font-bold tracking-wider uppercase">MONITORING UNIT DAN KOMPONEN UNDERCARRIAGE YANG AKTIF BEROPERASI (ON TRACK)</p>
+            </div>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
+                    <p class="text-[9px] text-slate-400 uppercase font-black">TOTAL UNIT ON TRACK</p>
+                    <h3 id="ontrackTotal" class="text-2xl font-black text-emerald-400 mt-0.5">0</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Komponen Aktif</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
+                    <p class="text-[9px] text-slate-400 uppercase font-black">RATA-RATA RUNNING HM</p>
+                    <h3 id="ontrackAvgHm" class="text-2xl font-black text-white mt-0.5">0 HM</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Jam Berjalan Saat Ini</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
+                    <p class="text-[9px] text-slate-400 uppercase font-black">SISA ESTIMASI UMUR</p>
+                    <h3 id="ontrackAvgRemaining" class="text-2xl font-black text-amber-400 mt-0.5">0 HM</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Estimasi Sisa Umur Komponen</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl card-shadow">
+                    <p class="text-[9px] text-slate-400 uppercase font-black">STATUS KESEHATAN UC</p>
+                    <h3 id="ontrackHealth" class="text-2xl font-black text-cyan-400 mt-0.5">GOOD</h3>
+                    <p class="text-[10px] text-slate-400 font-bold">Indikator Umur Pakai</p>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
+                <h3 class="text-xs font-black text-white uppercase tracking-wider">Daftar Komponen On Track</h3>
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left text-xs font-medium text-slate-300">
+                        <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
+                            <tr>
+                                <th class="p-2.5">NO UNIT</th>
+                                <th class="p-2.5">MODEL</th>
+                                <th class="p-2.5">BRAND UCR</th>
+                                <th class="p-2.5 text-right">TARGET (HM)</th>
+                                <th class="p-2.5 text-right">RUNNING (HM)</th>
+                                <th class="p-2.5 text-right">SISA HM</th>
+                                <th class="p-2.5 text-center">PROGRES LIFETIME</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ontrackTableBody" class="divide-y divide-slate-800/80"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Review Historical replace UC -->
+        <div id="tab-historical-replace" class="tab-page hidden space-y-4">
+            <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-slate-800 to-rose-950/40 px-5 py-4 border border-slate-800 card-shadow">
+                <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">Review Historical Replace UC</h2>
+                <p class="text-[10px] text-rose-400 font-bold tracking-wider uppercase">REKAPITULASI HISTORIS PENGGANTIAN KOMPONEN UNDERCARRIAGE SEMUA FLEET</p>
+            </div>
+
+            <!-- Controls & Table -->
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 card-shadow space-y-3">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-800 pb-2">
+                    <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="history" class="w-3.5 h-3.5 text-rose-500"></i>
+                        Arsip Riwayat Penggantian Component UC
+                    </h3>
+                    <input type="text" id="histSearchInput" onkeyup="filterHistoricalTable()" placeholder="Cari Unit / Model / Brand..." class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left text-xs font-medium text-slate-300">
+                        <thead class="bg-slate-800/90 text-slate-300 uppercase text-[9px] font-black tracking-wider border-b border-slate-700">
+                            <tr>
+                                <th class="p-2.5">NO UNIT</th>
+                                <th class="p-2.5">MODEL</th>
+                                <th class="p-2.5">SUB-UNIT / REF</th>
+                                <th class="p-2.5">BRAND UCR</th>
+                                <th class="p-2.5 text-right">TARGET (HM)</th>
+                                <th class="p-2.5 text-right">ACTUAL (HM)</th>
+                                <th class="p-2.5 text-right">DEVIASI (HM)</th>
+                                <th class="p-2.5 text-center">STATUS KETERCAPAIAN</th>
+                            </tr>
+                        </thead>
+                        <tbody id="histTableBody" class="divide-y divide-slate-800/80"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
     </main>
 
@@ -284,6 +420,7 @@
         let globalData = [];
         let achChartInstance = null;
         let brandChartInstance = null;
+        let avgModelChartInstance = null;
 
         function refreshIcons() {
             if (window.lucide) {
@@ -302,6 +439,9 @@
                         globalData = processCSVData(rawRows);
                         populateFilterOptions(globalData);
                         renderDashboard(globalData);
+                        renderAvgTab(globalData);
+                        renderOnTrackTab(globalData);
+                        renderHistoricalTab(globalData);
                         
                         document.getElementById('syncStatus').classList.remove('hidden');
                         document.getElementById('syncText').textContent = 'Live Data Connected (' + globalData.length + ' rows)';
@@ -316,15 +456,6 @@
 
         function processCSVData(rows) {
             return rows.map(row => {
-                // Pemetaan Kolom Spreadsheet:
-                // AE (index 30) -> No Unit
-                // AF (index 31) -> Model
-                // AH (index 33) -> No Unit Singkat (Substitusi Komponen)
-                // AI (index 34) -> Actual HM
-                // AJ (index 35) -> Brand UCR
-                // AK (index 36) -> Status
-                // AL (index 37) -> Target HM
-
                 const unit = row[30] ? row[30].toString().trim() : '-';
                 const model = row[31] ? row[31].toString().trim() : '-';
                 const unitAH = row[33] ? row[33].toString().trim() : '-';
@@ -363,6 +494,7 @@
             statuses.forEach(s => statusSel.appendChild(new Option(s, s)));
         }
 
+        /* ------------------ TAB 1 LOGIC ------------------ */
         function renderDashboard(data) {
             renderAchTable(data);
             updateKPICards(data);
@@ -432,13 +564,11 @@
 
         function updateCharts(data) {
             const modelMap = {};
-            
             data.forEach(item => {
                 if (!item.model || item.model === '-') return;
                 if (!modelMap[item.model]) {
                     modelMap[item.model] = { tercapai: 0, tidakTercapai: 0 };
                 }
-                
                 if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
                     modelMap[item.model].tercapai += 1;
                 } else {
@@ -467,28 +597,12 @@
                 theme: { mode: 'dark' },
                 colors: ['#10b981', '#f43f5e'],
                 plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '55%',
-                        borderRadius: 4
-                    }
+                    bar: { horizontal: false, columnWidth: '55%', borderRadius: 4 }
                 },
-                dataLabels: {
-                    enabled: true,
-                    style: { fontSize: '10px', fontWeight: 'bold' }
-                },
-                legend: {
-                    show: true,
-                    position: 'top',
-                    labels: { colors: '#cbd5e1' }
-                },
-                xaxis: {
-                    categories: modelCategories,
-                    labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
-                },
-                yaxis: {
-                    labels: { style: { colors: '#94a3b8' } }
-                },
+                dataLabels: { enabled: true, style: { fontSize: '10px', fontWeight: 'bold' } },
+                legend: { show: true, position: 'top', labels: { colors: '#cbd5e1' } },
+                xaxis: { categories: modelCategories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
+                yaxis: { labels: { style: { colors: '#94a3b8' } } },
                 grid: { borderColor: '#334155', strokeDashArray: 4 }
             };
             
@@ -496,13 +610,11 @@
             achChartInstance.render();
 
             const brandMap = {};
-
             data.forEach(item => {
                 if (!item.brand || item.brand === '-') return;
                 if (!brandMap[item.brand]) {
                     brandMap[item.brand] = { tercapai: 0, tidakTercapai: 0 };
                 }
-
                 if (item.status.includes('TERCAPAI') && !item.status.includes('TIDAK')) {
                     brandMap[item.brand].tercapai += 1;
                 } else {
@@ -530,29 +642,11 @@
                 },
                 theme: { mode: 'dark' },
                 colors: ['#10b981', '#f43f5e'],
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '55%',
-                        borderRadius: 4
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    style: { fontSize: '10px', fontWeight: 'bold' }
-                },
-                legend: {
-                    show: true,
-                    position: 'top',
-                    labels: { colors: '#cbd5e1' }
-                },
-                xaxis: {
-                    categories: brandCategories,
-                    labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
-                },
-                yaxis: {
-                    labels: { style: { colors: '#94a3b8' } }
-                },
+                plotOptions: { bar: { horizontal: false, columnWidth: '55%', borderRadius: 4 } },
+                dataLabels: { enabled: true, style: { fontSize: '10px', fontWeight: 'bold' } },
+                legend: { show: true, position: 'top', labels: { colors: '#cbd5e1' } },
+                xaxis: { categories: brandCategories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
+                yaxis: { labels: { style: { colors: '#94a3b8' } } },
                 grid: { borderColor: '#334155', strokeDashArray: 4 }
             };
 
@@ -560,6 +654,166 @@
             brandChartInstance.render();
         }
 
+        /* ------------------ TAB 2 LOGIC ------------------ */
+        function renderAvgTab(data) {
+            const modelSummary = {};
+
+            let totalTarget = 0;
+            let totalActual = 0;
+
+            data.forEach(item => {
+                totalTarget += item.targetHm;
+                totalActual += item.actualHm;
+
+                if (!modelSummary[item.model]) {
+                    modelSummary[item.model] = { count: 0, targetSum: 0, actualSum: 0 };
+                }
+                modelSummary[item.model].count += 1;
+                modelSummary[item.model].targetSum += item.targetHm;
+                modelSummary[item.model].actualSum += item.actualHm;
+            });
+
+            const avgTargetAll = data.length ? Math.round(totalTarget / data.length) : 0;
+            const avgActualAll = data.length ? Math.round(totalActual / data.length) : 0;
+            const totalAchPct = avgTargetAll ? Math.round((avgActualAll / avgTargetAll) * 100) : 0;
+
+            document.getElementById('avgTotalAchPct').textContent = `${totalAchPct}%`;
+            document.getElementById('avgTotalTargetHm').textContent = `${avgTargetAll.toLocaleString()} HM`;
+            document.getElementById('avgTotalActualHm').textContent = `${avgActualAll.toLocaleString()} HM`;
+
+            const categories = Object.keys(modelSummary).sort();
+            const avgTargets = categories.map(m => Math.round(modelSummary[m].targetSum / modelSummary[m].count));
+            const avgActuals = categories.map(m => Math.round(modelSummary[m].actualSum / modelSummary[m].count));
+
+            if (avgModelChartInstance) avgModelChartInstance.destroy();
+
+            const options = {
+                series: [
+                    { name: 'Rata-Rata Target HM', data: avgTargets },
+                    { name: 'Rata-Rata Actual HM', data: avgActuals }
+                ],
+                chart: { type: 'bar', height: 300, toolbar: { show: false }, background: 'transparent' },
+                theme: { mode: 'dark' },
+                colors: ['#06b6d4', '#f59e0b'],
+                plotOptions: { bar: { horizontal: false, columnWidth: '50%', borderRadius: 4 } },
+                dataLabels: { enabled: false },
+                xaxis: { categories: categories, labels: { style: { colors: '#94a3b8', fontWeight: 700 } } },
+                yaxis: { labels: { style: { colors: '#94a3b8' } } },
+                grid: { borderColor: '#334155', strokeDashArray: 4 }
+            };
+
+            avgModelChartInstance = new ApexCharts(document.querySelector("#avgModelChart"), options);
+            avgModelChartInstance.render();
+
+            const tbody = document.getElementById('avgModelTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            categories.forEach(m => {
+                const info = modelSummary[m];
+                const avgT = Math.round(info.targetSum / info.count);
+                const avgA = Math.round(info.actualSum / info.count);
+                const achPct = avgT ? ((avgA / avgT) * 100).toFixed(1) : '0.0';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/60 transition';
+                tr.innerHTML = `
+                    <td class="p-2.5 font-bold text-white">${m}</td>
+                    <td class="p-2.5 text-center font-bold text-amber-400">${info.count}</td>
+                    <td class="p-2.5 text-right font-mono text-slate-400">${avgT.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${avgA.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-center font-bold ${achPct >= 100 ? 'text-emerald-400' : 'text-rose-400'}">${achPct}%</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        /* ------------------ TAB 3 LOGIC ------------------ */
+        function renderOnTrackTab(data) {
+            const tbody = document.getElementById('ontrackTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            let sumRunning = 0;
+            let sumRemaining = 0;
+
+            data.forEach(item => {
+                const runningHm = item.actualHm;
+                const remainingHm = Math.max(0, item.targetHm - runningHm);
+                const pct = item.targetHm ? Math.min(100, Math.round((runningHm / item.targetHm) * 100)) : 0;
+
+                sumRunning += runningHm;
+                sumRemaining += remainingHm;
+
+                let progressColor = 'bg-emerald-500';
+                if (pct > 80) progressColor = 'bg-amber-500';
+                if (pct >= 100) progressColor = 'bg-rose-500';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/60 transition';
+                tr.innerHTML = `
+                    <td class="p-2.5 font-mono font-bold text-amber-400">${item.unit}</td>
+                    <td class="p-2.5 font-bold text-white">${item.model}</td>
+                    <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
+                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${runningHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-amber-400">${remainingHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-center">
+                        <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
+                            <div class="${progressColor} h-2.5 rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                        <span class="text-[9px] font-bold text-slate-400">${pct}% Target</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('ontrackTotal').textContent = data.length;
+            document.getElementById('ontrackAvgHm').textContent = data.length ? `${Math.round(sumRunning / data.length).toLocaleString()} HM` : '0 HM';
+            document.getElementById('ontrackAvgRemaining').textContent = data.length ? `${Math.round(sumRemaining / data.length).toLocaleString()} HM` : '0 HM';
+        }
+
+        /* ------------------ TAB 4 LOGIC ------------------ */
+        function renderHistoricalTab(data) {
+            const tbody = document.getElementById('histTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            data.forEach(item => {
+                const diff = item.actualHm - item.targetHm;
+                const diffText = (diff >= 0 ? '+' : '') + diff.toLocaleString() + ' HM';
+                const diffColor = diff >= 0 ? 'text-emerald-400' : 'text-rose-400';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/60 transition historical-row';
+                tr.innerHTML = `
+                    <td class="p-2.5 font-mono font-bold text-amber-400">${item.unit}</td>
+                    <td class="p-2.5 font-bold text-white">${item.model}</td>
+                    <td class="p-2.5 font-bold text-slate-400">${item.unitAH}</td>
+                    <td class="p-2.5 font-bold text-cyan-400">${item.brand}</td>
+                    <td class="p-2.5 text-right font-mono text-slate-400">${item.targetHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold text-white">${item.actualHm.toLocaleString()} HM</td>
+                    <td class="p-2.5 text-right font-mono font-bold ${diffColor}">${diffText}</td>
+                    <td class="p-2.5 text-center">
+                        <span class="px-2 py-0.5 rounded text-[9px] font-black ${item.status.includes('TERCAPAI') && !item.status.includes('TIDAK') ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'}">
+                            ${item.status}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterHistoricalTable() {
+            const q = document.getElementById('histSearchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#histTableBody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(q) ? '' : 'none';
+            });
+        }
+
+        /* ------------------ NAVIGATION TAB ------------------ */
         function switchTab(tabId) {
             document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
 
